@@ -297,18 +297,17 @@ class FocusTracker:
                 self.current_idle_time = idle_time
                 self.last_app_name = current_app
                 self.last_window_title = current_title
-                
-                # 1) Baseline 설정 전
-                if not self.is_baseline_set:
-                    self.current_state = "수집 중"
-                    continue
-                
-                # 2) 상태 모니터링 (3분 이후) - 1초마다 실시간 판정
+                # 1) 실시간 상태 판정 검사
                 cond_blocked = self.is_blocked(current_app, current_title)
                 cond_idle = idle_time > IDLE_THRESHOLD
                 cond_app = current_app and current_app not in self.allowed_apps
-                cond_switch_activity = (window_switch_count > WINDOW_SWITCH_THRESHOLD) and (self.last_minute_activity < self.baseline_activity * ACTIVITY_DROP_RATIO)
                 
+                # Baseline 기반 검사는 Baseline 수집이 끝난 후에만
+                cond_switch_activity = False
+                if self.is_baseline_set:
+                    cond_switch_activity = (window_switch_count > WINDOW_SWITCH_THRESHOLD) and (self.last_minute_activity < self.baseline_activity * ACTIVITY_DROP_RATIO)
+                
+                # 2) 상태 결정 로직
                 if cond_blocked:
                     self.current_state = "이탈"
                 elif cond_idle:
@@ -318,9 +317,12 @@ class FocusTracker:
                 elif cond_switch_activity:
                     self.current_state = "이탈"
                 else:
-                    self.current_state = "집중"
+                    if not self.is_baseline_set:
+                        self.current_state = "수집 중"
+                    else:
+                        self.current_state = "집중"
                 
-                # 통계 기록 (1초마다)
+                # 3) 통계 기록 (1초마다)
                 if self.current_state == "집중":
                     self.total_focus_sec += 1
                 elif self.current_state == "이탈":

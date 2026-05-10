@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>Focus Tracker Dashboard</title>
+    <style>
+        :root {
+            --ink: #1d1d1f;
+            --body: #1d1d1f;
+            --body-on-dark: #ffffff;
+            --body-muted: #86868b;
+            --canvas: #ffffff;
+            --canvas-parchment: #f5f5f7;
+            --surface-tile: #272729;
+            --primary: #0066cc;
+            --primary-active: #0071e3;
+            
+            --state-focus: #e8f5e9;
+            --state-idle: #f5f5f7;
+            --state-distracted: #ffebee;
+            
+            --shadow-product: rgba(0, 0, 0, 0.22) 3px 5px 30px 0;
+            --rounded-lg: 18px;
+            --rounded-pill: 9999px;
+            
+            --font-display: "SF Pro Display", system-ui, -apple-system, sans-serif;
+            --font-body: "SF Pro Text", system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-body);
+            background-color: var(--state-idle);
+            color: var(--ink);
+            transition: background-color 0.8s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.state-집중 { background-color: var(--state-focus); }
+        body.state-이탈 { background-color: var(--state-distracted); }
+        body.state-비활동 { background-color: var(--state-idle); }
+        body.state-수집 { background-color: var(--canvas-parchment); }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Views */
+        #setup-view { display: none; }
+        #dashboard-view { display: none; }
+        #report-view { display: none; }
+
+        /* Setup Form Styling */
+        .setup-card {
+            background-color: var(--canvas);
+            border-radius: var(--rounded-lg);
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .setup-card h2 {
+            font-family: var(--font-display);
+            font-size: 32px;
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px 16px;
+            border: 1px solid #d2d2d7;
+            border-radius: 8px;
+            font-size: 17px;
+            font-family: var(--font-body);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: var(--primary);
+        }
+        .help-text {
+            font-size: 12px;
+            color: var(--body-muted);
+            margin-top: 6px;
+            display: block;
+        }
+        button.btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--rounded-pill);
+            padding: 12px 24px;
+            font-size: 17px;
+            font-family: var(--font-body);
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        button.btn-primary:hover {
+            background-color: var(--primary-active);
+        }
+        
+        button.btn-danger {
+            background-color: #ff3b30;
+            color: white;
+            border: none;
+            border-radius: var(--rounded-pill);
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            margin-top: 30px;
+        }
+        button.btn-danger:hover { background-color: #d32f2f; }
+        button.btn-danger:active { transform: scale(0.96); }
+
+        /* Report View Styling */
+        .report-card {
+            background-color: var(--canvas);
+            border-radius: var(--rounded-lg);
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .report-title {
+            font-family: var(--font-display);
+            font-size: 40px;
+            margin: 0 0 32px 0;
+            color: var(--ink);
+        }
+        .report-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 32px;
+        }
+        .report-stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .report-stat-val {
+            font-size: 32px;
+            font-weight: 700;
+            font-family: var(--font-display);
+        }
+        .val-focus { color: #2e7d32; }
+        .val-dist { color: #d32f2f; }
+        .val-idle { color: #86868b; }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background-color: var(--canvas-parchment);
+            border-radius: var(--rounded-pill);
+            overflow: hidden;
+            display: flex;
+            margin-bottom: 32px;
+        }
+        .progress-segment {
+            height: 100%;
+        }
+        
+        .distractions-list {
+            text-align: left;
+            background-color: var(--canvas-parchment);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 32px;
+        }
+        .distractions-list h3 {
+            margin-top: 0;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .distractions-list ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--ink);
+            font-size: 15px;
+        }
+
+        /* Dashboard Styling */
+        h1.state-title {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 600;
+            line-height: 1.07;
+            letter-spacing: -0.28px;
+            margin: 0 0 16px 0;
+            transition: color 0.5s ease;
+        }
+        body.state-이탈 h1.state-title { color: #d32f2f; }
+        body.state-집중 h1.state-title { color: #2e7d32; }
+
+        p.current-app {
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1.14;
+            letter-spacing: 0.196px;
+            margin: 0 0 48px 0;
+            color: var(--body-muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .stat-card {
+            background-color: var(--canvas);
+            border-radius: var(--rounded-lg);
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 34px;
+            font-weight: 600;
+            letter-spacing: -0.374px;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--body-muted);
+            letter-spacing: -0.224px;
+        }
+
+        /* Distracted Alert Overlay */
+        .alert-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 100;
+        }
+        body.state-이탈 .alert-overlay { opacity: 1; }
+
+        .alert-card {
+            background-color: var(--surface-tile);
+            color: var(--body-on-dark);
+            padding: 80px 60px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-product);
+            transform: scale(0.95);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        body.state-이탈 .alert-card { transform: scale(1); }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 40px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+        }
+        .alert-subtitle {
+            font-size: 21px;
+            color: #a1a1a6;
+            margin: 0;
+        }
+        
+        .timer-badge {
+            display: inline-block;
+            background-color: var(--ink);
+            color: var(--body-on-dark);
+            padding: 8px 16px;
+            border-radius: var(--rounded-pill);
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Setup View -->
+    <div id="setup-view" class="container">
+        <div class="setup-card">
+            <h2>모니터링 설정</h2>
+            <div class="form-group">
+                <label for="task">🎯 지금 할 작업</label>
+                <input type="text" id="task" placeholder="예: 레포트 작성, 코딩, 자료 조사" autocomplete="off">
+                <span class="help-text">입력한 작업에 맞춰 허용 앱이 자동 설정됩니다.</span>
+            </div>
+            <div class="form-group">
+                <label for="blocked">🚫 피하고 싶은 앱 (선택사항)</label>
+                <input type="text" id="blocked" placeholder="예: youtube, kakao" autocomplete="off">
+                <span class="help-text">쉼표(,)로 구분하여 입력하세요.</span>
+            </div>
+            <button class="btn-primary" onclick="startTracking()">모니터링 시작</button>
+        </div>
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="dashboard-view" class="container">
+        <h1 class="state-title" id="state-text">수집 중</h1>
+        <p class="current-app" id="app-text">대기 중...</p>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="val-activity">0</div>
+                <div class="stat-label">Activity (1m)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="val-idle">0s</div>
+                <div class="stat-label">Idle Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="val-switch">0</div>
+                <div class="stat-label">Window Switches</div>
+            </div>
+        </div>
+        
+        <div class="timer-badge" id="timer-text">0:00 경과</div>
+        <br>
+        <button class="btn-danger" onclick="stopTracking()">작업 종료</button>
+    </div>
+
+    <!-- Report View -->
+    <div id="report-view" class="container">
+        <div class="report-card">
+            <h2 class="report-title">작업 보고서</h2>
+            
+            <div class="report-stats">
+                <div class="report-stat-item">
+                    <span class="report-stat-val val-focus" id="rep-focus">00:00</span>
+                    <span class="stat-label">집중 시간</span>
+                </div>
+                <div class="report-stat-item">
+                    <span class="report-stat-val val-dist" id="rep-dist">00:00</span>
+                    <span class="stat-label">이탈 시간</span>
+                </div>
+                <div class="report-stat-item">
+                    <span class="report-stat-val val-idle" id="rep-idle">00:00</span>
+                    <span class="stat-label">비활동 시간</span>
+                </div>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-segment" id="bar-focus" style="width: 0%; background-color: #34c759;"></div>
+                <div class="progress-segment" id="bar-dist" style="width: 0%; background-color: #ff3b30;"></div>
+                <div class="progress-segment" id="bar-idle" style="width: 0%; background-color: #8e8e93;"></div>
+            </div>
+            
+            <div class="distractions-list">
+                <h3>방해 요소 (접속한 앱/사이트)</h3>
+                <ul id="dist-list">
+                    <!-- Javascript will populate -->
+                </ul>
+            </div>
+            
+            <button class="btn-primary" onclick="location.reload()">새 작업 시작하기</button>
+        </div>
+    </div>
+
+    <!-- Alert Overlay -->
+    <div class="alert-overlay">
+        <div class="alert-card">
+            <h2 class="alert-title">작업에서 벗어났습니다</h2>
+            <p class="alert-subtitle">다시 원래 하던 일로 돌아가세요.</p>
+        </div>
+    </div>
+
+    <script>
+        function showView(viewId) {
+            document.getElementById('setup-view').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'none';
+            document.getElementById('report-view').style.display = 'none';
+            document.getElementById(viewId).style.display = 'block';
+        }
+
+        function formatTimeMinSec(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+        
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            return `${m}:${s.toString().padStart(2, '0')} 경과`;
+        }
+
+        async function startTracking() {
+            const btn = document.querySelector('.setup-card .btn-primary');
+            btn.disabled = true;
+            btn.innerText = "시작 중...";
+            
+            const task = document.getElementById('task').value;
+            const blocked_apps = document.getElementById('blocked').value;
+
+            try {
+                const res = await fetch('/start_tracking', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ task, blocked_apps })
+                });
+                if (res.ok) {
+                    showView('dashboard-view');
+                    if (pollInterval) clearInterval(pollInterval);
+                    pollInterval = setInterval(fetchStatus, 1000);
+                    fetchStatus();
+                }
+            } catch (err) {
+                console.error("Failed to start:", err);
+                alert("서버 연결에 실패했습니다.");
+                btn.disabled = false;
+                btn.innerText = "모니터링 시작";
+            }
+        }
+
+        async function stopTracking() {
+            if(!confirm("정말 작업을 종료하고 보고서를 보시겠습니까?")) return;
+            
+            try {
+                const res = await fetch('/stop_tracking', { method: 'POST' });
+                if(res.ok) {
+                    const report = await res.json();
+                    showReport(report);
+                }
+            } catch (err) {
+                console.error("Failed to stop:", err);
+            }
+        }
+        
+        function showReport(report) {
+            clearInterval(pollInterval);
+            document.body.className = "state-수집"; // Reset background to normal
+            
+            showView('report-view');
+            
+            document.getElementById('rep-focus').innerText = formatTimeMinSec(report.total_focus_sec);
+            document.getElementById('rep-dist').innerText = formatTimeMinSec(report.total_distracted_sec);
+            document.getElementById('rep-idle').innerText = formatTimeMinSec(report.total_idle_sec);
+            
+            const total = report.total_focus_sec + report.total_distracted_sec + report.total_idle_sec || 1;
+            document.getElementById('bar-focus').style.width = (report.total_focus_sec / total * 100) + '%';
+            document.getElementById('bar-dist').style.width = (report.total_distracted_sec / total * 100) + '%';
+            document.getElementById('bar-idle').style.width = (report.total_idle_sec / total * 100) + '%';
+            
+            const ul = document.getElementById('dist-list');
+            ul.innerHTML = '';
+            if(report.distractions && report.distractions.length > 0) {
+                report.distractions.forEach(d => {
+                    const li = document.createElement('li');
+                    li.innerText = d;
+                    ul.appendChild(li);
+                });
+            } else {
+                ul.innerHTML = '<li>방해 요소가 없었습니다! 완벽해요 👏</li>';
+            }
+        }
+
+        async function fetchStatus() {
+            try {
+                const response = await fetch('/status');
+                if (response.status === 500) return; // not initialized
+                
+                const data = await response.json();
+                
+                if (!data.is_active) {
+                    // 보고서 화면이 아닐 때만 setup 뷰로 강제 이동 (in-flight fetch 방어)
+                    if (document.getElementById('report-view').style.display !== 'block') {
+                        showView('setup-view');
+                    }
+                    return;
+                } else {
+                    if (document.getElementById('dashboard-view').style.display !== 'block') {
+                        showView('dashboard-view');
+                    }
+                }
+
+                // Update Body Class
+                const stateClass = `state-${data.state.split(' ')[0]}`;
+                document.body.className = stateClass;
+
+                // Update Texts
+                document.getElementById('state-text').innerText = data.state;
+                
+                let appDisplay = data.current_app;
+                if (data.current_url) {
+                    appDisplay += ` (${data.current_url})`;
+                } else if (data.current_title) {
+                    let title = data.current_title;
+                    if(title.length > 30) title = title.substring(0, 30) + '...';
+                    appDisplay += ` - ${title}`;
+                }
+                document.getElementById('app-text').innerText = appDisplay || '바탕화면';
+
+                document.getElementById('val-activity').innerText = data.activity;
+                document.getElementById('val-idle').innerText = data.idle_time + 's';
+                document.getElementById('val-switch').innerText = data.window_switch;
+                document.getElementById('timer-text').innerText = formatTime(data.elapsed_time);
+
+            } catch (error) {
+                console.error("Failed to fetch status:", error);
+            }
+        }
+
+        let pollInterval;
+        // Do not setInterval immediately, wait for setup to finish.
+        // But we need to check if it's already active (in case of page refresh).
+        async function initCheck() {
+            try {
+                const response = await fetch('/status');
+                if (response.status === 500) {
+                    document.getElementById('setup-view').style.display = 'block';
+                    return;
+                }
+                const data = await response.json();
+                if(data.is_active) {
+                    showView('dashboard-view');
+                    pollInterval = setInterval(fetchStatus, 1000);
+                    fetchStatus();
+                } else {
+                    showView('setup-view');
+                }
+            } catch(err) {
+                showView('setup-view');
+            }
+        }
+        initCheck();
+    </script>
+</body>
+</html>

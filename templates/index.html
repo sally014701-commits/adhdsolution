@@ -114,6 +114,34 @@
             margin-top: 6px;
             display: block;
         }
+        .allowed-preview {
+            background-color: var(--canvas-parchment);
+            border: 1px solid #e5e5ea;
+            border-radius: 12px;
+            padding: 14px;
+            margin-top: 10px;
+        }
+        .allowed-preview-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--body-muted);
+            margin-bottom: 10px;
+        }
+        .app-chip-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .app-chip {
+            display: inline-flex;
+            align-items: center;
+            border-radius: var(--rounded-pill);
+            background-color: #ffffff;
+            border: 1px solid #d2d2d7;
+            padding: 6px 10px;
+            font-size: 13px;
+            color: var(--ink);
+        }
         button.btn-primary {
             background-color: var(--primary);
             color: white;
@@ -388,6 +416,15 @@
                 <label for="task">🎯 지금 할 작업</label>
                 <input type="text" id="task" placeholder="예: 레포트 작성, 코딩, 자료 조사" autocomplete="off">
                 <span class="help-text">입력한 작업에 맞춰 허용 앱이 자동 설정됩니다.</span>
+                <div class="allowed-preview">
+                    <div class="allowed-preview-title">현재 가능 앱</div>
+                    <div class="app-chip-list" id="allowed-preview-list"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="extra-allowed">➕ 추가로 허용할 앱</label>
+                <input type="text" id="extra-allowed" placeholder="예: Notion.exe, Obsidian.exe, Slack.exe" autocomplete="off">
+                <span class="help-text">쉼표(,)로 구분하세요. 여기에 없는 앱은 작업 중 이탈로 처리됩니다.</span>
             </div>
             <div class="form-group">
                 <label for="target-minutes">⏱ 목표 작업 시간</label>
@@ -490,7 +527,7 @@
     <div class="alert-overlay">
         <div class="alert-card">
             <h2 class="alert-title">작업에서 벗어났습니다</h2>
-            <p class="alert-subtitle">다시 원래 하던 일로 돌아가세요.</p>
+            <p class="alert-subtitle" id="alert-subtitle">다시 원래 하던 일로 돌아가세요.</p>
         </div>
     </div>
 
@@ -522,6 +559,35 @@
             const m = Math.floor(abs / 60);
             const s = abs % 60;
             return `${sign}${m}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function renderAllowedApps(apps) {
+            const container = document.getElementById('allowed-preview-list');
+            container.innerHTML = '';
+            (apps || []).forEach(app => {
+                const chip = document.createElement('span');
+                chip.className = 'app-chip';
+                chip.innerText = app;
+                container.appendChild(chip);
+            });
+        }
+
+        async function updateAllowedPreview() {
+            const task = document.getElementById('task').value;
+            const extra_allowed_apps = document.getElementById('extra-allowed').value;
+            try {
+                const res = await fetch('/allowed_apps_preview', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ task, extra_allowed_apps })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    renderAllowedApps(data.allowed_apps);
+                }
+            } catch (err) {
+                renderAllowedApps(['chrome.exe']);
+            }
         }
 
         let lastTransitionPhase = 'work';
@@ -584,12 +650,13 @@
             const task = document.getElementById('task').value;
             const target_minutes = document.getElementById('target-minutes').value;
             const blocked_apps = document.getElementById('blocked').value;
+            const extra_allowed_apps = document.getElementById('extra-allowed').value;
 
             try {
                 const res = await fetch('/start_tracking', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ task, target_minutes, blocked_apps })
+                    body: JSON.stringify({ task, target_minutes, blocked_apps, extra_allowed_apps })
                 });
                 if (res.ok) {
                     showView('dashboard-view');
@@ -678,6 +745,8 @@
 
                 // Update Texts
                 document.getElementById('state-text').innerText = data.state;
+                document.getElementById('alert-subtitle').innerText =
+                    data.alert_message || '다시 원래 하던 일로 돌아가세요.';
                 
                 let appDisplay = data.current_app;
                 if (data.current_url) {
@@ -720,6 +789,10 @@
         }
 
         let pollInterval;
+        document.getElementById('task').addEventListener('input', updateAllowedPreview);
+        document.getElementById('extra-allowed').addEventListener('input', updateAllowedPreview);
+        updateAllowedPreview();
+
         // Do not setInterval immediately, wait for setup to finish.
         // But we need to check if it's already active (in case of page refresh).
         async function initCheck() {

@@ -71,6 +71,8 @@ def update_tab():
                 global_tracker.last_app_name = chrome_app
                 global_tracker.last_window_title = title
                 global_tracker.current_state = "이탈"
+                global_tracker.distraction_reason = "blocked"
+                global_tracker.alert_message = f"금지된 사이트/앱입니다: {title.strip() or url}"
                 print(f"\n[즉시 경고] 금지된 크롬 사이트({title.strip()})에 진입했습니다!\n")
     return jsonify({"status": "ok"})
 
@@ -81,9 +83,24 @@ def start_tracking():
         task = data.get('task', '')
         blocked_apps = data.get('blocked_apps', '')
         target_minutes = data.get('target_minutes', 60)
-        global_tracker.start_monitoring(task, blocked_apps, target_minutes)
+        extra_allowed_apps = data.get('extra_allowed_apps', '')
+        global_tracker.start_monitoring(task, blocked_apps, target_minutes, extra_allowed_apps)
         return jsonify({"status": "ok"})
     return jsonify({"error": "Invalid request"}), 400
+
+@app.route('/allowed_apps_preview', methods=['POST'])
+def allowed_apps_preview():
+    data = request.json or {}
+    task = data.get('task', '')
+    extra_allowed_apps = data.get('extra_allowed_apps', '')
+    tracker = global_tracker or FocusTracker.__new__(FocusTracker)
+    default_apps = tracker.get_default_allowed_apps(task)
+    extra_apps = tracker.parse_app_list(extra_allowed_apps)
+    return jsonify({
+        "allowed_apps": tracker.merge_app_lists(default_apps, extra_apps),
+        "default_apps": default_apps,
+        "extra_apps": extra_apps,
+    })
 
 @app.route('/stop_tracking', methods=['POST'])
 def stop_tracking():
@@ -111,6 +128,12 @@ def get_status():
 
     if global_tracker.is_active:
         global_tracker.record_window_switch(global_tracker.get_foreground_window(), source="/status")
+        global_tracker.evaluate_state(
+            global_tracker.last_app_name,
+            global_tracker.last_window_title,
+            global_tracker.get_window_switch_count(),
+            global_tracker.current_idle_time,
+        )
 
     time_status = global_tracker.get_time_status()
         
@@ -118,6 +141,10 @@ def get_status():
         "is_active": global_tracker.is_active,
         "state": global_tracker.current_state,
         "state_code": global_tracker.get_state_code(),
+        "alert_message": global_tracker.alert_message,
+        "distraction_reason": global_tracker.distraction_reason,
+        "condition_flags": global_tracker.condition_flags,
+        "allowed_apps": global_tracker.allowed_apps,
         "task": global_tracker.task_name,
         "target_minutes": global_tracker.target_minutes,
         "target_seconds": global_tracker.target_seconds,
@@ -152,6 +179,9 @@ class FocusTracker:
         self.last_window_title = ""
         self.last_minute_activity = 0
         self.current_idle_time = 0
+        self.distraction_reason = ""
+        self.alert_message = ""
+        self.condition_flags = {}
         
         # Baseline 변수
         self.baseline_activity = 0.0
@@ -191,7 +221,7 @@ class FocusTracker:
         global global_tracker
         global_tracker = self
         
-    def start_monitoring(self, task, blocked_input, target_minutes=60):
+    def start_monitoring(self, task, blocked_input, target_minutes=60, extra_allowed_input=""):
         with self.lock:
             if self.is_active:
                 return
@@ -225,23 +255,21 @@ class FocusTracker:
         self.is_baseline_set = False
         
         self.current_state = "수집 중"
+        self.distraction_reason = ""
+        self.alert_message = ""
         self.total_focus_sec = 0
         self.total_distracted_sec = 0
         self.total_idle_sec = 0
         self.distraction_log.clear()
         self.distracted_minutes = 0
             
-        if "레포트" in task or "문서" in task or "과제" in task:
-            self.allowed_apps = ["WINWORD.EXE", "EXCEL.EXE", "chrome.exe"]
-        elif "코딩" in task or "개발" in task:
-            self.allowed_apps = ["Code.exe", "chrome.exe"]
-        elif "조사" in task or "리서치" in task:
-            self.allowed_apps = ["chrome.exe"]
-        else:
-            self.allowed_apps = ["chrome.exe"]
+        self.allowed_apps = self.merge_app_lists(
+            self.get_default_allowed_apps(task),
+            self.parse_app_list(extra_allowed_input)
+        )
 
         if blocked_input:
-            self.blocked_apps = [app.strip() for app in blocked_input.split(",") if app.strip()]
+            self.blocked_apps = self.parse_app_list(blocked_input)
         else:
             self.blocked_apps = []
 
@@ -272,6 +300,32 @@ class FocusTracker:
     def on_input(self, *args):
         """키보드 및 마우스 입력 발생 시 호출되는 콜백"""
         self.record_activity()
+
+    def parse_app_list(self, value):
+        if not value:
+            return []
+        return [app.strip() for app in value.split(",") if app.strip()]
+
+    def merge_app_lists(self, *app_lists):
+        merged = []
+        seen = set()
+        for apps in app_lists:
+            for app_name in apps:
+                key = app_name.lower()
+                if key not in seen:
+                    seen.add(key)
+                    merged.append(app_name)
+        return merged
+
+    def get_default_allowed_apps(self, task):
+        task_text = task or ""
+        if "레포트" in task_text or "문서" in task_text or "과제" in task_text:
+            return ["WINWORD.EXE", "EXCEL.EXE", "chrome.exe"]
+        if "코딩" in task_text or "개발" in task_text:
+            return ["Code.exe", "chrome.exe"]
+        if "조사" in task_text or "리서치" in task_text:
+            return ["chrome.exe"]
+        return ["chrome.exe"]
 
     def parse_target_minutes(self, value):
         try:
@@ -432,6 +486,8 @@ class FocusTracker:
         if initial_window:
             self.last_window_handle = initial_window
             self.last_window_process_name = self.get_process_name_by_window(initial_window)
+            self.last_app_name = self.last_window_process_name
+            self.last_window_title = self.get_window_title(initial_window)
             print(
                 f"[WindowSwitch] baseline hwnd={self.last_window_handle} "
                 f"process={self.last_window_process_name}",
@@ -440,12 +496,17 @@ class FocusTracker:
         print(f"[WindowSwitch] monitor_window loop entered | running={self.running}", flush=True)
         while self.running:
             current_window = self.get_foreground_window()
+            if current_window:
+                self.last_app_name = self.get_process_name_by_window(current_window)
+                self.last_window_title = self.get_window_title(current_window)
             if self.record_window_switch(current_window, source="monitor"):
                 title = self.get_window_title(current_window)
                 if self.blocked_apps:
                     current_app = self.get_foreground_process_name()
                     if hasattr(self, 'is_blocked') and self.is_blocked(current_app, title):
                         self.current_state = "이탈"
+                        self.distraction_reason = "blocked"
+                        self.alert_message = f"금지된 사이트/앱입니다: {title.strip() or current_app}"
                         print(f"\n[즉시 경고] 금지된 사이트/앱({title.strip()})에 진입했습니다!\n")
             time.sleep(1)
 
@@ -496,7 +557,7 @@ class FocusTracker:
         url_lower = self.current_chrome_url.lower()
         
         for b_lower in self.get_blocked_terms():
-            if b_lower == app_lower or b_lower in title_lower or b_lower in url_lower:
+            if b_lower in app_lower or b_lower in title_lower or b_lower in url_lower:
                 return True
         return False
 
@@ -508,6 +569,55 @@ class FocusTracker:
         if self.current_state == "집중":
             return "focused"
         return "collecting"
+
+    def evaluate_state(self, current_app, current_title, window_switch_count, idle_time):
+        cond_blocked = self.is_blocked(current_app, current_title)
+        cond_idle = idle_time > IDLE_THRESHOLD
+        allowed_lower = [app.lower() for app in self.allowed_apps]
+        cond_app = bool(current_app) and current_app.lower() not in allowed_lower
+
+        current_activity = self.get_current_activity()
+        cond_switch_activity = False
+        if self.is_baseline_set:
+            cond_switch_activity = (
+                window_switch_count > WINDOW_SWITCH_THRESHOLD
+                and current_activity < self.baseline_activity * ACTIVITY_DROP_RATIO
+            )
+
+        self.condition_flags = {
+            "cond_blocked": bool(cond_blocked),
+            "cond_idle": bool(cond_idle),
+            "cond_app": bool(cond_app),
+            "cond_switch_activity": bool(cond_switch_activity),
+            "current_app": current_app,
+            "allowed_apps": self.allowed_apps,
+            "window_switch_count": window_switch_count,
+            "current_activity": current_activity,
+            "baseline_activity": self.baseline_activity,
+            "is_baseline_set": self.is_baseline_set,
+        }
+
+        if cond_blocked:
+            self.current_state = "이탈"
+            self.distraction_reason = "blocked"
+            blocked_target = self.current_chrome_url if self.current_chrome_url else (current_title or current_app)
+            self.alert_message = f"금지된 사이트/앱입니다: {blocked_target}"
+        elif cond_idle:
+            self.current_state = "비활동"
+            self.distraction_reason = "idle"
+            self.alert_message = "60초 이상 입력이 없어 비활동 상태입니다."
+        elif cond_app:
+            self.current_state = "이탈"
+            self.distraction_reason = "not_allowed_app"
+            self.alert_message = f"허용되지 않은 앱입니다: {current_app}"
+        elif cond_switch_activity:
+            self.current_state = "이탈"
+            self.distraction_reason = "switch_activity"
+            self.alert_message = "창 전환이 많고 활동량이 낮아 산만한 작업 패턴으로 감지되었습니다."
+        else:
+            self.current_state = "집중"
+            self.distraction_reason = ""
+            self.alert_message = ""
 
     def tracking_loop(self):
         try:
@@ -532,40 +642,14 @@ class FocusTracker:
                 
                 window_switch_count = self.get_window_switch_count()
                 idle_time = int(time.time() - self.last_input_time)
-                current_window = self.get_foreground_window()
-                if self.record_window_switch(current_window, source="tracking_loop"):
-                    window_switch_count = self.get_window_switch_count()
-                current_app = self.get_foreground_process_name()
-                current_title = self.get_window_title(current_window)
+                current_app = self.last_app_name
+                current_title = self.last_window_title
                 
                 # UI용 변수 실시간 업데이트
                 self.current_idle_time = idle_time
                 self.last_app_name = current_app
                 self.last_window_title = current_title
-                # 1) 실시간 상태 판정 검사
-                cond_blocked = self.is_blocked(current_app, current_title)
-                cond_idle = idle_time > IDLE_THRESHOLD
-                cond_app = current_app and current_app.lower() not in [app.lower() for app in self.allowed_apps]
-                
-                # Baseline 기반 검사는 Baseline 수집이 끝난 후에만
-                cond_switch_activity = False
-                if self.is_baseline_set:
-                    cond_switch_activity = (window_switch_count > WINDOW_SWITCH_THRESHOLD) and (self.last_minute_activity < self.baseline_activity * ACTIVITY_DROP_RATIO)
-                
-                # 2) 상태 결정 로직
-                if cond_blocked:
-                    self.current_state = "이탈"
-                elif cond_idle:
-                    self.current_state = "비활동"
-                elif cond_app:
-                    self.current_state = "이탈"
-                elif cond_switch_activity:
-                    self.current_state = "이탈"
-                else:
-                    if not self.is_baseline_set:
-                        self.current_state = "수집 중"
-                    else:
-                        self.current_state = "집중"
+                self.evaluate_state(current_app, current_title, window_switch_count, idle_time)
                 
                 # 3) 통계 기록 (1초마다)
                 if self.current_state == "집중":

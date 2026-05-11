@@ -42,9 +42,13 @@
             justify-content: center;
         }
 
+        body.state-focused,
         body.state-집중 { background-color: var(--state-focus); }
+        body.state-distracted,
         body.state-이탈 { background-color: var(--state-distracted); }
+        body.state-idle,
         body.state-비활동 { background-color: var(--state-idle); }
+        body.state-collecting,
         body.state-수집 { background-color: var(--canvas-parchment); }
 
         .container {
@@ -88,7 +92,8 @@
             margin-bottom: 8px;
             color: var(--ink);
         }
-        input[type="text"] {
+        input[type="text"],
+        input[type="number"] {
             width: 100%;
             box-sizing: border-box;
             padding: 12px 16px;
@@ -99,7 +104,8 @@
             outline: none;
             transition: border-color 0.2s;
         }
-        input[type="text"]:focus {
+        input[type="text"]:focus,
+        input[type="number"]:focus {
             border-color: var(--primary);
         }
         .help-text {
@@ -158,12 +164,15 @@
         }
         .report-stats {
             display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
             justify-content: space-around;
             margin-bottom: 32px;
         }
         .report-stat-item {
             display: flex;
             flex-direction: column;
+            min-width: 90px;
         }
         .report-stat-val {
             font-size: 32px;
@@ -216,7 +225,9 @@
             margin: 0 0 16px 0;
             transition: color 0.5s ease;
         }
+        body.state-distracted h1.state-title,
         body.state-이탈 h1.state-title { color: #d32f2f; }
+        body.state-focused h1.state-title,
         body.state-집중 h1.state-title { color: #2e7d32; }
 
         p.current-app {
@@ -230,9 +241,9 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 24px;
-            margin-bottom: 48px;
+            margin-bottom: 28px;
         }
 
         .stat-card {
@@ -276,7 +287,7 @@
             transition: opacity 0.5s ease;
             z-index: 100;
         }
-        body.state-이탈 .alert-overlay { opacity: 1; }
+        body.state-distracted .alert-overlay { opacity: 1; }
 
         .alert-card {
             background-color: var(--surface-tile);
@@ -288,7 +299,7 @@
             transform: scale(0.95);
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        body.state-이탈 .alert-card { transform: scale(1); }
+        body.state-distracted .alert-card { transform: scale(1); }
 
         .alert-title {
             font-family: var(--font-display);
@@ -312,6 +323,59 @@
             font-weight: 600;
             margin-top: 24px;
         }
+
+        .transition-panel {
+            display: none;
+            max-width: 680px;
+            margin: 0 auto 28px auto;
+            padding: 20px 24px;
+            border-radius: 14px;
+            background-color: var(--canvas);
+            border: 1px solid #d2d2d7;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .transition-panel.active { display: block; }
+        .transition-panel.urgent {
+            border-color: #ff3b30;
+            background-color: #fff5f5;
+        }
+        .transition-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--body-muted);
+            margin-bottom: 8px;
+        }
+        .transition-message {
+            font-size: 18px;
+            line-height: 1.35;
+            margin-bottom: 14px;
+            color: var(--ink);
+        }
+        .time-progress {
+            height: 8px;
+            border-radius: var(--rounded-pill);
+            overflow: hidden;
+            background-color: var(--canvas-parchment);
+        }
+        .time-progress-fill {
+            width: 0%;
+            height: 100%;
+            background-color: var(--primary);
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+        .transition-panel.urgent .time-progress-fill { background-color: #ff3b30; }
+        .btn-primary.btn-small {
+            display: inline-block;
+            width: auto;
+            margin-top: 14px;
+            padding: 9px 16px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 760px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
 <body>
@@ -324,6 +388,11 @@
                 <label for="task">🎯 지금 할 작업</label>
                 <input type="text" id="task" placeholder="예: 레포트 작성, 코딩, 자료 조사" autocomplete="off">
                 <span class="help-text">입력한 작업에 맞춰 허용 앱이 자동 설정됩니다.</span>
+            </div>
+            <div class="form-group">
+                <label for="target-minutes">⏱ 목표 작업 시간</label>
+                <input type="text" id="target-minutes" inputmode="numeric" pattern="[0-9]*" value="60" autocomplete="off">
+                <span class="help-text">분 단위로 입력하세요. 시간이 가까워지면 마무리 전환을 도와줍니다.</span>
             </div>
             <div class="form-group">
                 <label for="blocked">🚫 피하고 싶은 앱 (선택사항)</label>
@@ -341,6 +410,10 @@
         
         <div class="stats-grid">
             <div class="stat-card">
+                <div class="stat-value" id="val-remaining">--:--</div>
+                <div class="stat-label">Remaining</div>
+            </div>
+            <div class="stat-card">
                 <div class="stat-value" id="val-activity">0</div>
                 <div class="stat-label">Activity (1m)</div>
             </div>
@@ -352,6 +425,15 @@
                 <div class="stat-value" id="val-switch">0</div>
                 <div class="stat-label">Window Switches</div>
             </div>
+        </div>
+
+        <div class="transition-panel" id="transition-panel">
+            <div class="transition-label" id="transition-label">마무리 안내</div>
+            <div class="transition-message" id="transition-message"></div>
+            <div class="time-progress">
+                <div class="time-progress-fill" id="time-progress-fill"></div>
+            </div>
+            <button class="btn-primary btn-small" onclick="stopTracking(false)">마무리하고 보고서 보기</button>
         </div>
         
         <div class="timer-badge" id="timer-text">0:00 경과</div>
@@ -376,6 +458,14 @@
                 <div class="report-stat-item">
                     <span class="report-stat-val val-idle" id="rep-idle">00:00</span>
                     <span class="stat-label">비활동 시간</span>
+                </div>
+                <div class="report-stat-item">
+                    <span class="report-stat-val" id="rep-target">00:00</span>
+                    <span class="stat-label">목표 시간</span>
+                </div>
+                <div class="report-stat-item">
+                    <span class="report-stat-val val-dist" id="rep-overrun">00:00</span>
+                    <span class="stat-label">초과 시간</span>
                 </div>
             </div>
             
@@ -424,19 +514,52 @@
             return `${m}:${s.toString().padStart(2, '0')} 경과`;
         }
 
+        function formatCountdown(seconds) {
+            const sign = seconds < 0 ? '+' : '';
+            const abs = Math.abs(seconds);
+            const m = Math.floor(abs / 60);
+            const s = abs % 60;
+            return `${sign}${m}:${s.toString().padStart(2, '0')}`;
+        }
+
+        let lastTransitionPhase = 'work';
+
+        function playTransitionChime(phase) {
+            if (phase === 'work' || phase === lastTransitionPhase) return;
+            lastTransitionPhase = phase;
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = phase === 'overrun' ? 660 : 520;
+                gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.35);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.38);
+            } catch (err) {
+                console.debug('Audio cue unavailable:', err);
+            }
+        }
+
         async function startTracking() {
             const btn = document.querySelector('.setup-card .btn-primary');
             btn.disabled = true;
             btn.innerText = "시작 중...";
             
             const task = document.getElementById('task').value;
+            const target_minutes = document.getElementById('target-minutes').value;
             const blocked_apps = document.getElementById('blocked').value;
 
             try {
                 const res = await fetch('/start_tracking', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ task, blocked_apps })
+                    body: JSON.stringify({ task, target_minutes, blocked_apps })
                 });
                 if (res.ok) {
                     showView('dashboard-view');
@@ -452,8 +575,8 @@
             }
         }
 
-        async function stopTracking() {
-            if(!confirm("정말 작업을 종료하고 보고서를 보시겠습니까?")) return;
+        async function stopTracking(askConfirm = true) {
+            if(askConfirm && !confirm("정말 작업을 종료하고 보고서를 보시겠습니까?")) return;
             
             try {
                 const res = await fetch('/stop_tracking', { method: 'POST' });
@@ -468,13 +591,18 @@
         
         function showReport(report) {
             clearInterval(pollInterval);
-            document.body.className = "state-수집"; // Reset background to normal
+            document.body.className = "state-collecting"; // Reset background to normal
             
             showView('report-view');
             
             document.getElementById('rep-focus').innerText = formatTimeMinSec(report.total_focus_sec);
             document.getElementById('rep-dist').innerText = formatTimeMinSec(report.total_distracted_sec);
             document.getElementById('rep-idle').innerText = formatTimeMinSec(report.total_idle_sec);
+            document.getElementById('rep-target').innerText = formatTimeMinSec((report.target_minutes || 0) * 60);
+            document.getElementById('rep-overrun').innerText = formatTimeMinSec(report.overrun_sec || 0);
+            if (report.target_minutes) {
+                document.querySelector('.report-title').innerText = `${report.task || '작업'} 보고서`;
+            }
             
             const total = report.total_focus_sec + report.total_distracted_sec + report.total_idle_sec || 1;
             document.getElementById('bar-focus').style.width = (report.total_focus_sec / total * 100) + '%';
@@ -514,7 +642,7 @@
                 }
 
                 // Update Body Class
-                const stateClass = `state-${data.state.split(' ')[0]}`;
+                const stateClass = `state-${data.state_code || 'collecting'}`;
                 document.body.className = stateClass;
 
                 // Update Texts
@@ -530,10 +658,27 @@
                 }
                 document.getElementById('app-text').innerText = appDisplay || '바탕화면';
 
+                const remainingDisplay = data.overrun_seconds > 0
+                    ? formatCountdown(-data.overrun_seconds)
+                    : formatCountdown(data.remaining_time || 0);
+                document.getElementById('val-remaining').innerText = remainingDisplay;
                 document.getElementById('val-activity').innerText = data.activity;
                 document.getElementById('val-idle').innerText = data.idle_time + 's';
                 document.getElementById('val-switch').innerText = data.window_switch;
                 document.getElementById('timer-text').innerText = formatTime(data.elapsed_time);
+
+                const panel = document.getElementById('transition-panel');
+                const phase = data.transition_phase || 'work';
+                const showPanel = phase !== 'work';
+                panel.classList.toggle('active', showPanel);
+                panel.classList.toggle('urgent', phase === 'finish_now' || phase === 'overrun');
+                document.getElementById('transition-label').innerText =
+                    phase === 'overrun' ? '목표 시간 초과' :
+                    phase === 'finish_now' ? '전환 준비' : '마무리 구간';
+                document.getElementById('transition-message').innerText = data.transition_message || '';
+                document.getElementById('time-progress-fill').style.width =
+                    `${Math.min(100, Math.round((data.time_progress || 0) * 100))}%`;
+                playTransitionChime(phase);
 
             } catch (error) {
                 console.error("Failed to fetch status:", error);

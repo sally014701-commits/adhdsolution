@@ -1,6 +1,7 @@
 import time
 import threading
 import ctypes
+from ctypes import wintypes
 from collections import deque
 import psutil
 from pynput import keyboard, mouse
@@ -15,6 +16,32 @@ from flask import Flask, request, jsonify, render_template
 WINDOW_SWITCH_THRESHOLD = 15      # 2분 기준 활성 창 전환 횟수
 IDLE_THRESHOLD = 60               # 초 단위 마지막 입력 이후 경과 시간
 ACTIVITY_DROP_RATIO = 0.5         # baseline 대비 50% 이하
+
+class LASTINPUTINFO(ctypes.Structure):
+    _fields_ = [
+        ("cbSize", ctypes.c_uint),
+        ("dwTime", ctypes.c_uint),
+    ]
+
+user32 = ctypes.windll.user32
+user32.GetForegroundWindow.restype = wintypes.HWND
+user32.GetWindowTextLengthW.argtypes = [wintypes.HWND]
+user32.GetWindowTextLengthW.restype = ctypes.c_int
+user32.GetWindowTextW.argtypes = [wintypes.HWND, wintypes.LPWSTR, ctypes.c_int]
+user32.GetWindowTextW.restype = ctypes.c_int
+user32.GetWindowThreadProcessId.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.DWORD)]
+user32.GetWindowThreadProcessId.restype = wintypes.DWORD
+user32.GetLastInputInfo.argtypes = [ctypes.POINTER(LASTINPUTINFO)]
+user32.GetLastInputInfo.restype = wintypes.BOOL
+user32.OpenInputDesktop.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+user32.OpenInputDesktop.restype = wintypes.HDESK
+user32.SetThreadDesktop.argtypes = [wintypes.HDESK]
+user32.SetThreadDesktop.restype = wintypes.BOOL
+user32.IsWindow.argtypes = [wintypes.HWND]
+user32.IsWindow.restype = wintypes.BOOL
+
+DESKTOP_READOBJECTS = 0x0001
+DESKTOP_SWITCHDESKTOP = 0x0100
 
 app = Flask(__name__)
 # Flask 로깅 최소화 (콘솔 지저분해짐 방지)
@@ -39,8 +66,12 @@ def update_tab():
         
         if global_tracker.blocked_apps:
             current_app = global_tracker.get_foreground_process_name()
-            if current_app and current_app.lower() == 'chrome.exe' and global_tracker.is_blocked(current_app, title):
-                print(f"\n🚨 [즉시 경고] 금지된 크롬 사이트({title.strip()})에 진입했습니다! 🚨\n")
+            chrome_app = current_app if current_app and current_app.lower() == 'chrome.exe' else 'chrome.exe'
+            if global_tracker.is_blocked(chrome_app, title):
+                global_tracker.last_app_name = chrome_app
+                global_tracker.last_window_title = title
+                global_tracker.current_state = "이탈"
+                print(f"\n[즉시 경고] 금지된 크롬 사이트({title.strip()})에 진입했습니다!\n")
     return jsonify({"status": "ok"})
 
 @app.route('/start_tracking', methods=['POST'])
@@ -49,7 +80,8 @@ def start_tracking():
     if data and global_tracker:
         task = data.get('task', '')
         blocked_apps = data.get('blocked_apps', '')
-        global_tracker.start_monitoring(task, blocked_apps)
+        target_minutes = data.get('target_minutes', 60)
+        global_tracker.start_monitoring(task, blocked_apps, target_minutes)
         return jsonify({"status": "ok"})
     return jsonify({"error": "Invalid request"}), 400
 
@@ -58,13 +90,16 @@ def stop_tracking():
     if not global_tracker:
         return jsonify({"error": "Tracker not initialized"}), 500
     
-    global_tracker.running = False
-    global_tracker.is_active = False
+    global_tracker.stop()
     
     report = {
         "total_focus_sec": global_tracker.total_focus_sec,
         "total_distracted_sec": global_tracker.total_distracted_sec,
         "total_idle_sec": global_tracker.total_idle_sec,
+        "task": global_tracker.task_name,
+        "target_minutes": global_tracker.target_minutes,
+        "elapsed_sec": global_tracker.get_elapsed_seconds(),
+        "overrun_sec": global_tracker.get_time_status()["overrun_seconds"],
         "distractions": list(global_tracker.distraction_log)
     }
     return jsonify(report)
@@ -73,16 +108,29 @@ def stop_tracking():
 def get_status():
     if not global_tracker:
         return jsonify({"error": "Tracker not initialized"}), 500
+
+    if global_tracker.is_active:
+        global_tracker.record_window_switch(global_tracker.get_foreground_window(), source="/status")
+
+    time_status = global_tracker.get_time_status()
         
     return jsonify({
         "is_active": global_tracker.is_active,
         "state": global_tracker.current_state,
+        "state_code": global_tracker.get_state_code(),
+        "task": global_tracker.task_name,
+        "target_minutes": global_tracker.target_minutes,
+        "target_seconds": global_tracker.target_seconds,
+        **time_status,
         "current_app": global_tracker.last_app_name,
-        "current_url": global_tracker.current_chrome_url if global_tracker.last_app_name.lower() == 'chrome.exe' else "",
+        "current_url": global_tracker.current_chrome_url if global_tracker.current_chrome_url else "",
         "current_title": global_tracker.last_window_title,
-        "activity": global_tracker.last_minute_activity,
+        "activity": global_tracker.get_current_activity(),
         "idle_time": global_tracker.current_idle_time,
         "window_switch": global_tracker.get_window_switch_count(),
+        "foreground_hwnd": global_tracker.get_foreground_window(),
+        "last_window_handle": global_tracker.last_window_handle,
+        "win_thread_alive": bool(global_tracker.win_thread and global_tracker.win_thread.is_alive()),
         "elapsed_time": int(time.time() - global_tracker.start_time) if global_tracker.start_time else 0
     })
 
@@ -93,8 +141,10 @@ class FocusTracker:
         # 상태 변수
         self.last_input_time = time.time()
         self.current_activity = 0
+        self.activity_timestamps = deque()
         self.window_switch_timestamps = deque()
         self.activity_history = []
+        self.last_system_input_tick = self.get_last_input_tick()
         
         # UI 제공용 변수
         self.current_state = "수집 중"
@@ -109,6 +159,10 @@ class FocusTracker:
         self.is_baseline_set = False
         self.seconds_elapsed = 0
         self.start_time = None
+        self.task_name = ""
+        self.target_minutes = 60
+        self.target_seconds = 3600
+        self.transition_phase = "work"
         
         # 지속 시간 추적
         self.distracted_minutes = 0
@@ -120,11 +174,13 @@ class FocusTracker:
         self.distraction_log = set()
         
         # 윈도우 창 모니터링용
-        self.last_window_handle = ctypes.windll.user32.GetForegroundWindow()
+        self.last_window_handle = self.get_foreground_window()
+        self.last_window_process_name = self.get_process_name_by_window(self.last_window_handle)
         self.running = False
         self.is_active = False # 설정 전엔 비활성
         self.loop_thread = None
         self.win_thread = None
+        self.input_desktop_handle = None
         self.allowed_apps = []
         self.blocked_apps = []
         
@@ -135,7 +191,7 @@ class FocusTracker:
         global global_tracker
         global_tracker = self
         
-    def start_monitoring(self, task, blocked_input):
+    def start_monitoring(self, task, blocked_input, target_minutes=60):
         with self.lock:
             if self.is_active:
                 return
@@ -143,6 +199,7 @@ class FocusTracker:
             
         # 이전 스레드가 완전히 종료될 때까지 대기
         self.running = False
+        self.stop_input_listeners()
         if self.loop_thread and self.loop_thread.is_alive():
             self.loop_thread.join(timeout=1.5)
         if self.win_thread and self.win_thread.is_alive():
@@ -152,10 +209,19 @@ class FocusTracker:
         self.running = True
         self.seconds_elapsed = 0
         self.start_time = time.time()
+        self.task_name = task.strip() or "작업"
+        self.target_minutes = self.parse_target_minutes(target_minutes)
+        self.target_seconds = self.target_minutes * 60
+        self.transition_phase = "work"
         self.current_activity = 0
+        self.activity_timestamps.clear()
+        self.last_minute_activity = 0
         self.activity_history = []
         self.window_switch_timestamps.clear()
+        self.last_window_handle = self.get_foreground_window()
+        self.last_window_process_name = self.get_process_name_by_window(self.last_window_handle)
         self.last_input_time = time.time()
+        self.last_system_input_tick = self.get_last_input_tick()
         self.is_baseline_set = False
         
         self.current_state = "수집 중"
@@ -176,6 +242,8 @@ class FocusTracker:
 
         if blocked_input:
             self.blocked_apps = [app.strip() for app in blocked_input.split(",") if app.strip()]
+        else:
+            self.blocked_apps = []
 
         # pynput 이벤트 리스너 시작
         self.kb_listener = keyboard.Listener(on_press=self.on_input)
@@ -190,6 +258,7 @@ class FocusTracker:
         # 창 전환 모니터링 스레드 시작
         self.win_thread = threading.Thread(target=self.monitor_window, daemon=True)
         self.win_thread.start()
+        print(f"[WindowSwitch] monitor_window thread started | alive={self.win_thread.is_alive()} | initial_hwnd={self.last_window_handle}", flush=True)
         
         # 루프 시작 스레드
         self.loop_thread = threading.Thread(target=self.tracking_loop, daemon=True)
@@ -197,39 +266,187 @@ class FocusTracker:
         
         print(f"✅ 허용 앱 설정 완료: {self.allowed_apps}")
         if self.blocked_apps:
-            print(f"🚫 다음 앱은 차단됩니다: {self.blocked_apps}")
-        print("🎯 집중 모니터링 시스템 시작")
+            print(f"차단 앱/사이트: {self.blocked_apps}")
+        print("집중 모니터링 시스템 시작")
 
     def on_input(self, *args):
         """키보드 및 마우스 입력 발생 시 호출되는 콜백"""
-        self.last_input_time = time.time()
-        self.current_activity += 1
+        self.record_activity()
+
+    def parse_target_minutes(self, value):
+        try:
+            minutes = int(value)
+        except (TypeError, ValueError):
+            minutes = 60
+        return max(1, min(minutes, 480))
+
+    def get_elapsed_seconds(self):
+        return int(time.time() - self.start_time) if self.start_time else 0
+
+    def get_time_status(self):
+        elapsed = self.get_elapsed_seconds()
+        remaining = max(0, self.target_seconds - elapsed)
+        overrun = max(0, elapsed - self.target_seconds)
+        progress = min(1.0, elapsed / self.target_seconds) if self.target_seconds else 0.0
+
+        if overrun > 0:
+            phase = "overrun"
+            message = "목표 시간을 넘겼습니다. 지금은 더 완벽하게 만드는 시간이 아니라 마무리하고 전환할 시간입니다."
+        elif remaining <= 120:
+            phase = "finish_now"
+            message = "마무리 2분 전입니다. 새 내용을 추가하지 말고 저장, 정리, 다음 행동만 준비하세요."
+        elif remaining <= 600:
+            phase = "wrapup_soon"
+            message = "마무리 구간입니다. 완성도를 올리기보다 끝낼 수 있는 형태로 좁혀주세요."
+        else:
+            phase = "work"
+            message = "정해둔 시간 안에서 필요한 만큼만 진행하세요."
+
+        if phase != self.transition_phase:
+            self.transition_phase = phase
+            print(f"[Transition] phase={phase} remaining={remaining}s overrun={overrun}s", flush=True)
+
+        return {
+            "elapsed_time": elapsed,
+            "remaining_time": remaining,
+            "overrun_seconds": overrun,
+            "time_progress": progress,
+            "transition_phase": phase,
+            "transition_message": message,
+            "transition_required": phase in ["finish_now", "overrun"],
+        }
+
+    def record_activity(self):
+        if not self.is_active:
+            return
+        now = time.time()
+        self.last_input_time = now
+        self.activity_timestamps.append(now)
+        self.prune_activity(now)
+
+    def prune_activity(self, now=None):
+        now = now or time.time()
+        while self.activity_timestamps and self.activity_timestamps[0] < now - 60:
+            self.activity_timestamps.popleft()
+        self.current_activity = len(self.activity_timestamps)
+        return self.current_activity
+
+    def get_current_activity(self):
+        return self.prune_activity()
+
+    def get_last_input_tick(self):
+        info = LASTINPUTINFO()
+        info.cbSize = ctypes.sizeof(LASTINPUTINFO)
+        if user32.GetLastInputInfo(ctypes.byref(info)):
+            return int(info.dwTime)
+        return None
+
+    def sync_polled_input_activity(self):
+        current_tick = self.get_last_input_tick()
+        if current_tick is None:
+            return
+        if self.last_system_input_tick is None:
+            self.last_system_input_tick = current_tick
+            return
+        if current_tick != self.last_system_input_tick:
+            self.last_system_input_tick = current_tick
+            self.record_activity()
 
     def get_window_title(self, hwnd):
         """윈도우 핸들(hwnd)의 타이틀을 반환"""
-        length = ctypes.windll.user32.GetWindowTextLengthW(hwnd)
+        length = user32.GetWindowTextLengthW(hwnd)
         if length == 0:
             return ""
         buf = ctypes.create_unicode_buffer(length + 1)
-        ctypes.windll.user32.GetWindowTextW(hwnd, buf, length + 1)
+        user32.GetWindowTextW(hwnd, buf, length + 1)
         return buf.value
+
+    def get_foreground_window(self):
+        hwnd = user32.GetForegroundWindow()
+        return int(hwnd) if hwnd else 0
+
+    def attach_thread_to_input_desktop(self):
+        access = DESKTOP_READOBJECTS | DESKTOP_SWITCHDESKTOP
+        desktop = user32.OpenInputDesktop(0, False, access)
+        if not desktop:
+            print("[WindowSwitch] OpenInputDesktop failed", flush=True)
+            return False
+        if not user32.SetThreadDesktop(desktop):
+            print("[WindowSwitch] SetThreadDesktop failed", flush=True)
+            return False
+        self.input_desktop_handle = desktop
+        print("[WindowSwitch] attached monitor thread to input desktop", flush=True)
+        return True
+
+    def get_process_name_by_window(self, hwnd):
+        if not hwnd:
+            return ""
+        pid = wintypes.DWORD(0)
+        user32.GetWindowThreadProcessId(wintypes.HWND(hwnd), ctypes.byref(pid))
+        if pid.value > 0:
+            try:
+                return psutil.Process(pid.value).name()
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                return ""
+        return ""
+
+    def record_window_switch(self, hwnd, source="monitor"):
+        if not hwnd:
+            return False
+        previous_window = self.last_window_handle
+        previous_app = self.last_window_process_name
+        current_app = self.get_process_name_by_window(hwnd)
+        if hwnd == self.last_window_handle:
+            return False
+        if previous_app and current_app and previous_app.lower() == current_app.lower():
+            self.last_window_handle = hwnd
+            self.last_window_process_name = current_app
+            return False
+        if previous_window and not user32.IsWindow(wintypes.HWND(previous_window)):
+            print(
+                f"[WindowSwitch:{source}] ignored_closed_window_return "
+                f"previous_hwnd={previous_window} current_hwnd={hwnd} "
+                f"previous_process={previous_app} process={current_app} "
+                f"window_switch_count={self.get_window_switch_count()}",
+                flush=True
+            )
+            self.last_window_handle = hwnd
+            self.last_window_process_name = current_app
+            return False
+        self.last_window_handle = hwnd
+        self.last_window_process_name = current_app
+        self.window_switch_timestamps.append(time.time())
+        window_switch_count = self.get_window_switch_count()
+        print(
+            f"[WindowSwitch:{source}] previous_hwnd={previous_window} "
+            f"current_hwnd={hwnd} previous_process={previous_app} process={current_app} "
+            f"window_switch_count={window_switch_count}",
+            flush=True
+        )
+        return True
 
     def monitor_window(self):
         """1초마다 활성 창을 체크하여 변경 시 카운트 및 금지 앱 감지"""
-        last_valid_window = ctypes.windll.user32.GetForegroundWindow()
-        
+        self.attach_thread_to_input_desktop()
+        initial_window = self.get_foreground_window()
+        if initial_window:
+            self.last_window_handle = initial_window
+            self.last_window_process_name = self.get_process_name_by_window(initial_window)
+            print(
+                f"[WindowSwitch] baseline hwnd={self.last_window_handle} "
+                f"process={self.last_window_process_name}",
+                flush=True
+            )
+        print(f"[WindowSwitch] monitor_window loop entered | running={self.running}", flush=True)
         while self.running:
-            current_window = ctypes.windll.user32.GetForegroundWindow()
-            if current_window != 0 and current_window != last_valid_window:
+            current_window = self.get_foreground_window()
+            if self.record_window_switch(current_window, source="monitor"):
                 title = self.get_window_title(current_window)
-                if title.strip():
-                    self.window_switch_timestamps.append(time.time())
-                    last_valid_window = current_window
-                    
-                    if self.blocked_apps:
-                        current_app = self.get_foreground_process_name()
-                        if hasattr(self, 'is_blocked') and self.is_blocked(current_app, title):
-                            print(f"\n🚨 [즉시 경고] 금지된 사이트/앱({title.strip()})에 진입했습니다! 🚨\n")
+                if self.blocked_apps:
+                    current_app = self.get_foreground_process_name()
+                    if hasattr(self, 'is_blocked') and self.is_blocked(current_app, title):
+                        self.current_state = "이탈"
+                        print(f"\n[즉시 경고] 금지된 사이트/앱({title.strip()})에 진입했습니다!\n")
             time.sleep(1)
 
     def get_window_switch_count(self):
@@ -241,17 +458,34 @@ class FocusTracker:
 
     def get_foreground_process_name(self):
         """현재 활성화된 창의 프로세스 이름 반환"""
-        hwnd = ctypes.windll.user32.GetForegroundWindow()
-        if not hwnd:
-            return ""
-        pid = ctypes.c_ulong(0)
-        ctypes.windll.user32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
-        if pid.value > 0:
-            try:
-                return psutil.Process(pid.value).name()
-            except (psutil.NoSuchProcess, psutil.AccessDenied):
-                return ""
-        return ""
+        return self.get_process_name_by_window(self.get_foreground_window())
+
+    def stop_input_listeners(self):
+        for listener_name in ("kb_listener", "ms_listener"):
+            listener = getattr(self, listener_name, None)
+            if listener:
+                try:
+                    listener.stop()
+                except Exception:
+                    pass
+                setattr(self, listener_name, None)
+
+    def get_blocked_terms(self):
+        terms = set()
+        aliases = {
+            "유튜브": ["youtube", "youtube.com", "youtu.be"],
+            "youtube": ["유튜브", "youtube.com", "youtu.be"],
+            "youtube.com": ["유튜브", "youtube", "youtu.be"],
+            "youtu.be": ["유튜브", "youtube", "youtube.com"],
+        }
+
+        for blocked in self.blocked_apps:
+            term = blocked.strip().lower()
+            if not term:
+                continue
+            terms.add(term)
+            terms.update(aliases.get(term, []))
+        return terms
 
     def is_blocked(self, current_app, current_title):
         """앱 프로세스 이름이나 창 타이틀, 또는 크롬 URL에 금지어가 포함되어 있는지 확인"""
@@ -259,26 +493,34 @@ class FocusTracker:
             return False
         app_lower = current_app.lower() if current_app else ""
         title_lower = current_title.lower() if current_title else ""
-        url_lower = self.current_chrome_url.lower() if app_lower == 'chrome.exe' else ""
+        url_lower = self.current_chrome_url.lower()
         
-        for b in self.blocked_apps:
-            b_lower = b.lower()
+        for b_lower in self.get_blocked_terms():
             if b_lower == app_lower or b_lower in title_lower or b_lower in url_lower:
                 return True
         return False
+
+    def get_state_code(self):
+        if self.current_state == "이탈":
+            return "distracted"
+        if self.current_state == "비활동":
+            return "idle"
+        if self.current_state == "집중":
+            return "focused"
+        return "collecting"
 
     def tracking_loop(self):
         try:
             # 1초 주기 상태 갱신 루프
             while self.running:
                 time.sleep(1) 
+                self.sync_polled_input_activity()
                 self.seconds_elapsed += 1
                 
                 # 매 1분(60초)마다 activity 누적 및 처리
                 if self.seconds_elapsed % 60 == 0:
-                    self.last_minute_activity = self.current_activity
-                    self.activity_history.append(self.current_activity)
-                    self.current_activity = 0
+                    self.last_minute_activity = self.get_current_activity()
+                    self.activity_history.append(self.last_minute_activity)
                     
                     # Baseline 3분 수집 완료 체크
                     if not self.is_baseline_set and len(self.activity_history) == 3:
@@ -290,8 +532,11 @@ class FocusTracker:
                 
                 window_switch_count = self.get_window_switch_count()
                 idle_time = int(time.time() - self.last_input_time)
+                current_window = self.get_foreground_window()
+                if self.record_window_switch(current_window, source="tracking_loop"):
+                    window_switch_count = self.get_window_switch_count()
                 current_app = self.get_foreground_process_name()
-                current_title = self.get_window_title(ctypes.windll.user32.GetForegroundWindow())
+                current_title = self.get_window_title(current_window)
                 
                 # UI용 변수 실시간 업데이트
                 self.current_idle_time = idle_time
@@ -300,7 +545,7 @@ class FocusTracker:
                 # 1) 실시간 상태 판정 검사
                 cond_blocked = self.is_blocked(current_app, current_title)
                 cond_idle = idle_time > IDLE_THRESHOLD
-                cond_app = current_app and current_app not in self.allowed_apps
+                cond_app = current_app and current_app.lower() not in [app.lower() for app in self.allowed_apps]
                 
                 # Baseline 기반 검사는 Baseline 수집이 끝난 후에만
                 cond_switch_activity = False
@@ -341,7 +586,7 @@ class FocusTracker:
                     if self.current_state in ["이탈", "비활동"]:
                         self.distracted_minutes += 1
                         if self.distracted_minutes >= 3:
-                            print("\n🚨 [경고] 현재 작업에서 벗어난 상태입니다! 🚨\n")
+                            print("\n[경고] 현재 작업에서 벗어난 상태입니다!\n")
                     else:
                         self.distracted_minutes = 0
 
@@ -351,13 +596,12 @@ class FocusTracker:
     def stop(self):
         print("\n모니터링을 종료합니다.")
         self.running = False
-        if hasattr(self, 'kb_listener'):
-            self.kb_listener.stop()
-            self.ms_listener.stop()
+        self.is_active = False
+        self.stop_input_listeners()
 
     def run(self):
         print("="*50)
-        print("🎯 대시보드 주소: http://localhost:5000")
+        print("대시보드 주소: http://localhost:5000")
         print("="*50)
         # 브라우저 자동 실행
         threading.Timer(1, lambda: webbrowser.open("http://localhost:5000")).start()

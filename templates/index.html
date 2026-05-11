@@ -494,6 +494,8 @@
         </div>
     </div>
 
+    <audio id="transition-audio" src="/static/audio/transition-rain.mp3" preload="auto" loop></audio>
+
     <script>
         function showView(viewId) {
             document.getElementById('setup-view').style.display = 'none';
@@ -523,10 +525,15 @@
         }
 
         let lastTransitionPhase = 'work';
+        let transitionAudioStarted = false;
 
         function playTransitionChime(phase) {
             if (phase === 'work' || phase === lastTransitionPhase) return;
             lastTransitionPhase = phase;
+            if (phase === 'overrun') {
+                startTransitionAudio();
+                return;
+            }
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 const ctx = new AudioContext();
@@ -544,6 +551,29 @@
             } catch (err) {
                 console.debug('Audio cue unavailable:', err);
             }
+        }
+
+        function startTransitionAudio() {
+            const audio = document.getElementById('transition-audio');
+            if (!audio || transitionAudioStarted) return;
+            transitionAudioStarted = true;
+            audio.volume = 0.45;
+            audio.currentTime = 0;
+            const playPromise = audio.play();
+            if (playPromise) {
+                playPromise.catch(err => {
+                    transitionAudioStarted = false;
+                    console.debug('Transition audio unavailable:', err);
+                });
+            }
+        }
+
+        function stopTransitionAudio() {
+            const audio = document.getElementById('transition-audio');
+            if (!audio) return;
+            audio.pause();
+            audio.currentTime = 0;
+            transitionAudioStarted = false;
         }
 
         async function startTracking() {
@@ -591,6 +621,7 @@
         
         function showReport(report) {
             clearInterval(pollInterval);
+            stopTransitionAudio();
             document.body.className = "state-collecting"; // Reset background to normal
             
             showView('report-view');
@@ -678,6 +709,9 @@
                 document.getElementById('transition-message').innerText = data.transition_message || '';
                 document.getElementById('time-progress-fill').style.width =
                     `${Math.min(100, Math.round((data.time_progress || 0) * 100))}%`;
+                if (phase !== 'overrun') {
+                    stopTransitionAudio();
+                }
                 playTransitionChime(phase);
 
             } catch (error) {

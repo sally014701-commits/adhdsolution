@@ -1,0 +1,11 @@
+{
+  "state": "focused",
+  "label": "집중 중",
+  "current_app": "Mock Workspace",
+  "current_url": "https://example.local/demo-task",
+  "activity": "mock",
+  "idle_time": 0,
+  "window_switch": 0,
+  "elapsed_time": 0,
+  "demoSequence": ["focused", "warning", "distracted", "focused"]
+}

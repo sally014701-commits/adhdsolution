@@ -1,0 +1,17 @@
+{
+  "state": "focused",
+  "current_app": "chrome.exe",
+  "current_url": "https://docs.example.com/report",
+  "activity": "typing",
+  "idle_time": 0,
+  "window_switch": 2,
+  "elapsed_time": 185,
+  "tasks": [
+    {
+      "id": 1,
+      "title": "워드 켜고 제목 쓰기",
+      "duration": 5,
+      "status": "pending"
+    }
+  ]
+}

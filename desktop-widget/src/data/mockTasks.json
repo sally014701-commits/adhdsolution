@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "워드 켜고 제목 쓰기",
+    "duration": 5,
+    "status": "pending"
+  },
+  {
+    "id": 2,
+    "title": "자료조사 링크 3개 찾기",
+    "duration": 15,
+    "status": "pending"
+  },
+  {
+    "id": 3,
+    "title": "서론 세 줄 쓰기",
+    "duration": 10,
+    "status": "pending"
+  }
+]

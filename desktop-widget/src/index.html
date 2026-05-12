@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADHD Desktop Widget</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="widget-shell" data-focus-state="focused" aria-live="polite">
+      <header class="widget-header">
+        <span class="drag-handle" aria-hidden="true"></span>
+        <div class="focus-pill">
+          <span class="status-dot"></span>
+          <span id="focusLabel">집중 중</span>
+        </div>
+        <button class="close-button" id="closeButton" type="button" aria-label="닫기">×</button>
+      </header>
+
+      <section class="task-panel" id="taskPanel">
+        <p class="eyebrow">지금 할 일</p>
+        <h1 id="currentTaskTitle">작은 행동 하나</h1>
+        <p class="duration" id="currentTaskDuration">5분</p>
+      </section>
+
+      <section class="next-panel">
+        <p class="next-label">다음</p>
+        <p class="next-title" id="nextTaskTitle">다음 행동 준비 중</p>
+        <p class="next-duration" id="nextTaskDuration">0분</p>
+      </section>
+
+      <section class="progress-panel" aria-label="오늘의 진행률">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p id="progressText">오늘의 퀘스트 0개 중 0개 완료</p>
+      </section>
+
+      <section class="status-panel" aria-label="현재 PC 상태">
+        <div class="status-row">
+          <span>앱</span>
+          <strong id="currentApp">연결 대기</strong>
+        </div>
+        <div class="status-row">
+          <span>URL</span>
+          <strong id="currentUrl">-</strong>
+        </div>
+        <div class="status-meta" id="statusMeta">
+          API 확인 중
+        </div>
+      </section>
+
+      <button class="complete-button" id="completeButton" type="button">
+        완료
+      </button>
+    </main>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>

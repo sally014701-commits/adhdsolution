@@ -9,6 +9,7 @@ import json
 import logging
 import webbrowser
 from flask import Flask, request, jsonify, render_template
+from mobile_app import create_mobile_blueprint
 
 # ==========================================
 # 임계값 (Thresholds) 상수 정의
@@ -49,6 +50,7 @@ log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
 global_tracker = None
+app.register_blueprint(create_mobile_blueprint(lambda: global_tracker))
 
 @app.route('/')
 def index():

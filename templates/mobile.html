@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ADHD Focus Mobile</title>
+    <style>
+        :root {
+            --ink: #17181c;
+            --muted: #6d7280;
+            --line: #dfe3ea;
+            --canvas: #fbfcfd;
+            --surface: #ffffff;
+            --surface-soft: #eef4f8;
+            --primary: #0066cc;
+            --primary-press: #0057ad;
+            --green: #1f8a5b;
+            --red: #d73a31;
+            --amber: #9a6a00;
+            --shadow: 0 14px 38px rgba(31, 43, 58, 0.14);
+            --radius: 18px;
+            font-family: "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                linear-gradient(180deg, rgba(220, 236, 246, 0.7), rgba(251, 252, 253, 0) 260px),
+                var(--canvas);
+            color: var(--ink);
+        }
+
+        button,
+        textarea,
+        input {
+            font: inherit;
+        }
+
+        .app {
+            width: min(100%, 480px);
+            min-height: 100vh;
+            margin: 0 auto;
+            padding: max(18px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .brand {
+            display: grid;
+            gap: 3px;
+        }
+
+        .brand strong {
+            font-size: 17px;
+            line-height: 1.2;
+        }
+
+        .brand span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .status-pill {
+            min-width: 96px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 8px 11px;
+            background: rgba(255, 255, 255, 0.84);
+            color: var(--muted);
+            text-align: center;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .hero {
+            margin: 18px 0 18px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 34px;
+            line-height: 1.12;
+            letter-spacing: 0;
+        }
+
+        .lead {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.45;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid rgba(223, 227, 234, 0.9);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 16px;
+            margin: 14px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 132px;
+            resize: vertical;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 14px;
+            background: #fff;
+            color: var(--ink);
+            font-size: 19px;
+            line-height: 1.45;
+            outline: none;
+        }
+
+        textarea:focus,
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.12);
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 118px;
+            gap: 10px;
+            align-items: end;
+            margin-top: 12px;
+        }
+
+        input {
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px;
+            background: #fff;
+            color: var(--ink);
+            outline: none;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 999px;
+            min-height: 48px;
+            padding: 0 18px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn:active { background: var(--primary-press); }
+        .btn:disabled { opacity: 0.48; cursor: default; }
+
+        .btn.secondary {
+            background: var(--surface-soft);
+            color: var(--ink);
+            border: 1px solid var(--line);
+        }
+
+        .btn.full {
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        .plan-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .plan-title {
+            margin: 0;
+            font-size: 19px;
+            line-height: 1.25;
+        }
+
+        .time-badge {
+            flex: 0 0 auto;
+            border-radius: 999px;
+            background: #eef7f2;
+            color: var(--green);
+            padding: 7px 10px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .steps {
+            display: grid;
+            gap: 9px;
+            margin-top: 14px;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 34px 1fr auto;
+            gap: 10px;
+            align-items: center;
+            min-height: 58px;
+            padding: 10px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #fff;
+        }
+
+        .step-number {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--surface-soft);
+            color: var(--muted);
+            font-weight: 800;
+        }
+
+        .step-title {
+            font-size: 15px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .step-time {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        .step.done {
+            background: #f5fbf8;
+            border-color: #cce8db;
+        }
+
+        .step.done .step-number {
+            background: var(--green);
+            color: #fff;
+        }
+
+        .check {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: #fff;
+            color: var(--green);
+            font-weight: 900;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .chip {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 7px 10px;
+            background: #fff;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .handoff {
+            display: none;
+            margin-top: 12px;
+            border: 1px solid #cce8db;
+            border-radius: 14px;
+            padding: 13px;
+            background: #f5fbf8;
+            color: var(--green);
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+
+        .handoff.show {
+            display: block;
+        }
+
+        .pc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .pc-card {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 12px;
+            background: #fff;
+            min-height: 76px;
+        }
+
+        .pc-label {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .pc-value {
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.2;
+            overflow-wrap: anywhere;
+        }
+
+        .hidden { display: none; }
+
+        .toast {
+            position: fixed;
+            left: 18px;
+            right: 18px;
+            bottom: max(18px, env(safe-area-inset-bottom));
+            max-width: 444px;
+            margin: 0 auto;
+            border-radius: 14px;
+            padding: 13px 15px;
+            background: var(--ink);
+            color: #fff;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 360px) {
+            .row { grid-template-columns: 1fr; }
+            h1 { font-size: 30px; }
+            .pc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <main class="app">
+        <header class="topbar">
+            <div class="brand">
+                <strong>Focus Mobile</strong>
+                <span>PC와 연결된 작업 기획자</span>
+            </div>
+            <div class="status-pill" id="connection">연결 확인 중</div>
+        </header>
+
+        <section class="hero">
+            <h1>머리 아픈 계획은 누워서 폰으로</h1>
+            <p class="lead">큰 목표만 던져두면, PC에서 바로 시작할 수 있는 작은 행동으로 쪼개 둡니다.</p>
+        </section>
+
+        <section class="panel">
+            <label for="goal">큰 목표</label>
+            <textarea id="goal" placeholder="예: 중간고사 레포트 쓰기"></textarea>
+            <div class="row">
+                <div>
+                    <label for="minutes">오늘 확보한 시간</label>
+                    <input id="minutes" type="number" inputmode="numeric" min="15" max="180" value="45">
+                </div>
+                <button class="btn" id="make-plan">쪼개기</button>
+            </div>
+        </section>
+
+        <section class="panel hidden" id="plan-panel">
+            <div class="plan-head">
+                <h2 class="plan-title" id="plan-goal">계획</h2>
+                <span class="time-badge" id="plan-time">0분</span>
+            </div>
+            <div class="steps" id="steps"></div>
+            <button class="btn full" id="start-plan">PC에서 실행하기</button>
+            <div class="handoff" id="handoff-message">태스크가 PC 위젯으로 전송되었습니다.</div>
+            <button class="btn secondary full" id="refresh-plan">계획 다시 불러오기</button>
+            <div class="chips" id="settings"></div>
+        </section>
+
+        <section class="panel">
+            <div class="plan-head">
+                <h2 class="plan-title">PC 상태</h2>
+                <button class="btn secondary" id="refresh-status">새로고침</button>
+            </div>
+            <div class="pc-grid">
+                <div class="pc-card">
+                    <div class="pc-label">상태</div>
+                    <div class="pc-value" id="pc-state">대기</div>
+                </div>
+                <div class="pc-card">
+                    <div class="pc-label">남은 시간</div>
+                    <div class="pc-value" id="pc-time">--:--</div>
+                </div>
+                <div class="pc-card">
+                    <div class="pc-label">현재 작업</div>
+                    <div class="pc-value" id="pc-task">없음</div>
+                </div>
+                <div class="pc-card">
+                    <div class="pc-label">앱</div>
+                    <div class="pc-value" id="pc-app">없음</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let currentPlan = null;
+        const $ = (id) => document.getElementById(id);
+
+        function toast(message) {
+            const box = $('toast');
+            box.textContent = message;
+            box.classList.add('show');
+            window.clearTimeout(window.toastTimer);
+            window.toastTimer = window.setTimeout(() => box.classList.remove('show'), 2200);
+        }
+
+        function formatSeconds(seconds) {
+            const safe = Math.max(0, Number(seconds) || 0);
+            const minutes = Math.floor(safe / 60);
+            const rest = safe % 60;
+            return `${minutes}:${String(rest).padStart(2, '0')}`;
+        }
+
+        function renderPlan(plan) {
+            currentPlan = plan;
+            if (!plan || !plan.id) return;
+            $('plan-panel').classList.remove('hidden');
+            $('handoff-message').classList.remove('show');
+            $('plan-goal').textContent = plan.goal;
+            $('plan-time').textContent = `${plan.target_minutes}분`;
+            $('steps').innerHTML = '';
+            plan.steps.forEach((step) => {
+                const row = document.createElement('div');
+                row.className = `step ${step.done ? 'done' : ''}`;
+                row.innerHTML = `
+                    <div class="step-number">${step.done ? '✓' : step.id}</div>
+                    <div>
+                        <div class="step-title">${step.title}</div>
+                        <div class="step-time">${step.minutes}분</div>
+                    </div>
+                    <button class="check" aria-label="완료 표시">${step.done ? '↺' : '✓'}</button>
+                `;
+                row.querySelector('button').addEventListener('click', () => toggleStep(step));
+                $('steps').appendChild(row);
+            });
+            const chips = [
+                ...plan.allowed_apps.map((item) => `허용 ${item}`),
+                ...plan.blocked_apps.map((item) => `차단 ${item}`)
+            ];
+            $('settings').innerHTML = chips.map((item) => `<span class="chip">${item}</span>`).join('');
+        }
+
+        async function makePlan() {
+            const goal = $('goal').value.trim();
+            if (!goal) {
+                toast('큰 목표를 한 줄만 적어주세요.');
+                $('goal').focus();
+                return;
+            }
+            $('make-plan').disabled = true;
+            $('make-plan').textContent = '정리 중';
+            try {
+                const response = await fetch('/api/mobile/plan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ goal, total_minutes: $('minutes').value })
+                });
+                renderPlan(await response.json());
+                toast('PC에 보낼 계획을 만들었어요.');
+            } catch (error) {
+                toast('계획을 만들지 못했어요. 서버를 확인해주세요.');
+            } finally {
+                $('make-plan').disabled = false;
+                $('make-plan').textContent = '쪼개기';
+            }
+        }
+
+        async function loadLatestPlan() {
+            try {
+                const response = await fetch('/api/mobile/latest_plan');
+                const plan = await response.json();
+                if (plan && plan.id) renderPlan(plan);
+            } catch (error) {
+                toast('저장된 계획을 불러오지 못했어요.');
+            }
+        }
+
+        async function toggleStep(step) {
+            if (!currentPlan) return;
+            try {
+                const response = await fetch('/api/mobile/step_done', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        plan_id: currentPlan.id,
+                        step_id: step.id,
+                        done: !step.done
+                    })
+                });
+                renderPlan(await response.json());
+            } catch (error) {
+                toast('완료 표시를 저장하지 못했어요.');
+            }
+        }
+
+        async function startPlan() {
+            if (!currentPlan) {
+                toast('먼저 계획을 만들어주세요.');
+                return;
+            }
+            $('start-plan').disabled = true;
+            try {
+                const response = await fetch('/api/mobile/start_plan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ plan_id: currentPlan.id })
+                });
+                if (!response.ok) throw new Error('start failed');
+                const data = await response.json();
+                $('handoff-message').textContent = '태스크가 PC 위젯으로 전송되었습니다.';
+                $('handoff-message').classList.add('show');
+                toast('태스크가 PC 위젯으로 전송되었습니다.');
+                await fetchStatus();
+            } catch (error) {
+                toast('PC 세션을 시작하지 못했어요.');
+            } finally {
+                $('start-plan').disabled = false;
+            }
+        }
+
+        async function fetchStatus() {
+            try {
+                const response = await fetch('/status');
+                if (!response.ok) throw new Error('offline');
+                const data = await response.json();
+                $('connection').textContent = 'PC 연결됨';
+                $('pc-state').textContent = data.is_active ? data.state : '대기';
+                $('pc-time').textContent = data.overrun_seconds > 0
+                    ? `+${formatSeconds(data.overrun_seconds)}`
+                    : formatSeconds(data.remaining_time);
+                $('pc-task').textContent = data.task || '없음';
+                $('pc-app').textContent = data.current_app || '없음';
+            } catch (error) {
+                $('connection').textContent = 'PC 대기 중';
+                $('pc-state').textContent = '오프라인';
+                $('pc-time').textContent = '--:--';
+            }
+        }
+
+        $('make-plan').addEventListener('click', makePlan);
+        $('start-plan').addEventListener('click', startPlan);
+        $('refresh-plan').addEventListener('click', loadLatestPlan);
+        $('refresh-status').addEventListener('click', fetchStatus);
+        loadLatestPlan();
+        fetchStatus();
+        window.setInterval(fetchStatus, 3000);
+    </script>
+</body>
+</html>

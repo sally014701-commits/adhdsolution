@@ -1,6 +1,10 @@
 import time
 import threading
 import ctypes
+import os
+import subprocess
+import atexit
+import sys
 from ctypes import wintypes
 from collections import deque
 import psutil
@@ -8,7 +12,7 @@ from pynput import keyboard, mouse
 import json
 import logging
 import webbrowser
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from mobile_app import create_mobile_blueprint
 
 # ==========================================
@@ -49,8 +53,258 @@ app = Flask(__name__)
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(encoding="utf-8", errors="replace")
+
 global_tracker = None
 app.register_blueprint(create_mobile_blueprint(lambda: global_tracker))
+
+WIDGET_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "desktop-widget")
+WIDGET_SRC_DIR = os.path.join(WIDGET_DIR, "src")
+WIDGET_LAUNCH_LOG = os.path.join(WIDGET_DIR, "widget-launch.log")
+WIDGET_USER_DATA_DIR = os.path.join(WIDGET_DIR, ".electron-user-data")
+WIDGET_CACHE_DIR = os.path.join(WIDGET_DIR, ".electron-cache")
+WIDGET_TEMP_DIR = os.path.join(WIDGET_DIR, ".electron-temp")
+widget_process = None
+widget_lock = threading.Lock()
+
+def _normalized_path(value):
+    return os.path.normcase(os.path.abspath(value)) if value else ""
+
+def _path_contains_widget_dir(value):
+    if not value:
+        return False
+    return os.path.normcase(value).find(os.path.normcase(WIDGET_DIR)) >= 0
+
+def _find_widget_process():
+    for proc in psutil.process_iter(["pid", "name", "cmdline", "cwd"]):
+        try:
+            cmdline = " ".join(proc.info.get("cmdline") or [])
+            cwd = proc.info.get("cwd") or ""
+            if _path_contains_widget_dir(cmdline) or _path_contains_widget_dir(cwd):
+                return proc
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            continue
+    return None
+
+def _get_running_widget_process():
+    global widget_process
+    if widget_process and widget_process.poll() is None:
+        return widget_process
+
+    found = _find_widget_process()
+    if found:
+        return found
+
+    widget_process = None
+    return None
+
+def _terminate_process_tree(proc):
+    try:
+        ps_proc = psutil.Process(proc.pid) if hasattr(proc, "pid") else proc
+        children = ps_proc.children(recursive=True)
+        for child in children:
+            try:
+                child.terminate()
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
+        try:
+            ps_proc.terminate()
+        except psutil.AccessDenied:
+            if hasattr(proc, "terminate"):
+                proc.terminate()
+
+        gone, alive = psutil.wait_procs([ps_proc, *children], timeout=3)
+        for still_alive in alive:
+            try:
+                still_alive.kill()
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
+        return True
+    except psutil.NoSuchProcess:
+        return False
+    except psutil.AccessDenied:
+        if hasattr(proc, "kill"):
+            try:
+                proc.kill()
+                return True
+            except Exception:
+                return False
+        return False
+
+def _cleanup_widget_process():
+    global widget_process
+    proc = _get_running_widget_process()
+    if proc:
+        _terminate_process_tree(proc)
+        widget_process = None
+
+def _get_electron_command():
+    electron_exe = os.path.join(WIDGET_DIR, "node_modules", "electron", "dist", "electron.exe")
+    electron_cmd = os.path.join(WIDGET_DIR, "node_modules", ".bin", "electron.cmd")
+    electron_args = [
+        f"--user-data-dir={WIDGET_USER_DATA_DIR}",
+        f"--disk-cache-dir={WIDGET_CACHE_DIR}",
+        "--disable-gpu",
+        "--disable-features=NetworkServiceSandbox",
+        "--no-sandbox",
+        ".",
+    ]
+
+    if os.path.exists(electron_exe):
+        return [electron_exe, *electron_args]
+    if os.path.exists(electron_cmd):
+        return [electron_cmd, *electron_args]
+    return None
+
+def _get_electron_path():
+    electron_exe = os.path.join(WIDGET_DIR, "node_modules", "electron", "dist", "electron.exe")
+    electron_cmd = os.path.join(WIDGET_DIR, "node_modules", ".bin", "electron.cmd")
+
+    if os.path.exists(electron_exe):
+        return electron_exe
+    if os.path.exists(electron_cmd):
+        return electron_cmd
+    return None
+
+@app.route('/widget/start', methods=['POST'])
+def start_widget():
+    global widget_process
+    print("desktop widget start API called", flush=True)
+    with widget_lock:
+        if _get_running_widget_process():
+            return jsonify({
+                "running": True,
+                "message": "already running",
+                "mode": "electron",
+            })
+
+        if not os.path.isdir(WIDGET_DIR):
+            return jsonify({
+                "running": False,
+                "error": "desktop-widget folder not found",
+                "widget_dir": WIDGET_DIR,
+            }), 500
+
+        package_json = os.path.join(WIDGET_DIR, "package.json")
+        if not os.path.exists(package_json):
+            return jsonify({
+                "running": False,
+                "error": "package.json not found",
+                "widget_dir": WIDGET_DIR,
+            }), 500
+
+        electron_path = _get_electron_path()
+        widget_command = _get_electron_command()
+        if not widget_command:
+            return jsonify({
+                "running": False,
+                "error": "Electron not installed",
+                "command": None,
+                "cwd": WIDGET_DIR,
+                "electron_path": None,
+                "log_path": WIDGET_LAUNCH_LOG,
+            }), 500
+
+        command_display = " ".join(widget_command)
+        print(f"desktop widget command: {command_display}", flush=True)
+        print(f"desktop widget cwd: {WIDGET_DIR}", flush=True)
+        creationflags = (
+            getattr(subprocess, "CREATE_NO_WINDOW", 0)
+            | getattr(subprocess, "DETACHED_PROCESS", 0)
+            | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
+        )
+        try:
+            os.makedirs(WIDGET_USER_DATA_DIR, exist_ok=True)
+            os.makedirs(WIDGET_CACHE_DIR, exist_ok=True)
+            os.makedirs(WIDGET_TEMP_DIR, exist_ok=True)
+            widget_env = os.environ.copy()
+            widget_env["LOCALAPPDATA"] = WIDGET_USER_DATA_DIR
+            widget_env["TEMP"] = WIDGET_TEMP_DIR
+            widget_env["TMP"] = WIDGET_TEMP_DIR
+            log_file = open(WIDGET_LAUNCH_LOG, "w", encoding="utf-8", errors="replace")
+            widget_process = subprocess.Popen(
+                widget_command,
+                cwd=WIDGET_DIR,
+                env=widget_env,
+                stdin=subprocess.DEVNULL,
+                stdout=log_file,
+                stderr=log_file,
+                close_fds=True,
+                creationflags=creationflags,
+            )
+            log_file.close()
+            time.sleep(3)
+            if widget_process.poll() is not None:
+                returncode = widget_process.returncode
+                error_detail = ""
+                if os.path.exists(WIDGET_LAUNCH_LOG):
+                    with open(WIDGET_LAUNCH_LOG, "r", encoding="utf-8", errors="replace") as launch_log:
+                        error_detail = launch_log.read()[-800:]
+                widget_process = None
+                return jsonify({
+                    "running": False,
+                    "error": "Electron widget failed to start",
+                    "returncode": returncode,
+                    "detail": error_detail.strip(),
+                    "command": command_display,
+                    "cwd": WIDGET_DIR,
+                    "electron_path": electron_path,
+                    "log_path": WIDGET_LAUNCH_LOG,
+                    "user_data_dir": WIDGET_USER_DATA_DIR,
+                    "cache_dir": WIDGET_CACHE_DIR,
+                    "temp_dir": WIDGET_TEMP_DIR,
+                }), 500
+            return jsonify({
+                "running": True,
+                "message": "desktop electron widget launched",
+                "mode": "electron",
+                "command": command_display,
+                "cwd": WIDGET_DIR,
+                "electron_path": electron_path,
+                "log_path": WIDGET_LAUNCH_LOG,
+                "user_data_dir": WIDGET_USER_DATA_DIR,
+                "cache_dir": WIDGET_CACHE_DIR,
+                "temp_dir": WIDGET_TEMP_DIR,
+            })
+        except Exception as exc:
+            widget_process = None
+            error_detail = ""
+            if os.path.exists(WIDGET_LAUNCH_LOG):
+                with open(WIDGET_LAUNCH_LOG, "r", encoding="utf-8", errors="replace") as launch_log:
+                    error_detail = launch_log.read()[-800:]
+            return jsonify({
+                "running": False,
+                "error": str(exc),
+                "detail": error_detail.strip(),
+                "command": command_display,
+                "cwd": WIDGET_DIR,
+                "electron_path": electron_path,
+                "log_path": WIDGET_LAUNCH_LOG,
+                "user_data_dir": WIDGET_USER_DATA_DIR,
+                "cache_dir": WIDGET_CACHE_DIR,
+                "temp_dir": WIDGET_TEMP_DIR,
+            }), 500
+
+@app.route('/widget/stop', methods=['POST'])
+def stop_widget():
+    global widget_process
+    with widget_lock:
+        proc = _get_running_widget_process()
+        if not proc:
+            return jsonify({"running": False, "status": "not running"})
+
+        if not _terminate_process_tree(proc):
+            return jsonify({"running": True, "error": "failed to stop widget process"}), 500
+        widget_process = None
+        return jsonify({"running": False, "status": "stopped"})
+
+@app.route('/widget/status', methods=['GET'])
+def widget_status():
+    return jsonify({"running": bool(_get_running_widget_process())})
+
+atexit.register(_cleanup_widget_process)
 
 @app.route('/')
 def index():

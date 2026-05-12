@@ -174,6 +174,52 @@
         button.btn-danger:hover { background-color: #d32f2f; }
         button.btn-danger:active { transform: scale(0.96); }
 
+        .widget-control {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 120;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: var(--rounded-pill);
+            background-color: rgba(255, 255, 255, 0.78);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .widget-toggle {
+            border: none;
+            border-radius: var(--rounded-pill);
+            background-color: var(--ink);
+            color: var(--body-on-dark);
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: var(--font-body);
+            cursor: pointer;
+            min-width: 92px;
+            transition: background-color 0.2s, transform 0.1s, opacity 0.2s;
+        }
+        .widget-toggle:hover { background-color: #333336; }
+        .widget-toggle:active { transform: scale(0.97); }
+        .widget-toggle:disabled {
+            cursor: default;
+            opacity: 0.58;
+            transform: none;
+        }
+        .widget-toggle.running {
+            background-color: #ff3b30;
+        }
+        .widget-error {
+            max-width: 220px;
+            color: #d32f2f;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: left;
+        }
+
         /* Report View Styling */
         .report-card {
             background-color: var(--canvas);
@@ -407,6 +453,10 @@
     </style>
 </head>
 <body>
+    <div class="widget-control">
+        <button class="widget-toggle" id="widget-toggle" type="button" onclick="toggleWidget()">Widget ON</button>
+        <span class="widget-error" id="widget-error"></span>
+    </div>
 
     <!-- Setup View -->
     <div id="setup-view" class="container">
@@ -534,6 +584,57 @@
     <audio id="transition-audio" src="/static/audio/transition-rain.mp3" preload="auto" loop></audio>
 
     <script>
+        let widgetRunning = false;
+
+        function setWidgetButton(running, message = '') {
+            widgetRunning = running;
+            const btn = document.getElementById('widget-toggle');
+            const error = document.getElementById('widget-error');
+            btn.innerText = running ? 'Widget OFF' : 'Widget ON';
+            btn.classList.toggle('running', running);
+            btn.disabled = false;
+            error.innerText = message;
+        }
+
+        async function refreshWidgetStatus() {
+            try {
+                const res = await fetch('/widget/status');
+                const data = await res.json();
+                setWidgetButton(Boolean(data.running));
+            } catch (err) {
+                setWidgetButton(false, '위젯 상태 확인 실패');
+            }
+        }
+
+        async function toggleWidget() {
+            const btn = document.getElementById('widget-toggle');
+            const error = document.getElementById('widget-error');
+            btn.disabled = true;
+            error.innerText = '';
+
+            try {
+                if (widgetRunning) {
+                    const res = await fetch('/widget/stop', { method: 'POST' });
+                    const data = await res.json();
+                    if (!res.ok || data.error) {
+                        throw new Error(data.error || '위젯 종료 실패');
+                    }
+                    setWidgetButton(Boolean(data.running));
+                    return;
+                }
+
+                console.log('calling /widget/start only');
+                const res = await fetch('/widget/start', { method: 'POST' });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    throw new Error(data.error || 'Electron 위젯 실행 실패');
+                }
+                setWidgetButton(Boolean(data.running));
+            } catch (err) {
+                setWidgetButton(widgetRunning, err.message || '위젯 제어 실패');
+            }
+        }
+
         function showView(viewId) {
             document.getElementById('setup-view').style.display = 'none';
             document.getElementById('dashboard-view').style.display = 'none';
@@ -653,22 +754,51 @@
             const extra_allowed_apps = document.getElementById('extra-allowed').value;
 
             try {
+                showView('dashboard-view');
+                if (pollInterval) clearInterval(pollInterval);
+                pollInterval = setInterval(fetchStatus, 1000);
+                fetchStatus();
+
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 6000);
                 const res = await fetch('/start_tracking', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ task, target_minutes, blocked_apps, extra_allowed_apps })
+                    body: JSON.stringify({ task, target_minutes, blocked_apps, extra_allowed_apps }),
+                    signal: controller.signal
                 });
-                if (res.ok) {
-                    showView('dashboard-view');
-                    if (pollInterval) clearInterval(pollInterval);
-                    pollInterval = setInterval(fetchStatus, 1000);
-                    fetchStatus();
+                clearTimeout(timeoutId);
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) {
+                    throw new Error(data.error || '모니터링 시작에 실패했습니다.');
                 }
+                fetchStatus();
             } catch (err) {
                 console.error("Failed to start:", err);
-                alert("서버 연결에 실패했습니다.");
+                const recovered = await recoverActiveSession();
+                if (!recovered) {
+                    alert(err.name === 'AbortError' ? '시작 요청이 지연되고 있습니다. 서버 상태를 확인해주세요.' : (err.message || "서버 연결에 실패했습니다."));
+                    showView('setup-view');
+                }
+            } finally {
                 btn.disabled = false;
                 btn.innerText = "모니터링 시작";
+            }
+        }
+
+        async function recoverActiveSession() {
+            try {
+                const response = await fetch('/status');
+                if (!response.ok) return false;
+                const data = await response.json();
+                if (!data.is_active) return false;
+                showView('dashboard-view');
+                if (pollInterval) clearInterval(pollInterval);
+                pollInterval = setInterval(fetchStatus, 1000);
+                fetchStatus();
+                return true;
+            } catch (err) {
+                return false;
             }
         }
 
@@ -815,6 +945,7 @@
             }
         }
         initCheck();
+        refreshWidgetStatus();
     </script>
 </body>
 </html>

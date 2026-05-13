@@ -1,8 +1,8 @@
 const FOCUS_LABELS = {
-  focused: "집중 중",
-  warning: "마무리 필요",
-  distracted: "이탈",
-  idle: "비활동",
+  focused: "Focused",
+  warning: "Warning",
+  distracted: "Distracted",
+  idle: "Idle",
 };
 
 const STATE_ALIASES = {
@@ -92,7 +92,8 @@ function getProgress() {
 }
 
 function formatDuration(minutes) {
-  return `${minutes}분`;
+  const safeMinutes = Number(minutes) || 0;
+  return `${String(safeMinutes).padStart(2, "0")}:00`;
 }
 
 function formatSeconds(seconds) {
@@ -126,7 +127,7 @@ function renderTasks() {
   }
 
   elements.nextTaskTitle.textContent = nextTask ? nextTask.title : "다음 할 일 없음";
-  elements.nextTaskDuration.textContent = nextTask ? formatDuration(nextTask.duration) : "";
+  elements.nextTaskDuration.textContent = nextTask ? ` · ${nextTask.duration}분` : "";
   elements.progressFill.style.width = `${progress.percent}%`;
   elements.progressText.textContent = `오늘의 퀘스트 ${progress.total}개 중 ${progress.completed}개 완료`;
 }

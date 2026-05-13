@@ -1,9 +1,9 @@
 const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const path = require("path");
 
-const WINDOW_WIDTH = 320;
-const WINDOW_HEIGHT = 540;
-const SCREEN_MARGIN = 24;
+const WINDOW_WIDTH = 480;
+const WINDOW_HEIGHT = 180;
+const SCREEN_MARGIN = 16;
 
 function getWidgetBounds() {
   const { workArea } = screen.getPrimaryDisplay();
@@ -11,7 +11,7 @@ function getWidgetBounds() {
   return {
     width: WINDOW_WIDTH,
     height: WINDOW_HEIGHT,
-    x: workArea.x + workArea.width - WINDOW_WIDTH - SCREEN_MARGIN,
+    x: workArea.x + Math.round((workArea.width - WINDOW_WIDTH) / 2),
     y: workArea.y + SCREEN_MARGIN,
   };
 }

@@ -7,52 +7,117 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="widget-shell" data-focus-state="focused" aria-live="polite">
-      <header class="widget-header">
-        <span class="drag-handle" aria-hidden="true"></span>
-        <div class="focus-pill">
-          <span class="status-dot"></span>
-          <span id="focusLabel">집중 중</span>
-        </div>
-        <button class="close-button" id="closeButton" type="button" aria-label="닫기">×</button>
-      </header>
+    <main
+      id="widget-canvas"
+      class="widget-shell"
+      data-focus-state="focused"
+      aria-live="polite"
+      data-purpose="floating-widget-wrapper"
+    >
+      <section class="glass-card" data-purpose="main-widget-card">
+        <header class="widget-header" data-purpose="widget-header">
+          <div class="header-copy">
+            <div class="focus-pill" data-purpose="status-badge">
+              <span class="status-dot"></span>
+              <span id="focusLabel">Focused</span>
+            </div>
+            <span class="eyebrow">Now</span>
+          </div>
 
-      <section class="task-panel" id="taskPanel">
-        <p class="eyebrow">지금 할 일</p>
-        <h1 id="currentTaskTitle">작은 행동 하나</h1>
-        <p class="duration" id="currentTaskDuration">5분</p>
-      </section>
+          <div
+            class="timer-text"
+            id="currentTaskDuration"
+            data-purpose="countdown-timer"
+          >
+            05:00
+          </div>
+        </header>
 
-      <section class="next-panel">
-        <p class="next-label">다음</p>
-        <p class="next-title" id="nextTaskTitle">다음 행동 준비 중</p>
-        <p class="next-duration" id="nextTaskDuration">0분</p>
-      </section>
+        <section class="task-panel" id="taskPanel" data-purpose="widget-content">
+          <h1 class="task-title" id="currentTaskTitle">
+            작은 행동 하나
+          </h1>
+        </section>
 
-      <section class="progress-panel" aria-label="오늘의 진행률">
-        <div class="progress-track">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <p id="progressText">오늘의 퀘스트 0개 중 0개 완료</p>
-      </section>
+        <footer class="widget-footer" data-purpose="widget-footer">
+          <section class="progress-panel" aria-label="오늘의 진행률">
+            <div class="progress-track" data-purpose="progress-container">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="progressText">오늘의 퀘스트 0개 중 0개 완료</p>
+          </section>
 
-      <section class="status-panel" aria-label="현재 PC 상태">
-        <div class="status-row">
-          <span>앱</span>
+          <div class="footer-row">
+            <section class="next-panel">
+              <svg
+                class="next-arrow"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                ></path>
+              </svg>
+              <span class="next-copy">
+                Next:
+                <span id="nextTaskTitle">다음 행동 준비 중</span>
+                <span class="next-duration" id="nextTaskDuration">0분</span>
+              </span>
+            </section>
+
+            <section class="controls" data-purpose="controls">
+              <button class="icon-button" type="button" aria-label="Pause">
+                <svg fill="currentColor" height="20" viewBox="0 0 24 24" width="20">
+                  <rect height="16" rx="1.5" width="4.5" x="5.5" y="4"></rect>
+                  <rect height="16" rx="1.5" width="4.5" x="14" y="4"></rect>
+                </svg>
+              </button>
+
+              <button class="icon-button" type="button" aria-label="Skip">
+                <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24">
+                  <path d="M6 18L14.5 12L6 6V18ZM16 6V18H18V6H16Z"></path>
+                </svg>
+              </button>
+
+              <button
+                class="complete-button"
+                id="completeButton"
+                type="button"
+                aria-label="Complete Task"
+              >
+                <svg
+                  fill="none"
+                  height="28"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="3"
+                  viewBox="0 0 24 24"
+                  width="28"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </button>
+
+              <button class="close-button" id="closeButton" type="button" aria-label="닫기">
+                ×
+              </button>
+            </section>
+          </div>
+        </footer>
+
+        <section class="status-panel" aria-label="현재 PC 상태">
           <strong id="currentApp">연결 대기</strong>
-        </div>
-        <div class="status-row">
-          <span>URL</span>
           <strong id="currentUrl">-</strong>
-        </div>
-        <div class="status-meta" id="statusMeta">
-          API 확인 중
-        </div>
+          <span id="statusMeta">API 확인 중</span>
+        </section>
       </section>
-
-      <button class="complete-button" id="completeButton" type="button">
-        완료
-      </button>
     </main>
 
     <script src="./renderer.js"></script>

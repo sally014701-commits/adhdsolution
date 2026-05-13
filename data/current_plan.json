@@ -1,0 +1,51 @@
+{
+  "plan_id": "plan-045c7bc0ed89",
+  "goal_title": "중간고사 레포트 쓰기",
+  "created_at": "2026-05-13T13:09:34+09:00",
+  "metadata_permission": true,
+  "blocked_apps": [
+    "KakaoTalk.exe",
+    "Discord.exe"
+  ],
+  "blocked_sites": [
+    "youtube.com",
+    "instagram.com"
+  ],
+  "steps": [
+    {
+      "id": "step-1",
+      "title": "문서 열고 제목만 쓰기",
+      "duration_minutes": 3,
+      "status": "pending",
+      "order": 1
+    },
+    {
+      "id": "step-2",
+      "title": "자료 링크 3개 찾기",
+      "duration_minutes": 10,
+      "status": "pending",
+      "order": 2
+    },
+    {
+      "id": "step-3",
+      "title": "목차를 세 줄로 잡기",
+      "duration_minutes": 6,
+      "status": "pending",
+      "order": 3
+    },
+    {
+      "id": "step-4",
+      "title": "서론 초안 세 문장 쓰기",
+      "duration_minutes": 7,
+      "status": "pending",
+      "order": 4
+    },
+    {
+      "id": "step-5",
+      "title": "다음에 이어 쓸 한 줄 남기기",
+      "duration_minutes": 4,
+      "status": "pending",
+      "order": 5
+    }
+  ]
+}

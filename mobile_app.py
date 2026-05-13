@@ -1,4 +1,7 @@
-import time
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+from uuid import uuid4
 
 from flask import Blueprint, jsonify, render_template, request
 
@@ -32,6 +35,8 @@ mobile_plan_store = {
     "latest": None,
     "plans": {},
 }
+
+CURRENT_PLAN_PATH = Path(__file__).resolve().parent / "data" / "current_plan.json"
 
 
 def clamp_minutes(value, default=25, minimum=5, maximum=180):
@@ -99,51 +104,65 @@ def split_goal_into_steps(goal, total_minutes=45):
     for index, (title, minutes) in enumerate(template, start=1):
         step_minutes = max(3, int(round(minutes * scale)))
         steps.append({
-            "id": index,
+            "id": f"step-{index}",
             "title": title,
-            "minutes": step_minutes,
-            "done": False,
-            "cue": f"{goal_text} - {title}" if goal_text else title,
+            "duration_minutes": step_minutes,
+            "status": "pending",
+            "order": index,
         })
     if steps:
-        delta = target_total - sum(step["minutes"] for step in steps)
-        steps[-1]["minutes"] = max(3, steps[-1]["minutes"] + delta)
+        delta = target_total - sum(step["duration_minutes"] for step in steps)
+        steps[-1]["duration_minutes"] = max(3, steps[-1]["duration_minutes"] + delta)
     return steps
 
 
-def infer_plan_settings(goal, steps):
-    goal_text = goal or ""
-    lower_goal = goal_text.lower()
-    allowed = ["chrome.exe"]
-    blocked = ["youtube", "instagram", "tiktok", "netflix"]
-    if any(term in lower_goal for term in ["report", "essay", "paper"]) or has_any_korean_term(
-        goal_text, REPORT_TERMS
-    ):
-        allowed = ["WINWORD.EXE", "EXCEL.EXE", "chrome.exe", "Hwp.exe"]
-    elif any(term in lower_goal for term in ["code", "coding", "develop"]) or has_any_korean_term(
-        goal_text, CODING_TERMS
-    ):
-        allowed = ["Code.exe", "chrome.exe", "WindowsTerminal.exe"]
-    return {
-        "allowed_apps": allowed,
-        "blocked_apps": blocked,
-        "target_minutes": sum(step["minutes"] for step in steps),
-    }
+def parse_list(value):
+    if isinstance(value, list):
+        raw_items = value
+    else:
+        raw_items = str(value or "").replace("\n", ",").split(",")
+    items = []
+    seen = set()
+    for item in raw_items:
+        cleaned = str(item).strip()
+        if cleaned and cleaned.lower() not in seen:
+            items.append(cleaned)
+            seen.add(cleaned.lower())
+    return items
 
 
-def build_mobile_plan(goal, total_minutes=45):
+def save_current_plan(plan):
+    CURRENT_PLAN_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with CURRENT_PLAN_PATH.open("w", encoding="utf-8") as plan_file:
+        json.dump(plan, plan_file, ensure_ascii=False, indent=2)
+        plan_file.write("\n")
+
+
+def load_current_plan():
+    if not CURRENT_PLAN_PATH.exists():
+        return None
+    try:
+        with CURRENT_PLAN_PATH.open("r", encoding="utf-8") as plan_file:
+            return json.load(plan_file)
+    except (OSError, json.JSONDecodeError):
+        return None
+
+
+def build_mobile_plan(goal, total_minutes=45, blocked_apps=None, blocked_sites=None, metadata_permission=False):
     steps = split_goal_into_steps(goal, total_minutes)
-    settings = infer_plan_settings(goal, steps)
-    plan_id = str(int(time.time() * 1000))
+    plan_id = f"plan-{uuid4().hex[:12]}"
     plan = {
-        "id": plan_id,
-        "goal": (goal or "").strip() or "\uc774\ub984 \uc5c6\ub294 \uc791\uc5c5",
-        "created_at": int(time.time()),
+        "plan_id": plan_id,
+        "goal_title": (goal or "").strip() or "\uc774\ub984 \uc5c6\ub294 \uc791\uc5c5",
+        "created_at": datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds"),
+        "metadata_permission": bool(metadata_permission),
+        "blocked_apps": parse_list(blocked_apps),
+        "blocked_sites": parse_list(blocked_sites),
         "steps": steps,
-        **settings,
     }
     mobile_plan_store["latest"] = plan
     mobile_plan_store["plans"][plan_id] = plan
+    save_current_plan(plan)
     return plan
 
 
@@ -157,12 +176,22 @@ def create_mobile_blueprint(get_tracker):
     @mobile_bp.route("/api/mobile/plan", methods=["POST"])
     def create_mobile_plan():
         data = request.json or {}
-        plan = build_mobile_plan(data.get("goal", ""), data.get("total_minutes", 45))
+        plan = build_mobile_plan(
+            data.get("goal", ""),
+            data.get("total_minutes", 45),
+            data.get("blocked_apps", ""),
+            data.get("blocked_sites", ""),
+            data.get("metadata_permission", False),
+        )
         return jsonify(plan)
 
     @mobile_bp.route("/api/mobile/latest_plan", methods=["GET"])
     def latest_mobile_plan():
-        return jsonify(mobile_plan_store["latest"] or {})
+        plan = mobile_plan_store["latest"] or load_current_plan()
+        if plan:
+            mobile_plan_store["latest"] = plan
+            mobile_plan_store["plans"][plan["plan_id"]] = plan
+        return jsonify(plan or {})
 
     @mobile_bp.route("/api/mobile/step_done", methods=["POST"])
     def mark_mobile_step_done():
@@ -170,11 +199,13 @@ def create_mobile_blueprint(get_tracker):
         plan = mobile_plan_store["plans"].get(str(data.get("plan_id", "")))
         if not plan:
             return jsonify({"error": "Plan not found"}), 404
-        step_id = int(data.get("step_id", 0) or 0)
+        step_id = str(data.get("step_id", ""))
         for step in plan["steps"]:
             if step["id"] == step_id:
-                step["done"] = bool(data.get("done", True))
+                step["status"] = "completed" if bool(data.get("done", True)) else "pending"
                 break
+        mobile_plan_store["latest"] = plan
+        save_current_plan(plan)
         return jsonify(plan)
 
     @mobile_bp.route("/api/mobile/start_plan", methods=["POST"])
@@ -184,11 +215,10 @@ def create_mobile_blueprint(get_tracker):
         tracker = get_tracker()
         if not plan or not tracker:
             return jsonify({"error": "No mobile plan or tracker available"}), 400
-        next_step = next((step for step in plan["steps"] if not step.get("done")), plan["steps"][0])
-        task = next_step["cue"]
+        next_step = next((step for step in plan["steps"] if step.get("status") != "completed"), plan["steps"][0])
+        task = f"{plan.get('goal_title', '')} - {next_step['title']}".strip(" -")
         blocked_apps = ", ".join(plan.get("blocked_apps", []))
-        extra_allowed = ", ".join(plan.get("allowed_apps", []))
-        tracker.start_monitoring(task, blocked_apps, next_step.get("minutes", 25), extra_allowed)
+        tracker.start_monitoring(task, blocked_apps, next_step.get("duration_minutes", 25), "")
         return jsonify({"status": "ok", "started_step": next_step, "plan": plan})
 
     return mobile_bp

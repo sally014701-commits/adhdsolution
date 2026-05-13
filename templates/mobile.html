@@ -154,6 +154,40 @@
             outline: none;
         }
 
+        .settings-grid {
+            display: grid;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .settings-input {
+            min-height: 72px;
+            font-size: 15px;
+        }
+
+        .toggle-row {
+            display: grid;
+            grid-template-columns: 22px 1fr;
+            gap: 10px;
+            align-items: start;
+            margin-top: 4px;
+            color: var(--ink);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .toggle-row input {
+            width: 18px;
+            height: 18px;
+            margin: 1px 0 0;
+            box-shadow: none;
+        }
+
+        .toggle-row span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
         .btn {
             border: 0;
             border-radius: 999px;
@@ -382,6 +416,23 @@
                 </div>
                 <button class="btn" id="make-plan">쪼개기</button>
             </div>
+            <div class="settings-grid">
+                <div>
+                    <label for="blocked-apps">차단할 앱</label>
+                    <textarea class="settings-input" id="blocked-apps" placeholder="예: KakaoTalk.exe, Discord.exe"></textarea>
+                </div>
+                <div>
+                    <label for="blocked-sites">차단할 사이트</label>
+                    <textarea class="settings-input" id="blocked-sites" placeholder="예: youtube.com, instagram.com"></textarea>
+                </div>
+                <label class="toggle-row" for="metadata-permission">
+                    <input id="metadata-permission" type="checkbox">
+                    <div>
+                        윈도우 사용 데이터 수집 허용
+                        <span>앱 이름과 창 제목 같은 실행 보조 정보를 PC에서 사용할 수 있게 저장합니다.</span>
+                    </div>
+                </label>
+            </div>
         </section>
 
         <section class="panel hidden" id="plan-panel">
@@ -445,29 +496,35 @@
 
         function renderPlan(plan) {
             currentPlan = plan;
-            if (!plan || !plan.id) return;
+            if (!plan || !plan.plan_id) return;
             $('plan-panel').classList.remove('hidden');
             $('handoff-message').classList.remove('show');
-            $('plan-goal').textContent = plan.goal;
-            $('plan-time').textContent = `${plan.target_minutes}분`;
+            $('plan-goal').textContent = plan.goal_title;
+            $('blocked-apps').value = plan.blocked_apps.join(', ');
+            $('blocked-sites').value = plan.blocked_sites.join(', ');
+            $('metadata-permission').checked = Boolean(plan.metadata_permission);
+            const targetMinutes = plan.steps.reduce((total, step) => total + step.duration_minutes, 0);
+            $('plan-time').textContent = `${targetMinutes}분`;
             $('steps').innerHTML = '';
             plan.steps.forEach((step) => {
+                const isDone = step.status === 'completed';
                 const row = document.createElement('div');
-                row.className = `step ${step.done ? 'done' : ''}`;
+                row.className = `step ${isDone ? 'done' : ''}`;
                 row.innerHTML = `
-                    <div class="step-number">${step.done ? '✓' : step.id}</div>
+                    <div class="step-number">${isDone ? '✓' : step.order}</div>
                     <div>
                         <div class="step-title">${step.title}</div>
-                        <div class="step-time">${step.minutes}분</div>
+                        <div class="step-time">${step.duration_minutes}분</div>
                     </div>
-                    <button class="check" aria-label="완료 표시">${step.done ? '↺' : '✓'}</button>
+                    <button class="check" aria-label="완료 표시">${isDone ? '↺' : '✓'}</button>
                 `;
                 row.querySelector('button').addEventListener('click', () => toggleStep(step));
                 $('steps').appendChild(row);
             });
             const chips = [
-                ...plan.allowed_apps.map((item) => `허용 ${item}`),
-                ...plan.blocked_apps.map((item) => `차단 ${item}`)
+                ...plan.blocked_apps.map((item) => `앱 차단 ${item}`),
+                ...plan.blocked_sites.map((item) => `사이트 차단 ${item}`),
+                `데이터 수집 ${plan.metadata_permission ? '허용' : '꺼짐'}`
             ];
             $('settings').innerHTML = chips.map((item) => `<span class="chip">${item}</span>`).join('');
         }
@@ -485,7 +542,13 @@
                 const response = await fetch('/api/mobile/plan', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ goal, total_minutes: $('minutes').value })
+                    body: JSON.stringify({
+                        goal,
+                        total_minutes: $('minutes').value,
+                        blocked_apps: $('blocked-apps').value,
+                        blocked_sites: $('blocked-sites').value,
+                        metadata_permission: $('metadata-permission').checked
+                    })
                 });
                 renderPlan(await response.json());
                 toast('PC에 보낼 계획을 만들었어요.');
@@ -501,7 +564,7 @@
             try {
                 const response = await fetch('/api/mobile/latest_plan');
                 const plan = await response.json();
-                if (plan && plan.id) renderPlan(plan);
+                if (plan && plan.plan_id) renderPlan(plan);
             } catch (error) {
                 toast('저장된 계획을 불러오지 못했어요.');
             }
@@ -514,9 +577,9 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        plan_id: currentPlan.id,
+                        plan_id: currentPlan.plan_id,
                         step_id: step.id,
-                        done: !step.done
+                        done: step.status !== 'completed'
                     })
                 });
                 renderPlan(await response.json());
@@ -535,7 +598,7 @@
                 const response = await fetch('/api/mobile/start_plan', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ plan_id: currentPlan.id })
+                    body: JSON.stringify({ plan_id: currentPlan.plan_id })
                 });
                 if (!response.ok) throw new Error('start failed');
                 const data = await response.json();

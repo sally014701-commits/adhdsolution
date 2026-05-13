@@ -247,7 +247,7 @@
         }
         .launcher-actions {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 12px;
             margin-top: 16px;
         }
@@ -623,10 +623,9 @@
                 </div>
 
                 <div class="launcher-actions">
-                    <button class="btn-primary" type="button" onclick="startPlan()">Start Plan</button>
-                    <button class="btn-secondary" type="button" onclick="toggleWidget()">Widget ON</button>
+                    <button class="btn-primary" id="start-plan-button" type="button" onclick="startPlan()">Start Plan</button>
                 </div>
-                <span class="help-text" id="plan-action-note">이번 단계에서는 plan 표시만 연결되어 있고, 실제 tracking 시작은 다음 단계에서 붙입니다.</span>
+                <span class="help-text" id="plan-action-note">Start Plan은 모바일 plan의 첫 task를 기존 tracking 화면으로 실행합니다.</span>
             </div>
         </div>
 
@@ -902,13 +901,51 @@
             }
         }
 
-        function startPlan() {
+        async function startPlan() {
             const note = document.getElementById('plan-action-note');
+            const btn = document.getElementById('start-plan-button');
             if (!currentPlan) {
                 note.innerText = '먼저 모바일에서 plan을 생성해주세요.';
                 return;
             }
-            note.innerText = 'Start Plan은 다음 단계에서 실제 tracking 시작과 연결됩니다. 지금은 표시/검증만 완료된 상태입니다.';
+            btn.disabled = true;
+            btn.innerText = '시작 중...';
+            note.innerText = '모바일 plan을 tracking 흐름에 연결하는 중입니다.';
+
+            try {
+                showView('dashboard-view');
+                if (pollInterval) clearInterval(pollInterval);
+                pollInterval = setInterval(fetchStatus, 1000);
+                fetchStatus();
+
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 6000);
+                const response = await fetch('/api/plan/start', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ plan_id: currentPlan.plan_id }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) {
+                    throw new Error(data.error || 'Plan 시작에 실패했습니다.');
+                }
+                fetchStatus();
+            } catch (err) {
+                console.error('Failed to start plan:', err);
+                const recovered = await recoverActiveSession();
+                if (!recovered) {
+                    showView('setup-view');
+                    note.innerText = err.name === 'AbortError'
+                        ? '시작 요청이 지연되고 있습니다. 서버 상태를 확인해주세요.'
+                        : (err.message || 'Plan 시작에 실패했습니다.');
+                }
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Start Plan';
+            }
         }
 
         let lastTransitionPhase = 'work';

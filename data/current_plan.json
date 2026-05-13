@@ -1,7 +1,7 @@
 {
-  "plan_id": "plan-045c7bc0ed89",
-  "goal_title": "중간고사 레포트 쓰기",
-  "created_at": "2026-05-13T13:09:34+09:00",
+  "plan_id": "plan-09aa0f45bf63",
+  "goal_title": "시험 준비",
+  "created_at": "2026-05-13T14:07:16+09:00",
   "metadata_permission": true,
   "blocked_apps": [
     "KakaoTalk.exe",
@@ -14,38 +14,42 @@
   "steps": [
     {
       "id": "step-1",
-      "title": "문서 열고 제목만 쓰기",
-      "duration_minutes": 3,
-      "status": "pending",
+      "title": "공부할 범위 한 장에 적기",
+      "duration_minutes": 5,
+      "status": "completed",
       "order": 1
     },
     {
       "id": "step-2",
-      "title": "자료 링크 3개 찾기",
+      "title": "가장 쉬운 개념 3개 체크하기",
       "duration_minutes": 10,
-      "status": "pending",
+      "status": "completed",
       "order": 2
     },
     {
       "id": "step-3",
-      "title": "목차를 세 줄로 잡기",
-      "duration_minutes": 6,
-      "status": "pending",
+      "title": "헷갈리는 부분 2개 표시하기",
+      "duration_minutes": 10,
+      "status": "completed",
       "order": 3
     },
     {
       "id": "step-4",
-      "title": "서론 초안 세 문장 쓰기",
-      "duration_minutes": 7,
-      "status": "pending",
+      "title": "짧은 문제나 예시 3개 풀기",
+      "duration_minutes": 15,
+      "status": "completed",
       "order": 4
     },
     {
       "id": "step-5",
-      "title": "다음에 이어 쓸 한 줄 남기기",
-      "duration_minutes": 4,
-      "status": "pending",
+      "title": "다음 복습 시작점 적기",
+      "duration_minutes": 5,
+      "status": "completed",
       "order": 5
     }
-  ]
+  ],
+  "current_step_index": 4,
+  "task_start_time": "2026-05-13T17:37:16+0900",
+  "status": "completed",
+  "task_completed_time": "2026-05-13T17:37:22+0900"
 }

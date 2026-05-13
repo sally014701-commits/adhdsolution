@@ -1,0 +1,200 @@
+[2026-05-13T08:23:29.694Z] main process started
+[2026-05-13T08:23:29.765Z] app ready
+[2026-05-13T08:23:29.766Z] createWindow called
+[2026-05-13T08:23:29.816Z] BrowserWindow created {"width":480,"height":180,"x":936,"y":24}
+[2026-05-13T08:24:46.652Z] failed to create runtime path C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry3\user-data EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry3\user-data'
+[2026-05-13T08:24:46.655Z] failed to create runtime path C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry3\cache EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry3\cache'
+[2026-05-13T08:24:46.656Z] failed to create runtime path C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry3\user-data\temp EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry3\user-data\temp'
+[2026-05-13T08:24:46.658Z] main process started
+[2026-05-13T08:24:46.659Z] runtime paths {"userData":"C:\\Users\\gram\\Desktop\\adhd\\.widget-runtime\\manual-electron-retry3\\user-data","sessionData":"C:\\Users\\gram\\Desktop\\adhd\\.widget-runtime\\manual-electron-retry3\\user-data","cache":"C:\\Users\\gram\\Desktop\\adhd\\.widget-runtime\\manual-electron-retry3\\cache","temp":"C:\\Users\\gram\\Desktop\\adhd\\.widget-runtime\\manual-electron-retry3\\user-data\\temp"}
+[2026-05-13T08:24:46.732Z] app ready
+[2026-05-13T08:24:46.733Z] createWindow called
+[2026-05-13T08:24:46.792Z] BrowserWindow created {"width":480,"height":180,"x":936,"y":24}
+[2026-05-13T08:25:54.948Z] failed to create runtime path C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry4\user-data EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry4\user-data'
+[2026-05-13T08:25:54.951Z] failed to create runtime path C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry4\cache EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry4\cache'
+[2026-05-13T08:25:54.953Z] failed to create runtime path C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry4\user-data\temp EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\.widget-runtime\manual-electron-retry4\user-data\temp'
+[2026-05-13T08:25:54.954Z] main process started
+[2026-05-13T08:25:54.955Z] runtime paths {"userData":"C:\\Users\\gram\\Desktop\\adhd\\.widget-runtime\\manual-electron-retry4\\user-data","sessionData":"C:\\Users\\gram\\Desktop\\adhd\\.widget-runtime\\manual-electron-retry4\\user-data","cache":"C:\\Users\\gram\\Desktop\\adhd\\.widget-runtime\\manual-electron-retry4\\cache","temp":"C:\\Users\\gram\\Desktop\\adhd\\.widget-runtime\\manual-electron-retry4\\user-data\\temp"}
+[2026-05-13T08:25:55.045Z] app ready
+[2026-05-13T08:25:55.045Z] createWindow called
+[2026-05-13T08:25:55.123Z] BrowserWindow created {"width":480,"height":180,"x":936,"y":24}
+[2026-05-13T08:27:03.000Z] failed to create runtime path C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry5\user-data EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry5\user-data'
+[2026-05-13T08:27:03.002Z] failed to create runtime path C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry5\cache EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry5\cache'
+[2026-05-13T08:27:03.003Z] failed to create runtime path C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry5\user-data\temp EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry5\user-data\temp'
+[2026-05-13T08:27:03.004Z] main process started
+[2026-05-13T08:27:03.004Z] runtime paths {"userData":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\manual-electron-retry5\\user-data","sessionData":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\manual-electron-retry5\\user-data","cache":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\manual-electron-retry5\\cache","temp":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\manual-electron-retry5\\user-data\\temp"}
+[2026-05-13T08:27:03.078Z] app ready
+[2026-05-13T08:27:03.079Z] createWindow called
+[2026-05-13T08:27:03.225Z] BrowserWindow created {"width":480,"height":180,"x":936,"y":24}
+[2026-05-13T08:28:00.676Z] failed to create runtime path C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry6\user-data EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry6\user-data'
+[2026-05-13T08:28:00.693Z] failed to create runtime path C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry6\cache EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry6\cache'
+[2026-05-13T08:28:00.694Z] failed to create runtime path C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry6\user-data\temp EPERM: operation not permitted, mkdir 'C:\Users\gram\Desktop\adhd\widget-runtime\manual-electron-retry6\user-data\temp'
+[2026-05-13T08:28:00.694Z] main process started
+[2026-05-13T08:28:00.695Z] runtime paths {"userData":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\manual-electron-retry6\\user-data","sessionData":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\manual-electron-retry6\\user-data","cache":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\manual-electron-retry6\\cache","temp":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\manual-electron-retry6\\user-data\\temp"}
+[2026-05-13T08:28:00.746Z] app ready
+[2026-05-13T08:28:00.746Z] createWindow called
+[2026-05-13T08:28:00.795Z] BrowserWindow created {"width":480,"height":180,"x":936,"y":24}
+[2026-05-13T08:29:35.432Z] main process started
+[2026-05-13T08:29:35.435Z] runtime paths {"userData":"C:\\Users\\gram\\desktop\\adhd\\widget-runtime\\session-35780\\user-data","sessionData":"C:\\Users\\gram\\desktop\\adhd\\widget-runtime\\session-35780\\user-data","cache":"C:\\Users\\gram\\desktop\\adhd\\widget-runtime\\session-35780\\cache","temp":"C:\\Users\\gram\\desktop\\adhd\\widget-runtime\\session-35780\\user-data\\temp"}
+[2026-05-13T08:29:35.552Z] app ready
+[2026-05-13T08:29:35.553Z] createWindow called
+[2026-05-13T08:29:35.788Z] BrowserWindow created {"width":480,"height":180,"x":936,"y":24}
+[2026-05-13T08:29:36.200Z] ready-to-show
+[2026-05-13T08:29:36.204Z] window shown
+[2026-05-13T08:29:36.220Z] renderer did-finish-load
+[2026-05-13T08:36:47.284Z] main process started
+[2026-05-13T08:36:47.288Z] runtime paths {"userData":"C:\\Users\\gram\\desktop\\adhd\\widget-runtime\\session-35644\\user-data","sessionData":"C:\\Users\\gram\\desktop\\adhd\\widget-runtime\\session-35644\\user-data","cache":"C:\\Users\\gram\\desktop\\adhd\\widget-runtime\\session-35644\\cache","temp":"C:\\Users\\gram\\desktop\\adhd\\widget-runtime\\session-35644\\user-data\\temp"}
+[2026-05-13T08:36:47.369Z] app ready
+[2026-05-13T08:36:47.370Z] createWindow called
+[2026-05-13T08:36:47.467Z] BrowserWindow created {"width":480,"height":180,"x":936,"y":24}
+[2026-05-13T08:36:48.277Z] ready-to-show
+[2026-05-13T08:36:48.285Z] window shown
+[2026-05-13T08:36:48.330Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:48.351Z] renderer did-finish-load
+[2026-05-13T08:36:48.355Z] renderer console {"level":2,"message":"%cElectron Security Warning (Insecure Content-Security-Policy) font-weight: bold; This renderer process has either no Content Security\n  Policy set or a policy with \"unsafe-eval\" enabled. This exposes users of\n  this app to unnecessary security risks.\n\nFor more information and help, consult\nhttps://electronjs.org/docs/tutorial/security.\nThis warning will not show up\nonce the app is packaged.","line":2,"sourceId":"node:electron/js2c/renderer_init"}
+[2026-05-13T08:36:48.390Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":296,"error":""}
+[2026-05-13T08:36:48.391Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":296,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:49.350Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:49.366Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":295,"error":""}
+[2026-05-13T08:36:49.370Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":295,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:50.341Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:50.352Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":294,"error":""}
+[2026-05-13T08:36:50.353Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":294,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:51.353Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:51.362Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":293,"error":""}
+[2026-05-13T08:36:51.363Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":293,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:52.347Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:52.356Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":292,"error":""}
+[2026-05-13T08:36:52.357Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":292,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:53.342Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:53.350Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":291,"error":""}
+[2026-05-13T08:36:53.351Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":291,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:54.342Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:54.352Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":290,"error":""}
+[2026-05-13T08:36:54.352Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":290,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:55.352Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:55.361Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":289,"error":""}
+[2026-05-13T08:36:55.362Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":289,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:56.347Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:56.356Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":288,"error":""}
+[2026-05-13T08:36:56.356Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":288,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:57.346Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:57.355Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":287,"error":""}
+[2026-05-13T08:36:57.356Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":287,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:58.350Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:58.361Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부할 범위 한 장에 적기","remaining":286,"error":""}
+[2026-05-13T08:36:58.362Z] renderer render status tasks {"source":"api","title":"공부할 범위 한 장에 적기","remaining_time":286,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-13T08:36:59.171Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-13T08:36:59.352Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:36:59.388Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":600,"error":""}
+[2026-05-13T08:36:59.388Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":600,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T08:36:59.643Z] renderer complete current result {"ok":true,"result":{"completed_task":"공부할 범위 한 장에 적기","next_task":{"duration_minutes":10,"id":"step-2","order":2,"status":"active","title":"가장 쉬운 개념 3개 체크하기"},"plan_completed":false,"success":true}}
+[2026-05-13T08:37:00.217Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:00.239Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":600,"error":""}
+[2026-05-13T08:37:00.240Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":600,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T08:37:00.352Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:00.383Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":599,"error":""}
+[2026-05-13T08:37:00.385Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":599,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T08:37:01.352Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:01.361Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":598,"error":""}
+[2026-05-13T08:37:01.362Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":598,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T08:37:02.345Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:02.354Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":597,"error":""}
+[2026-05-13T08:37:02.355Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":597,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T08:37:03.351Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:03.359Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":596,"error":""}
+[2026-05-13T08:37:03.360Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":596,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T08:37:03.777Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-13T08:37:04.343Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:04.355Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":595,"error":""}
+[2026-05-13T08:37:04.356Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":595,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T08:37:04.888Z] renderer complete current result {"ok":true,"result":{"completed_task":"가장 쉬운 개념 3개 체크하기","next_task":{"duration_minutes":10,"id":"step-3","order":3,"status":"active","title":"헷갈리는 부분 2개 표시하기"},"plan_completed":false,"success":true}}
+[2026-05-13T08:37:05.251Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:05.260Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":600,"error":""}
+[2026-05-13T08:37:05.261Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":600,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T08:37:05.340Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:05.350Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":600,"error":""}
+[2026-05-13T08:37:05.351Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":600,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T08:37:06.351Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:06.359Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":599,"error":""}
+[2026-05-13T08:37:06.360Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":599,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T08:37:07.351Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:07.362Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":598,"error":""}
+[2026-05-13T08:37:07.363Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":598,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T08:37:08.342Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:08.351Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":597,"error":""}
+[2026-05-13T08:37:08.351Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":597,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T08:37:09.348Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:09.360Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":596,"error":""}
+[2026-05-13T08:37:09.362Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":596,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T08:37:10.342Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:10.352Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":595,"error":""}
+[2026-05-13T08:37:10.352Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":595,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T08:37:10.452Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-13T08:37:11.063Z] renderer complete current result {"ok":true,"result":{"completed_task":"헷갈리는 부분 2개 표시하기","next_task":{"duration_minutes":15,"id":"step-4","order":4,"status":"active","title":"짧은 문제나 예시 3개 풀기"},"plan_completed":false,"success":true}}
+[2026-05-13T08:37:11.343Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:11.352Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"짧은 문제나 예시 3개 풀기","remaining":900,"error":""}
+[2026-05-13T08:37:11.353Z] renderer render status tasks {"source":"api","title":"짧은 문제나 예시 3개 풀기","remaining_time":900,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T08:37:11.436Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:11.445Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"짧은 문제나 예시 3개 풀기","remaining":900,"error":""}
+[2026-05-13T08:37:11.445Z] renderer render status tasks {"source":"api","title":"짧은 문제나 예시 3개 풀기","remaining_time":900,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T08:37:12.353Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:12.362Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"짧은 문제나 예시 3개 풀기","remaining":899,"error":""}
+[2026-05-13T08:37:12.363Z] renderer render status tasks {"source":"api","title":"짧은 문제나 예시 3개 풀기","remaining_time":899,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T08:37:13.355Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:13.364Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"짧은 문제나 예시 3개 풀기","remaining":898,"error":""}
+[2026-05-13T08:37:13.365Z] renderer render status tasks {"source":"api","title":"짧은 문제나 예시 3개 풀기","remaining_time":898,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T08:37:14.342Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:14.350Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"짧은 문제나 예시 3개 풀기","remaining":897,"error":""}
+[2026-05-13T08:37:14.351Z] renderer render status tasks {"source":"api","title":"짧은 문제나 예시 3개 풀기","remaining_time":897,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T08:37:15.344Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:15.353Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"짧은 문제나 예시 3개 풀기","remaining":896,"error":""}
+[2026-05-13T08:37:15.354Z] renderer render status tasks {"source":"api","title":"짧은 문제나 예시 3개 풀기","remaining_time":896,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T08:37:16.345Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:16.358Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"짧은 문제나 예시 3개 풀기","remaining":895,"error":""}
+[2026-05-13T08:37:16.359Z] renderer render status tasks {"source":"api","title":"짧은 문제나 예시 3개 풀기","remaining_time":895,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T08:37:16.883Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-13T08:37:17.109Z] renderer complete current result {"ok":true,"result":{"completed_task":"짧은 문제나 예시 3개 풀기","next_task":{"duration_minutes":5,"id":"step-5","order":5,"status":"active","title":"다음 복습 시작점 적기"},"plan_completed":false,"success":true}}
+[2026-05-13T08:37:17.344Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:17.385Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"다음 복습 시작점 적기","remaining":300,"error":""}
+[2026-05-13T08:37:17.387Z] renderer render status tasks {"source":"api","title":"다음 복습 시작점 적기","remaining_time":300,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T08:37:17.482Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:17.492Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"다음 복습 시작점 적기","remaining":300,"error":""}
+[2026-05-13T08:37:17.493Z] renderer render status tasks {"source":"api","title":"다음 복습 시작점 적기","remaining_time":300,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T08:37:18.353Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:18.368Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"다음 복습 시작점 적기","remaining":299,"error":""}
+[2026-05-13T08:37:18.370Z] renderer render status tasks {"source":"api","title":"다음 복습 시작점 적기","remaining_time":299,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T08:37:19.344Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:19.355Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"다음 복습 시작점 적기","remaining":298,"error":""}
+[2026-05-13T08:37:19.356Z] renderer render status tasks {"source":"api","title":"다음 복습 시작점 적기","remaining_time":298,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T08:37:20.345Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:20.361Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"다음 복습 시작점 적기","remaining":297,"error":""}
+[2026-05-13T08:37:20.362Z] renderer render status tasks {"source":"api","title":"다음 복습 시작점 적기","remaining_time":297,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T08:37:21.344Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:21.359Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"다음 복습 시작점 적기","remaining":296,"error":""}
+[2026-05-13T08:37:21.360Z] renderer render status tasks {"source":"api","title":"다음 복습 시작점 적기","remaining_time":296,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T08:37:22.344Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:22.353Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"다음 복습 시작점 적기","remaining":295,"error":""}
+[2026-05-13T08:37:22.354Z] renderer render status tasks {"source":"api","title":"다음 복습 시작점 적기","remaining_time":295,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T08:37:22.695Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-13T08:37:22.717Z] renderer complete current result {"ok":true,"result":{"completed_task":"다음 복습 시작점 적기","next_task":null,"plan_completed":true,"success":true}}
+[2026-05-13T08:37:23.082Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:23.136Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":294,"error":""}
+[2026-05-13T08:37:23.137Z] renderer render status tasks {"source":"api","title":"","remaining_time":294,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T08:37:23.344Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:23.354Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":294,"error":""}
+[2026-05-13T08:37:23.355Z] renderer render status tasks {"source":"api","title":"","remaining_time":294,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T08:37:24.351Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:24.362Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":293,"error":""}
+[2026-05-13T08:37:24.363Z] renderer render status tasks {"source":"api","title":"","remaining_time":293,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T08:37:25.351Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:25.367Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":292,"error":""}
+[2026-05-13T08:37:25.367Z] renderer render status tasks {"source":"api","title":"","remaining_time":292,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T08:37:26.344Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:26.359Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":291,"error":""}
+[2026-05-13T08:37:26.360Z] renderer render status tasks {"source":"api","title":"","remaining_time":291,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T08:37:27.344Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T08:37:27.361Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":290,"error":""}
+[2026-05-13T08:37:27.362Z] renderer render status tasks {"source":"api","title":"","remaining_time":290,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T08:37:28.315Z] window closed
+[2026-05-13T08:37:28.316Z] window-all-closed

@@ -386,6 +386,15 @@ body {
   --state-orb-b: rgba(255, 184, 108, 0.15);
 }
 
+.widget-shell[data-focus-state="overtime"] {
+  --state-bg: linear-gradient(135deg, #FFD6B8 0%, #FFB86C 100%);
+  --state-accent: #FFB86C;
+  --state-glow: rgba(255, 184, 108, 0.55);
+  --state-label: #8A4800;
+  --state-orb-a: rgba(255, 184, 108, 0.25);
+  --state-orb-b: rgba(255, 184, 108, 0.15);
+}
+
 .widget-shell[data-focus-state="distracted"] {
   --state-bg: linear-gradient(135deg, #FF8A7A 0%, #FFD6B8 100%);
   --state-accent: #FF8A7A;

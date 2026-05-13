@@ -63,9 +63,14 @@ app.register_blueprint(create_mobile_blueprint(lambda: global_tracker))
 WIDGET_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "desktop-widget")
 WIDGET_SRC_DIR = os.path.join(WIDGET_DIR, "src")
 WIDGET_LAUNCH_LOG = os.path.join(WIDGET_DIR, "widget-launch.log")
-WIDGET_USER_DATA_DIR = os.path.join(WIDGET_DIR, ".electron-user-data")
-WIDGET_CACHE_DIR = os.path.join(WIDGET_DIR, ".electron-cache")
-WIDGET_TEMP_DIR = os.path.join(WIDGET_DIR, ".electron-temp")
+WIDGET_RUNTIME_ROOT = os.environ.get(
+    "ADHD_WIDGET_RUNTIME_DIR",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "widget-runtime", f"session-{os.getpid()}"),
+)
+FALLBACK_WIDGET_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "desktop_widget_fallback.py")
+WIDGET_USER_DATA_DIR = os.path.join(WIDGET_RUNTIME_ROOT, "user-data")
+WIDGET_CACHE_DIR = os.path.join(WIDGET_RUNTIME_ROOT, "cache")
+WIDGET_TEMP_DIR = os.path.join(WIDGET_RUNTIME_ROOT, "temp")
 widget_process = None
 widget_lock = threading.Lock()
 CURRENT_PLAN_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "current_plan.json")
@@ -79,20 +84,33 @@ def _path_contains_widget_dir(value):
     return os.path.normcase(value).find(os.path.normcase(WIDGET_DIR)) >= 0
 
 def _find_widget_process():
+    fallback = None
     for proc in psutil.process_iter(["pid", "name", "cmdline", "cwd"]):
         try:
+            name = (proc.info.get("name") or "").lower()
             cmdline = " ".join(proc.info.get("cmdline") or [])
             cwd = proc.info.get("cwd") or ""
-            if _path_contains_widget_dir(cmdline) or _path_contains_widget_dir(cwd):
+            if _normalized_path(FALLBACK_WIDGET_PATH) and _normalized_path(FALLBACK_WIDGET_PATH) in _normalized_path(cmdline):
                 return proc
+            if _path_contains_widget_dir(cmdline) or _path_contains_widget_dir(cwd):
+                if "electron" in name:
+                    return proc
+                fallback = fallback or proc
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             continue
-    return None
+    return fallback
 
 def _get_running_widget_process():
     global widget_process
-    if widget_process and widget_process.poll() is None:
-        return widget_process
+    if widget_process:
+        if hasattr(widget_process, "poll") and widget_process.poll() is None:
+            return widget_process
+        if isinstance(widget_process, psutil.Process):
+            try:
+                if widget_process.is_running():
+                    return widget_process
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
 
     found = _find_widget_process()
     if found:
@@ -148,8 +166,8 @@ def _get_electron_command():
         f"--user-data-dir={WIDGET_USER_DATA_DIR}",
         f"--disk-cache-dir={WIDGET_CACHE_DIR}",
         "--disable-gpu",
-        "--disable-features=NetworkServiceSandbox",
-        "--no-sandbox",
+        "--disable-gpu-sandbox",
+        "--disable-http-cache",
         ".",
     ]
 
@@ -158,6 +176,47 @@ def _get_electron_command():
     if os.path.exists(electron_cmd):
         return [electron_cmd, *electron_args]
     return None
+
+def _get_widget_launch_command(widget_command):
+    if os.name != "nt":
+        return widget_command, False
+    # Electron crashes in this Windows environment when spawned directly from
+    # Python. Let the Windows shell create the GUI process instead.
+    executable = f'"{widget_command[0]}"'
+    args = subprocess.list2cmdline(widget_command[1:])
+    return f'start "" {executable} {args}', True
+
+def _start_fallback_widget():
+    if not os.path.exists(FALLBACK_WIDGET_PATH):
+        return None
+    pythonw = os.path.join(os.path.dirname(sys.executable), "pythonw.exe")
+    executable = pythonw if os.path.exists(pythonw) else sys.executable
+    return subprocess.Popen(
+        [executable, FALLBACK_WIDGET_PATH],
+        cwd=os.path.dirname(os.path.abspath(__file__)),
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        close_fds=True,
+    )
+
+def _prepare_electron_runtime_dirs():
+    paths = [
+        WIDGET_USER_DATA_DIR,
+        WIDGET_CACHE_DIR,
+        WIDGET_TEMP_DIR,
+        os.path.join(WIDGET_USER_DATA_DIR, "Network"),
+        os.path.join(WIDGET_USER_DATA_DIR, "Shared Dictionary"),
+        os.path.join(WIDGET_USER_DATA_DIR, "Code Cache", "js"),
+        os.path.join(WIDGET_USER_DATA_DIR, "Code Cache", "wasm"),
+        os.path.join(WIDGET_USER_DATA_DIR, "Cache", "Cache_Data"),
+        os.path.join(WIDGET_USER_DATA_DIR, "GPUCache"),
+        os.path.join(WIDGET_USER_DATA_DIR, "DawnGraphiteCache"),
+        os.path.join(WIDGET_USER_DATA_DIR, "DawnWebGPUCache"),
+        os.path.join(WIDGET_USER_DATA_DIR, "Local Storage", "leveldb"),
+    ]
+    for runtime_path in paths:
+        os.makedirs(runtime_path, exist_ok=True)
 
 def _get_electron_path():
     electron_exe = os.path.join(WIDGET_DIR, "node_modules", "electron", "dist", "electron.exe")
@@ -208,48 +267,66 @@ def start_widget():
                 "log_path": WIDGET_LAUNCH_LOG,
             }), 500
 
+        launch_command, use_shell = _get_widget_launch_command(widget_command)
         command_display = " ".join(widget_command)
+        launch_display = launch_command if isinstance(launch_command, str) else " ".join(launch_command)
         print(f"desktop widget command: {command_display}", flush=True)
         print(f"desktop widget cwd: {WIDGET_DIR}", flush=True)
-        creationflags = (
-            getattr(subprocess, "CREATE_NO_WINDOW", 0)
-            | getattr(subprocess, "DETACHED_PROCESS", 0)
-            | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
-        )
         try:
-            os.makedirs(WIDGET_USER_DATA_DIR, exist_ok=True)
-            os.makedirs(WIDGET_CACHE_DIR, exist_ok=True)
-            os.makedirs(WIDGET_TEMP_DIR, exist_ok=True)
+            _prepare_electron_runtime_dirs()
             widget_env = os.environ.copy()
-            widget_env["LOCALAPPDATA"] = WIDGET_USER_DATA_DIR
             widget_env["TEMP"] = WIDGET_TEMP_DIR
             widget_env["TMP"] = WIDGET_TEMP_DIR
             log_file = open(WIDGET_LAUNCH_LOG, "w", encoding="utf-8", errors="replace")
-            widget_process = subprocess.Popen(
-                widget_command,
+            launcher_process = subprocess.Popen(
+                launch_command,
                 cwd=WIDGET_DIR,
                 env=widget_env,
                 stdin=subprocess.DEVNULL,
                 stdout=log_file,
                 stderr=log_file,
                 close_fds=True,
-                creationflags=creationflags,
+                shell=use_shell,
             )
             log_file.close()
-            time.sleep(3)
-            if widget_process.poll() is not None:
-                returncode = widget_process.returncode
+            time.sleep(6)
+            running_process = _find_widget_process()
+            if not running_process:
+                returncode = launcher_process.poll()
                 error_detail = ""
                 if os.path.exists(WIDGET_LAUNCH_LOG):
                     with open(WIDGET_LAUNCH_LOG, "r", encoding="utf-8", errors="replace") as launch_log:
                         error_detail = launch_log.read()[-800:]
+                fallback_process = _start_fallback_widget()
+                time.sleep(2)
+                fallback_running = _find_widget_process()
+                if fallback_running:
+                    widget_process = fallback_running
+                    return jsonify({
+                        "running": True,
+                        "message": "fallback task widget launched after Electron failed",
+                        "mode": "fallback",
+                        "electron_error": "Electron widget failed to start",
+                        "returncode": returncode,
+                        "detail": error_detail.strip(),
+                        "command": command_display,
+                        "launch_command": launch_display,
+                        "fallback_pid": fallback_process.pid if fallback_process else None,
+                        "cwd": WIDGET_DIR,
+                        "electron_path": electron_path,
+                        "log_path": WIDGET_LAUNCH_LOG,
+                        "user_data_dir": WIDGET_USER_DATA_DIR,
+                        "cache_dir": WIDGET_CACHE_DIR,
+                        "temp_dir": WIDGET_TEMP_DIR,
+                    })
                 widget_process = None
                 return jsonify({
                     "running": False,
-                    "error": "Electron widget failed to start",
+                    "error": "Electron widget failed to start and fallback widget failed",
                     "returncode": returncode,
                     "detail": error_detail.strip(),
                     "command": command_display,
+                    "launch_command": launch_display,
                     "cwd": WIDGET_DIR,
                     "electron_path": electron_path,
                     "log_path": WIDGET_LAUNCH_LOG,
@@ -257,11 +334,13 @@ def start_widget():
                     "cache_dir": WIDGET_CACHE_DIR,
                     "temp_dir": WIDGET_TEMP_DIR,
                 }), 500
+            widget_process = running_process
             return jsonify({
                 "running": True,
                 "message": "desktop electron widget launched",
                 "mode": "electron",
                 "command": command_display,
+                "launch_command": launch_display,
                 "cwd": WIDGET_DIR,
                 "electron_path": electron_path,
                 "log_path": WIDGET_LAUNCH_LOG,
@@ -321,6 +400,197 @@ def current_plan():
     except (OSError, json.JSONDecodeError) as exc:
         return jsonify({"error": "Unable to read current plan", "detail": str(exc)}), 500
 
+def load_current_plan():
+    if not os.path.exists(CURRENT_PLAN_PATH):
+        return None
+    with open(CURRENT_PLAN_PATH, "r", encoding="utf-8") as plan_file:
+        return json.load(plan_file)
+
+def save_current_plan(plan):
+    os.makedirs(os.path.dirname(CURRENT_PLAN_PATH), exist_ok=True)
+    with open(CURRENT_PLAN_PATH, "w", encoding="utf-8") as plan_file:
+        json.dump(plan, plan_file, ensure_ascii=False, indent=2)
+        plan_file.write("\n")
+
+def find_startable_step(plan):
+    steps = plan.get("steps", [])
+    active_step = next(
+        ((index, step) for index, step in enumerate(steps) if step.get("status") == "active"),
+        None
+    )
+    if active_step:
+        return active_step
+    return next(
+        ((index, step) for index, step in enumerate(steps) if step.get("status") == "pending"),
+        None
+    )
+
+def get_active_step(plan):
+    return next(
+        ((index, step) for index, step in enumerate(plan.get("steps", [])) if step.get("status") == "active"),
+        None
+    )
+
+def get_next_pending_step(plan, current_index=-1):
+    return next(
+        (
+            (index, step)
+            for index, step in enumerate(plan.get("steps", []))
+            if index > current_index and step.get("status") == "pending"
+        ),
+        None
+    )
+
+def get_plan_progress(plan):
+    steps = plan.get("steps", [])
+    total = len(steps)
+    completed = len([step for step in steps if step.get("status") == "completed"])
+    percent = int(round((completed / total) * 100)) if total else 0
+    return {
+        "completed": completed,
+        "total": total,
+        "percent": percent,
+    }
+
+def build_task_label(plan, step):
+    return f"{plan.get('goal_title', '')} - {step.get('title', '')}".strip(" -")
+
+def start_tracker_for_plan_step(plan, step):
+    task = build_task_label(plan, step)
+    blocked_apps = ", ".join(plan.get("blocked_apps", []))
+    blocked_sites = ", ".join(plan.get("blocked_sites", []))
+    target_minutes = step.get("duration_minutes", 25)
+    metadata_permission = bool(plan.get("metadata_permission", True))
+    global_tracker.start_monitoring(task, blocked_apps, target_minutes, "", blocked_sites, metadata_permission)
+
+def complete_active_plan_task():
+    plan = load_current_plan()
+    if not plan:
+        return None, (jsonify({"error": "No current plan found"}), 404)
+
+    active = get_active_step(plan)
+    if not active:
+        return None, (jsonify({"error": "No active task found"}), 400)
+
+    active_index, active_step = active
+    completed_title = active_step.get("title", "")
+    active_step["status"] = "completed"
+
+    next_pending = get_next_pending_step(plan, active_index)
+    if next_pending:
+        next_index, next_step = next_pending
+        next_step["status"] = "active"
+        plan["current_step_index"] = next_index
+        plan["task_start_time"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        plan["status"] = "active"
+        save_current_plan(plan)
+        if global_tracker:
+            global_tracker.stop()
+            start_tracker_for_plan_step(plan, next_step)
+        return {
+            "success": True,
+            "completed_task": completed_title,
+            "next_task": next_step,
+            "plan_completed": False,
+        }, None
+
+    plan["status"] = "completed"
+    plan["current_step_index"] = active_index
+    plan["task_completed_time"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    save_current_plan(plan)
+    if global_tracker:
+        global_tracker.stop()
+    return {
+        "success": True,
+        "completed_task": completed_title,
+        "next_task": None,
+        "plan_completed": True,
+    }, None
+
+@app.route('/api/plan/start', methods=['POST'])
+def start_current_plan():
+    if not global_tracker:
+        return jsonify({"error": "Tracker not initialized"}), 500
+
+    try:
+        plan = load_current_plan()
+    except (OSError, json.JSONDecodeError) as exc:
+        return jsonify({"error": "Unable to read current plan", "detail": str(exc)}), 500
+
+    if not plan:
+        return jsonify({"error": "No current plan found"}), 404
+
+    selected = find_startable_step(plan)
+    if not selected:
+        return jsonify({"error": "No pending task found"}), 400
+
+    step_index, step = selected
+    for item in plan.get("steps", []):
+        if item.get("status") == "active":
+            item["status"] = "pending"
+    step["status"] = "active"
+    plan["current_step_index"] = step_index
+    plan["task_start_time"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    plan["status"] = "active"
+    save_current_plan(plan)
+
+    start_tracker_for_plan_step(plan, step)
+
+    return jsonify({
+        "status": "ok",
+        "plan_id": plan.get("plan_id"),
+        "started_step": step,
+        "current_step_index": step_index,
+    })
+
+    alert_message = global_tracker.alert_message
+    if not plan_completed:
+        overrun_seconds = time_status.get("overrun_seconds", 0)
+        remaining_seconds = time_status.get("remaining_time", 0)
+        if reason == "blocked":
+            state = "distracted"
+            state_code = "distracted"
+        elif overrun_seconds > 0:
+            state = "distracted"
+            state_code = "distracted"
+            reason = "overtime"
+            alert_message = "작업 시간이 끝났습니다. 다음 행동으로 전환할 시간이에요."
+            transition_message = "작업을 종료하고 다음 행동으로 전환할 시간이에요"
+        elif state_code == "distracted":
+            state = "focused"
+            state_code = "focused"
+            reason = ""
+            alert_message = ""
+            transition_message = ""
+
+        if state_code == "focused" and global_tracker.is_active and remaining_seconds <= 300:
+            state = "warning"
+            state_code = "warning"
+            reason = "finishing"
+            alert_message = ""
+            transition_message = "마무리 5분 전입니다. 새 일을 더 벌리지 말고 다음 행동으로 전환할 준비를 해주세요."
+
+    return jsonify({
+        "status": "ok",
+        "plan_id": plan.get("plan_id"),
+        "started_step": step,
+        "current_step_index": step_index,
+    })
+
+@app.route('/api/tasks/complete_current', methods=['POST'])
+def complete_current_task():
+    if not global_tracker:
+        return jsonify({"error": "Tracker not initialized"}), 500
+
+    try:
+        result, error_response = complete_active_plan_task()
+    except (OSError, json.JSONDecodeError) as exc:
+        return jsonify({"error": "Unable to update current plan", "detail": str(exc)}), 500
+
+    if error_response:
+        return error_response
+    return jsonify(result)
+
 @app.route('/update_tab', methods=['POST'])
 def update_tab():
     data = request.json
@@ -331,7 +601,7 @@ def update_tab():
         global_tracker.current_chrome_url = url
         global_tracker.current_chrome_title = title
         
-        if global_tracker.blocked_apps:
+        if global_tracker.blocked_apps or getattr(global_tracker, "blocked_sites", []):
             current_app = global_tracker.get_foreground_process_name()
             chrome_app = current_app if current_app and current_app.lower() == 'chrome.exe' else 'chrome.exe'
             if global_tracker.is_blocked(chrome_app, title):
@@ -403,19 +673,111 @@ def get_status():
         )
 
     time_status = global_tracker.get_time_status()
-        
+    plan = None
+    try:
+        plan = load_current_plan()
+    except (OSError, json.JSONDecodeError):
+        plan = None
+
+    current_task = None
+    next_task = None
+    plan_progress = {"completed": 0, "total": 0, "percent": 0}
+    goal_title = ""
+    metadata_permission = True
+    blocked_apps = list(global_tracker.blocked_apps)
+    blocked_sites = []
+    plan_completed = False
+
+    if plan:
+        goal_title = plan.get("goal_title", "")
+        metadata_permission = bool(plan.get("metadata_permission", True))
+        blocked_apps = plan.get("blocked_apps", blocked_apps)
+        blocked_sites = plan.get("blocked_sites", [])
+        plan_progress = get_plan_progress(plan)
+        plan_completed = plan.get("status") == "completed" or (
+            plan_progress["total"] > 0 and plan_progress["completed"] == plan_progress["total"]
+        )
+        active = get_active_step(plan)
+        if active:
+            active_index, active_step = active
+            current_task = active_step
+            pending = get_next_pending_step(plan, active_index)
+            next_task = pending[1] if pending else None
+
+    state = global_tracker.current_state
+    state_code = global_tracker.get_state_code()
+    reason = global_tracker.distraction_reason
+    transition_message = time_status.get("transition_message", "")
+
+    if plan_completed:
+        state = "completed"
+        state_code = "completed"
+        reason = "completed"
+        transition_message = "모든 task가 완료되었습니다."
+    elif state_code not in ["distracted", "idle"]:
+        if time_status.get("overrun_seconds", 0) > 0:
+            state = "distracted"
+            state_code = "distracted"
+            reason = "overtime"
+            transition_message = "작업을 종료하고 다음 행동으로 전환할 시간이에요"
+        elif time_status.get("remaining_time", 0) <= 300:
+            state = "warning"
+            state_code = "warning"
+            reason = "finishing"
+            transition_message = "마무리 5분 전입니다. 새 일을 더 벌리지 말고 다음 행동으로 전환할 준비를 해주세요."
+        elif global_tracker.is_active:
+            state = "focused"
+            state_code = "focused"
+
+    alert_message = global_tracker.alert_message
+    if not plan_completed:
+        overrun_seconds = time_status.get("overrun_seconds", 0)
+        remaining_seconds = time_status.get("remaining_time", 0)
+        if reason == "blocked":
+            state = "distracted"
+            state_code = "distracted"
+        elif overrun_seconds > 0:
+            state = "distracted"
+            state_code = "distracted"
+            reason = "overtime"
+            alert_message = "작업 시간이 끝났습니다. 다음 행동으로 전환할 시간이에요."
+            transition_message = "작업을 종료하고 다음 행동으로 전환할 시간이에요"
+        elif state_code == "distracted":
+            state = "focused"
+            state_code = "focused"
+            reason = ""
+            alert_message = ""
+            transition_message = ""
+
+        if state_code == "focused" and global_tracker.is_active and remaining_seconds <= 300:
+            state = "warning"
+            state_code = "warning"
+            reason = "finishing"
+            alert_message = ""
+            transition_message = "마무리 5분 전입니다. 새 일을 더 벌리지 말고 다음 행동으로 전환할 준비를 해주세요."
+
     return jsonify({
         "is_active": global_tracker.is_active,
-        "state": global_tracker.current_state,
-        "state_code": global_tracker.get_state_code(),
-        "alert_message": global_tracker.alert_message,
+        "state": state,
+        "state_code": state_code,
+        "alert_message": alert_message,
         "distraction_reason": global_tracker.distraction_reason,
+        "reason": reason,
         "condition_flags": global_tracker.condition_flags,
         "allowed_apps": global_tracker.allowed_apps,
+        "goal_title": goal_title,
+        "current_task": current_task,
+        "next_task": next_task,
+        "plan_progress": plan_progress,
+        "plan_completed": plan_completed,
+        "metadata_permission": metadata_permission,
+        "blocked_apps": blocked_apps,
+        "blocked_sites": blocked_sites,
         "task": global_tracker.task_name,
         "target_minutes": global_tracker.target_minutes,
         "target_seconds": global_tracker.target_seconds,
         **time_status,
+        "transition_message": transition_message,
         "current_app": global_tracker.last_app_name,
         "current_url": global_tracker.current_chrome_url if global_tracker.current_chrome_url else "",
         "current_title": global_tracker.last_window_title,
@@ -480,6 +842,8 @@ class FocusTracker:
         self.input_desktop_handle = None
         self.allowed_apps = []
         self.blocked_apps = []
+        self.blocked_sites = []
+        self.metadata_permission = True
         
         # 크롬 연동 변수
         self.current_chrome_url = ""
@@ -488,7 +852,7 @@ class FocusTracker:
         global global_tracker
         global_tracker = self
         
-    def start_monitoring(self, task, blocked_input, target_minutes=60, extra_allowed_input=""):
+    def start_monitoring(self, task, blocked_input, target_minutes=60, extra_allowed_input="", blocked_sites_input="", metadata_permission=True):
         with self.lock:
             if self.is_active:
                 return
@@ -530,15 +894,16 @@ class FocusTracker:
         self.distraction_log.clear()
         self.distracted_minutes = 0
             
-        self.allowed_apps = self.merge_app_lists(
-            self.get_default_allowed_apps(task),
-            self.parse_app_list(extra_allowed_input)
-        )
+        # Product direction: PC does not infer or enforce allowed apps.
+        # App warnings are based only on user-provided blocked apps/sites.
+        self.allowed_apps = []
 
         if blocked_input:
             self.blocked_apps = self.parse_app_list(blocked_input)
         else:
             self.blocked_apps = []
+        self.blocked_sites = self.parse_app_list(blocked_sites_input)
+        self.metadata_permission = bool(metadata_permission)
 
         # pynput 이벤트 리스너 시작
         self.kb_listener = keyboard.Listener(on_press=self.on_input)
@@ -559,9 +924,8 @@ class FocusTracker:
         self.loop_thread = threading.Thread(target=self.tracking_loop, daemon=True)
         self.loop_thread.start()
         
-        print(f"✅ 허용 앱 설정 완료: {self.allowed_apps}")
-        if self.blocked_apps:
-            print(f"차단 앱/사이트: {self.blocked_apps}")
+        if self.blocked_apps or self.blocked_sites:
+            print(f"차단 앱: {self.blocked_apps} | 차단 사이트: {self.blocked_sites}")
         print("집중 모니터링 시스템 시작")
 
     def on_input(self, *args):
@@ -585,6 +949,8 @@ class FocusTracker:
         return merged
 
     def get_default_allowed_apps(self, task):
+        # Legacy helper kept for compatibility with the old preview endpoint.
+        # Detection no longer uses inferred allowed apps.
         task_text = task or ""
         if "레포트" in task_text or "문서" in task_text or "과제" in task_text:
             return ["WINWORD.EXE", "EXCEL.EXE", "chrome.exe"]
@@ -768,7 +1134,7 @@ class FocusTracker:
                 self.last_window_title = self.get_window_title(current_window)
             if self.record_window_switch(current_window, source="monitor"):
                 title = self.get_window_title(current_window)
-                if self.blocked_apps:
+                if self.blocked_apps or self.blocked_sites:
                     current_app = self.get_foreground_process_name()
                     if hasattr(self, 'is_blocked') and self.is_blocked(current_app, title):
                         self.current_state = "이탈"
@@ -815,16 +1181,36 @@ class FocusTracker:
             terms.update(aliases.get(term, []))
         return terms
 
+    def get_blocked_site_terms(self):
+        terms = set()
+        aliases = {
+            "유튜브": ["youtube", "youtube.com", "youtu.be"],
+            "youtube": ["유튜브", "youtube.com", "youtu.be"],
+            "youtube.com": ["유튜브", "youtube", "youtu.be"],
+            "youtu.be": ["유튜브", "youtube", "youtube.com"],
+        }
+
+        for blocked in self.blocked_sites:
+            term = blocked.strip().lower()
+            if not term:
+                continue
+            terms.add(term)
+            terms.update(aliases.get(term, []))
+        return terms
+
     def is_blocked(self, current_app, current_title):
         """앱 프로세스 이름이나 창 타이틀, 또는 크롬 URL에 금지어가 포함되어 있는지 확인"""
-        if not self.blocked_apps:
+        if not self.blocked_apps and not self.blocked_sites:
             return False
         app_lower = current_app.lower() if current_app else ""
         title_lower = current_title.lower() if current_title else ""
         url_lower = self.current_chrome_url.lower()
         
         for b_lower in self.get_blocked_terms():
-            if b_lower in app_lower or b_lower in title_lower or b_lower in url_lower:
+            if b_lower in app_lower or b_lower in title_lower:
+                return True
+        for site_lower in self.get_blocked_site_terms():
+            if site_lower in url_lower or site_lower in title_lower:
                 return True
         return False
 
@@ -833,28 +1219,30 @@ class FocusTracker:
             return "distracted"
         if self.current_state == "비활동":
             return "idle"
+        if self.current_state == "warning":
+            return "warning"
         if self.current_state == "집중":
             return "focused"
         return "collecting"
 
     def evaluate_state(self, current_app, current_title, window_switch_count, idle_time):
         cond_blocked = self.is_blocked(current_app, current_title)
-        cond_idle = idle_time > IDLE_THRESHOLD
-        allowed_lower = [app.lower() for app in self.allowed_apps]
-        cond_app = bool(current_app) and current_app.lower() not in allowed_lower
+        metadata_checks_enabled = bool(getattr(self, "metadata_permission", True))
+        cond_idle = metadata_checks_enabled and idle_time > IDLE_THRESHOLD
+        cond_app = False
 
         current_activity = self.get_current_activity()
+        # Metadata is kept for display/context, but it no longer triggers
+        # distracted by itself. Distracted is reserved for blocked apps/sites
+        # and task overtime.
         cond_switch_activity = False
-        if self.is_baseline_set:
-            cond_switch_activity = (
-                window_switch_count > WINDOW_SWITCH_THRESHOLD
-                and current_activity < self.baseline_activity * ACTIVITY_DROP_RATIO
-            )
 
         self.condition_flags = {
             "cond_blocked": bool(cond_blocked),
             "cond_idle": bool(cond_idle),
             "cond_app": bool(cond_app),
+            "allowed_app_detection_enabled": False,
+            "metadata_checks_enabled": metadata_checks_enabled,
             "cond_switch_activity": bool(cond_switch_activity),
             "current_app": current_app,
             "allowed_apps": self.allowed_apps,
@@ -873,10 +1261,6 @@ class FocusTracker:
             self.current_state = "비활동"
             self.distraction_reason = "idle"
             self.alert_message = "60초 이상 입력이 없어 비활동 상태입니다."
-        elif cond_app:
-            self.current_state = "이탈"
-            self.distraction_reason = "not_allowed_app"
-            self.alert_message = f"허용되지 않은 앱입니다: {current_app}"
         elif cond_switch_activity:
             self.current_state = "이탈"
             self.distraction_reason = "switch_activity"

@@ -2,7 +2,7 @@
   "taskSource": "mock",
   "focusSource": "status-api-with-mock-fallback",
   "integration": {
-    "statusApiUrl": "http://localhost:5000/status",
+    "statusApiUrl": "http://127.0.0.1:5000/status",
     "statusJsonPath": "../integration/status.example.json"
   },
   "audio": {

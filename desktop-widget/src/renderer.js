@@ -3,6 +3,8 @@ const FOCUS_LABELS = {
   warning: "Warning",
   distracted: "Distracted",
   idle: "Idle",
+  overtime: "Overtime",
+  completed: "Done",
 };
 
 const STATE_ALIASES = {
@@ -10,18 +12,29 @@ const STATE_ALIASES = {
   "집중": "focused",
   "집중 중": "focused",
   warning: "warning",
+  finishing: "warning",
   "마무리 필요": "warning",
+  "마무리": "warning",
+  "마무리 중": "warning",
   "주의": "warning",
+  overtime: "overtime",
+  "시간초과": "overtime",
   distracted: "distracted",
   "이탈": "distracted",
   idle: "idle",
   "비활동": "idle",
+  completed: "completed",
 };
 
 const state = {
   tasks: [],
   isAnimating: false,
+  statusSource: "mock",
 };
+
+function logWidget(message, detail = "") {
+  window.desktopWidget?.log?.(message, detail);
+}
 
 const FALLBACK_DATA = {
   config: {
@@ -96,6 +109,14 @@ function formatDuration(minutes) {
   return `${String(safeMinutes).padStart(2, "0")}:00`;
 }
 
+function formatTimer(seconds, overrunSeconds = 0) {
+  const overrun = Math.max(0, Number(overrunSeconds) || 0);
+  const value = overrun > 0 ? overrun : Math.max(0, Number(seconds) || 0);
+  const minutes = Math.floor(value / 60);
+  const rest = value % 60;
+  return `${overrun > 0 ? "+" : ""}${String(minutes).padStart(2, "0")}:${String(rest).padStart(2, "0")}`;
+}
+
 function formatSeconds(seconds) {
   const value = Number(seconds) || 0;
 
@@ -110,6 +131,23 @@ function normalizeFocusState(rawState) {
   const original = String(rawState ?? "focused").trim();
   const lower = original.toLowerCase();
   return STATE_ALIASES[lower] ?? STATE_ALIASES[original] ?? "focused";
+}
+
+function normalizeStatusTask(task) {
+  if (!task) {
+    return null;
+  }
+  if (typeof task === "string") {
+    return {
+      title: task,
+      duration_minutes: 0,
+    };
+  }
+  return {
+    ...task,
+    title: task.title || task.name || "작업",
+    duration_minutes: Number(task.duration_minutes ?? task.duration ?? 0) || 0,
+  };
 }
 
 function renderTasks() {
@@ -132,8 +170,56 @@ function renderTasks() {
   elements.progressText.textContent = `오늘의 퀘스트 ${progress.total}개 중 ${progress.completed}개 완료`;
 }
 
+function renderStatusTasks(status, source) {
+  logWidget("render status tasks", {
+    source,
+    title: status?.current_task?.title || status?.current_task || "",
+    remaining_time: status?.remaining_time,
+    progress: status?.plan_progress,
+  });
+  if (source !== "api") {
+    renderTasks();
+    elements.progressText.textContent = "PC 앱 연결 대기 · mock fallback";
+    return;
+  }
+
+  const currentTask = normalizeStatusTask(status.current_task);
+  const nextTask = normalizeStatusTask(status.next_task);
+  const planProgress = status.plan_progress || {};
+  const completed = Number(planProgress.completed) || 0;
+  const total = Number(planProgress.total) || 0;
+  const planPercent = Number(planProgress.percent) || 0;
+  const taskProgress = Number(status.time_progress);
+  const progressPercent = Number.isFinite(taskProgress)
+    ? Math.max(0, Math.min(100, Math.round(taskProgress * 100)))
+    : Math.max(0, Math.min(100, Math.round(planPercent)));
+
+  if (currentTask) {
+    elements.currentTaskTitle.textContent = currentTask.title;
+    elements.currentTaskDuration.textContent = formatTimer(status.remaining_time, status.overrun_seconds);
+    elements.completeButton.disabled = false;
+  } else if (status.plan_completed || status.state === "completed") {
+    elements.currentTaskTitle.textContent = "오늘 할 일 완료";
+    elements.currentTaskDuration.textContent = "잘했어요";
+    elements.completeButton.disabled = true;
+  } else {
+    elements.currentTaskTitle.textContent = "작업 대기 중";
+    elements.currentTaskDuration.textContent = "--:--";
+    elements.completeButton.disabled = true;
+  }
+
+  elements.nextTaskTitle.textContent = nextTask ? nextTask.title : "다음 할 일 없음";
+  elements.nextTaskDuration.textContent = nextTask && nextTask.duration_minutes
+    ? ` · ${nextTask.duration_minutes}분`
+    : "";
+  elements.progressFill.style.width = `${progressPercent}%`;
+  elements.progressText.textContent = total > 0
+    ? `오늘의 퀘스트 ${total}개 중 ${completed}개 완료 · ${Math.round(planPercent)}%`
+    : "PC plan 대기 중";
+}
+
 function renderFocusStatus(status, source) {
-  const focusState = normalizeFocusState(status.state);
+  const focusState = normalizeFocusState(status.state_code || status.state);
   elements.shell.dataset.focusState = focusState;
   elements.shell.dataset.statusSource = source;
   elements.focusLabel.textContent = FOCUS_LABELS[focusState] ?? FOCUS_LABELS.focused;
@@ -147,9 +233,12 @@ function renderFocusStatus(status, source) {
   const elapsedTime = formatSeconds(status.elapsed_time);
   const switchCount = Number(status.window_switch) || 0;
   const sourceLabel = source === "api" ? "API 연결됨" : "mock fallback";
+  if (source !== "api") {
+    console.info("desktop-widget using mock fallback status");
+  }
 
   elements.statusMeta.textContent =
-    `${sourceLabel} · ${activity} · idle ${idleTime} · switch ${switchCount} · ${elapsedTime}`;
+    `${sourceLabel} · ${status.transition_message || activity} · idle ${idleTime} · switch ${switchCount} · ${elapsedTime}`;
 }
 
 function playCompletionSound(config) {
@@ -188,18 +277,12 @@ function playFallbackBeep() {
   oscillator.stop(audioContext.currentTime + 0.2);
 }
 
-function completeCurrentTask(config) {
+function runCompletionAnimation(config, afterAnimation) {
   if (state.isAnimating) {
     return;
   }
 
-  const [currentTask] = getPendingTasks();
-  if (!currentTask) {
-    return;
-  }
-
   state.isAnimating = true;
-  currentTask.status = "completed";
   elements.taskPanel.classList.add("is-completing");
   elements.currentTaskTitle.classList.add("is-done");
   playCompletionSound(config);
@@ -207,7 +290,7 @@ function completeCurrentTask(config) {
   window.setTimeout(() => {
     elements.taskPanel.classList.remove("is-completing");
     elements.currentTaskTitle.classList.remove("is-done");
-    renderTasks();
+    afterAnimation?.();
     elements.taskPanel.classList.add("is-entering");
 
     window.setTimeout(() => {
@@ -217,13 +300,60 @@ function completeCurrentTask(config) {
   }, 360);
 }
 
+async function completeCurrentTask(config, initialFocus) {
+  if (state.isAnimating) {
+    return;
+  }
+
+  if (window.desktopWidget?.completeCurrentTask) {
+    const result = await window.desktopWidget.completeCurrentTask();
+    logWidget("complete current result", result);
+    if (result.ok) {
+      runCompletionAnimation(config, () => {
+        refreshFocusStatus(initialFocus);
+      });
+      return;
+    }
+
+    if (state.statusSource === "api") {
+      console.error("Failed to complete PC task:", result.error);
+      elements.statusMeta.textContent = `완료 처리 실패 · ${result.error}`;
+      return;
+    }
+
+    console.info("desktop-widget complete API unavailable; using mock fallback", result.error);
+  }
+
+  const [currentTask] = getPendingTasks();
+  if (!currentTask) {
+    return;
+  }
+  currentTask.status = "completed";
+  runCompletionAnimation(config, renderTasks);
+}
+
 async function refreshFocusStatus(initialFocus) {
   if (!window.desktopWidget?.getFocusStatus) {
+    state.statusSource = "mock";
     renderFocusStatus(initialFocus, "mock");
+    renderStatusTasks(initialFocus, "mock");
     return;
   }
 
   const result = await window.desktopWidget.getFocusStatus();
+  state.statusSource = result.source;
+  logWidget("refresh focus status result", {
+    source: result.source,
+    ok: result.ok,
+    state: result.status?.state_code || result.status?.state,
+    currentTask: result.status?.current_task?.title || result.status?.current_task || "",
+    remaining: result.status?.remaining_time,
+    error: result.error || "",
+  });
+  if (result.source !== "api") {
+    console.info("desktop-widget status API unavailable; using mock fallback", result.error);
+  }
+  renderStatusTasks(result.status, result.source);
   renderFocusStatus(result.status, result.source);
 }
 
@@ -240,7 +370,7 @@ function init() {
   }, 1000);
 
   elements.completeButton.addEventListener("click", () => {
-    completeCurrentTask(initialData.config);
+    completeCurrentTask(initialData.config, initialData.focus);
   });
 
   elements.closeButton.addEventListener("click", () => {

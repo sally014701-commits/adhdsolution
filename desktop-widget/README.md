@@ -37,4 +37,6 @@ Supported state mapping:
 - `distracted` or `이탈`: red border with a light shake
 - `idle` or `비활동`: gray border
 
-If the API is unavailable, the widget falls back to `src/data/mockFocusState.json`. Micro task data remains local mock data for now.
+If the API is unavailable, the widget falls back to `src/data/mockFocusState.json`.
+Micro task data remains local mock data in the current repo. See `../DEMO.md`
+for the full mobile-PC-widget demo flow and current readiness gaps.

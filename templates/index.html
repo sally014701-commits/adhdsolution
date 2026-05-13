@@ -142,6 +142,142 @@
             font-size: 13px;
             color: var(--ink);
         }
+        .launcher-card {
+            background-color: var(--canvas);
+            border-radius: var(--rounded-lg);
+            padding: 38px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .launcher-eyebrow {
+            margin: 0 0 10px;
+            color: var(--body-muted);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .launcher-title {
+            margin: 0 0 10px;
+            font-family: var(--font-display);
+            font-size: 34px;
+            line-height: 1.14;
+        }
+        .launcher-subtitle {
+            margin: 0 0 24px;
+            color: var(--body-muted);
+            font-size: 16px;
+            line-height: 1.45;
+        }
+        .plan-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+        .plan-section {
+            border: 1px solid #e5e5ea;
+            border-radius: 14px;
+            padding: 16px;
+            background: #fff;
+        }
+        .plan-section h3 {
+            margin: 0 0 12px;
+            font-size: 14px;
+            color: var(--body-muted);
+        }
+        .step-list {
+            display: grid;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .step-item {
+            display: grid;
+            grid-template-columns: 28px 1fr auto;
+            gap: 10px;
+            align-items: center;
+            min-height: 42px;
+        }
+        .step-order {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--canvas-parchment);
+            color: var(--body-muted);
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .step-name {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .step-minutes {
+            color: var(--body-muted);
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        .chip-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .empty-state {
+            color: var(--body-muted);
+            font-size: 14px;
+            line-height: 1.45;
+        }
+        .permission-note {
+            margin-top: 14px;
+            border-radius: 12px;
+            padding: 12px;
+            background: #fff8e5;
+            color: #7a5600;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .permission-note.allowed {
+            background: #eef7f2;
+            color: #1f6f49;
+        }
+        .launcher-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .btn-secondary {
+            border: 1px solid #d2d2d7;
+            border-radius: var(--rounded-pill);
+            padding: 12px 24px;
+            background: #fff;
+            color: var(--ink);
+            font-size: 17px;
+            font-family: var(--font-body);
+            cursor: pointer;
+            width: 100%;
+        }
+        .legacy-setup {
+            max-width: 720px;
+            margin: 18px auto 0;
+            text-align: left;
+        }
+        .legacy-setup summary {
+            cursor: pointer;
+            color: var(--body-muted);
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .legacy-setup .setup-card {
+            margin-top: 12px;
+            box-shadow: none;
+            border: 1px solid #e5e5ea;
+        }
         button.btn-primary {
             background-color: var(--primary);
             color: white;
@@ -449,6 +585,8 @@
 
         @media (max-width: 760px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .plan-grid,
+            .launcher-actions { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -460,34 +598,60 @@
 
     <!-- Setup View -->
     <div id="setup-view" class="container">
-        <div class="setup-card">
-            <h2>모니터링 설정</h2>
-            <div class="form-group">
-                <label for="task">🎯 지금 할 작업</label>
-                <input type="text" id="task" placeholder="예: 레포트 작성, 코딩, 자료 조사" autocomplete="off">
-                <span class="help-text">입력한 작업에 맞춰 허용 앱이 자동 설정됩니다.</span>
-                <div class="allowed-preview">
-                    <div class="allowed-preview-title">현재 가능 앱</div>
-                    <div class="app-chip-list" id="allowed-preview-list"></div>
+        <div class="launcher-card">
+            <p class="launcher-eyebrow">Mobile plan ready</p>
+            <h2 class="launcher-title" id="plan-goal-title">모바일 계획을 불러오는 중</h2>
+            <p class="launcher-subtitle" id="plan-created-at">휴대폰에서 만든 계획을 PC에서 실행할 준비를 합니다.</p>
+
+            <div id="plan-empty" class="empty-state" style="display: none;">
+                아직 저장된 모바일 plan이 없습니다. 모바일 화면에서 목표를 쪼갠 뒤 이 페이지를 새로고침하세요.
+            </div>
+
+            <div id="plan-content" style="display: none;">
+                <div class="plan-grid">
+                    <div class="plan-section">
+                        <h3>Steps</h3>
+                        <ul class="step-list" id="plan-steps"></ul>
+                    </div>
+                    <div class="plan-section">
+                        <h3>Blocked apps</h3>
+                        <div class="chip-list" id="blocked-apps-list"></div>
+                        <h3 style="margin-top: 18px;">Blocked sites</h3>
+                        <div class="chip-list" id="blocked-sites-list"></div>
+                        <div class="permission-note" id="metadata-note"></div>
+                    </div>
                 </div>
+
+                <div class="launcher-actions">
+                    <button class="btn-primary" type="button" onclick="startPlan()">Start Plan</button>
+                    <button class="btn-secondary" type="button" onclick="toggleWidget()">Widget ON</button>
+                </div>
+                <span class="help-text" id="plan-action-note">이번 단계에서는 plan 표시만 연결되어 있고, 실제 tracking 시작은 다음 단계에서 붙입니다.</span>
             </div>
-            <div class="form-group">
-                <label for="extra-allowed">➕ 추가로 허용할 앱</label>
-                <input type="text" id="extra-allowed" placeholder="예: Notion.exe, Obsidian.exe, Slack.exe" autocomplete="off">
-                <span class="help-text">쉼표(,)로 구분하세요. 여기에 없는 앱은 작업 중 이탈로 처리됩니다.</span>
-            </div>
-            <div class="form-group">
-                <label for="target-minutes">⏱ 목표 작업 시간</label>
-                <input type="text" id="target-minutes" inputmode="numeric" pattern="[0-9]*" value="60" autocomplete="off">
-                <span class="help-text">분 단위로 입력하세요. 시간이 가까워지면 마무리 전환을 도와줍니다.</span>
-            </div>
-            <div class="form-group">
-                <label for="blocked">🚫 피하고 싶은 앱 (선택사항)</label>
-                <input type="text" id="blocked" placeholder="예: youtube, kakao" autocomplete="off">
-                <span class="help-text">쉼표(,)로 구분하여 입력하세요.</span>
-            </div>
-            <button class="btn-primary" onclick="startTracking()">모니터링 시작</button>
         </div>
+
+        <details class="legacy-setup">
+            <summary>기존 수동 시작 열기</summary>
+            <div class="setup-card">
+                <h2>수동 모니터링 설정</h2>
+                <div class="form-group">
+                    <label for="task">지금 할 작업</label>
+                    <input type="text" id="task" placeholder="예: 레포트 작성, 코딩, 자료 조사" autocomplete="off">
+                    <span class="help-text">모바일 plan이 없을 때만 사용하는 예비 입력입니다.</span>
+                </div>
+                <div class="form-group">
+                    <label for="target-minutes">목표 작업 시간</label>
+                    <input type="text" id="target-minutes" inputmode="numeric" pattern="[0-9]*" value="60" autocomplete="off">
+                    <span class="help-text">분 단위로 입력하세요.</span>
+                </div>
+                <div class="form-group">
+                    <label for="blocked">피하고 싶은 앱</label>
+                    <input type="text" id="blocked" placeholder="예: youtube, kakao" autocomplete="off">
+                    <span class="help-text">쉼표(,)로 구분하여 입력하세요.</span>
+                </div>
+                <button class="btn-primary" onclick="startTracking()">수동 모니터링 시작</button>
+            </div>
+        </details>
     </div>
 
     <!-- Dashboard View -->
@@ -585,6 +749,7 @@
 
     <script>
         let widgetRunning = false;
+        let currentPlan = null;
 
         function setWidgetButton(running, message = '') {
             widgetRunning = running;
@@ -662,33 +827,88 @@
             return `${sign}${m}:${s.toString().padStart(2, '0')}`;
         }
 
-        function renderAllowedApps(apps) {
-            const container = document.getElementById('allowed-preview-list');
+        function renderChipList(containerId, items, emptyText) {
+            const container = document.getElementById(containerId);
             container.innerHTML = '';
-            (apps || []).forEach(app => {
+            if (!items || items.length === 0) {
+                const empty = document.createElement('span');
+                empty.className = 'empty-state';
+                empty.innerText = emptyText;
+                container.appendChild(empty);
+                return;
+            }
+            items.forEach(item => {
                 const chip = document.createElement('span');
                 chip.className = 'app-chip';
-                chip.innerText = app;
+                chip.innerText = item;
                 container.appendChild(chip);
             });
         }
 
-        async function updateAllowedPreview() {
-            const task = document.getElementById('task').value;
-            const extra_allowed_apps = document.getElementById('extra-allowed').value;
+        function renderCurrentPlan(plan) {
+            currentPlan = plan;
+            document.getElementById('plan-empty').style.display = 'none';
+            document.getElementById('plan-content').style.display = 'block';
+            document.getElementById('plan-goal-title').innerText = plan.goal_title || '이름 없는 계획';
+            document.getElementById('plan-created-at').innerText =
+                plan.created_at ? `모바일에서 생성됨 · ${plan.created_at}` : '모바일에서 생성된 계획입니다.';
+
+            const steps = document.getElementById('plan-steps');
+            steps.innerHTML = '';
+            (plan.steps || []).forEach(step => {
+                const item = document.createElement('li');
+                item.className = 'step-item';
+                item.innerHTML = `
+                    <span class="step-order">${step.order}</span>
+                    <span class="step-name">${step.title}</span>
+                    <span class="step-minutes">${step.duration_minutes}분</span>
+                `;
+                steps.appendChild(item);
+            });
+
+            renderChipList('blocked-apps-list', plan.blocked_apps, '차단 앱 없음');
+            renderChipList('blocked-sites-list', plan.blocked_sites, '차단 사이트 없음');
+
+            const note = document.getElementById('metadata-note');
+            note.classList.toggle('allowed', Boolean(plan.metadata_permission));
+            note.innerText = plan.metadata_permission
+                ? '윈도우 activity, idle, window 데이터 수집이 사용자의 허용 상태로 저장되어 있습니다.'
+                : 'metadata_permission이 꺼져 있습니다. 다음 단계에서 activity, idle, window 데이터 수집은 비활성화될 예정입니다.';
+        }
+
+        function showNoPlan(message = '아직 저장된 모바일 plan이 없습니다. 모바일 화면에서 목표를 쪼갠 뒤 이 페이지를 새로고침하세요.') {
+            currentPlan = null;
+            document.getElementById('plan-goal-title').innerText = '모바일 plan이 필요합니다';
+            document.getElementById('plan-created-at').innerText = 'PC는 계획을 다시 짜지 않고 모바일 plan을 실행 준비합니다.';
+            document.getElementById('plan-content').style.display = 'none';
+            const empty = document.getElementById('plan-empty');
+            empty.innerText = message;
+            empty.style.display = 'block';
+        }
+
+        async function loadCurrentPlan() {
             try {
-                const res = await fetch('/allowed_apps_preview', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ task, extra_allowed_apps })
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    renderAllowedApps(data.allowed_apps);
+                const response = await fetch('/api/plan/current');
+                if (response.status === 404) {
+                    showNoPlan();
+                    return;
                 }
+                if (!response.ok) {
+                    throw new Error('현재 plan을 읽지 못했습니다.');
+                }
+                renderCurrentPlan(await response.json());
             } catch (err) {
-                renderAllowedApps(['chrome.exe']);
+                showNoPlan(err.message || '현재 plan을 읽지 못했습니다.');
             }
+        }
+
+        function startPlan() {
+            const note = document.getElementById('plan-action-note');
+            if (!currentPlan) {
+                note.innerText = '먼저 모바일에서 plan을 생성해주세요.';
+                return;
+            }
+            note.innerText = 'Start Plan은 다음 단계에서 실제 tracking 시작과 연결됩니다. 지금은 표시/검증만 완료된 상태입니다.';
         }
 
         let lastTransitionPhase = 'work';
@@ -751,7 +971,7 @@
             const task = document.getElementById('task').value;
             const target_minutes = document.getElementById('target-minutes').value;
             const blocked_apps = document.getElementById('blocked').value;
-            const extra_allowed_apps = document.getElementById('extra-allowed').value;
+            const extra_allowed_apps = '';
 
             try {
                 showView('dashboard-view');
@@ -919,9 +1139,6 @@
         }
 
         let pollInterval;
-        document.getElementById('task').addEventListener('input', updateAllowedPreview);
-        document.getElementById('extra-allowed').addEventListener('input', updateAllowedPreview);
-        updateAllowedPreview();
 
         // Do not setInterval immediately, wait for setup to finish.
         // But we need to check if it's already active (in case of page refresh).
@@ -930,6 +1147,7 @@
                 const response = await fetch('/status');
                 if (response.status === 500) {
                     document.getElementById('setup-view').style.display = 'block';
+                    loadCurrentPlan();
                     return;
                 }
                 const data = await response.json();
@@ -939,9 +1157,11 @@
                     fetchStatus();
                 } else {
                     showView('setup-view');
+                    loadCurrentPlan();
                 }
             } catch(err) {
                 showView('setup-view');
+                loadCurrentPlan();
             }
         }
         initCheck();

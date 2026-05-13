@@ -68,6 +68,7 @@ WIDGET_CACHE_DIR = os.path.join(WIDGET_DIR, ".electron-cache")
 WIDGET_TEMP_DIR = os.path.join(WIDGET_DIR, ".electron-temp")
 widget_process = None
 widget_lock = threading.Lock()
+CURRENT_PLAN_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "current_plan.json")
 
 def _normalized_path(value):
     return os.path.normcase(os.path.abspath(value)) if value else ""
@@ -309,6 +310,16 @@ atexit.register(_cleanup_widget_process)
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/api/plan/current', methods=['GET'])
+def current_plan():
+    if not os.path.exists(CURRENT_PLAN_PATH):
+        return jsonify({"error": "No current plan found"}), 404
+    try:
+        with open(CURRENT_PLAN_PATH, "r", encoding="utf-8") as plan_file:
+            return jsonify(json.load(plan_file))
+    except (OSError, json.JSONDecodeError) as exc:
+        return jsonify({"error": "Unable to read current plan", "detail": str(exc)}), 500
 
 @app.route('/update_tab', methods=['POST'])
 def update_tab():

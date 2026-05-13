@@ -1,0 +1,36 @@
+{
+  "plan_id": "midterm-report-plan",
+  "goal_title": "중간고사 레포트 쓰기",
+  "created_at": "2026-05-13T10:00:00+09:00",
+  "metadata_permission": true,
+  "blocked_apps": [
+    "KakaoTalk.exe"
+  ],
+  "blocked_sites": [
+    "youtube.com",
+    "instagram.com"
+  ],
+  "steps": [
+    {
+      "id": "step-1",
+      "title": "워드 켜고 제목 쓰기",
+      "duration_minutes": 5,
+      "status": "pending",
+      "order": 1
+    },
+    {
+      "id": "step-2",
+      "title": "자료조사 링크 3개 찾기",
+      "duration_minutes": 15,
+      "status": "pending",
+      "order": 2
+    },
+    {
+      "id": "step-3",
+      "title": "서론 세 줄 쓰기",
+      "duration_minutes": 10,
+      "status": "pending",
+      "order": 3
+    }
+  ]
+}

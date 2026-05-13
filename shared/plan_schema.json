@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.focus-tracker/shared/plan_schema.json",
+  "title": "Shared Plan",
+  "description": "Common plan/task structure shared by the PC app, mobile app, and desktop widget.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "plan_id",
+    "goal_title",
+    "created_at",
+    "metadata_permission",
+    "blocked_apps",
+    "blocked_sites",
+    "steps"
+  ],
+  "properties": {
+    "plan_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "goal_title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata_permission": {
+      "type": "boolean"
+    },
+    "blocked_apps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "blocked_sites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/step"
+      }
+    }
+  },
+  "$defs": {
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "duration_minutes",
+        "status",
+        "order"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "duration_minutes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "active",
+            "completed",
+            "skipped"
+          ]
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

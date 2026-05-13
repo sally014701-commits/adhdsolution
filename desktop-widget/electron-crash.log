@@ -198,3 +198,148 @@
 [2026-05-13T08:37:27.362Z] renderer render status tasks {"source":"api","title":"","remaining_time":290,"progress":{"completed":5,"percent":100,"total":5}}
 [2026-05-13T08:37:28.315Z] window closed
 [2026-05-13T08:37:28.316Z] window-all-closed
+[2026-05-13T22:12:18.530Z] main process started
+[2026-05-13T22:12:18.532Z] runtime paths {"userData":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-25888\\user-data","sessionData":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-25888\\user-data","cache":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-25888\\cache","temp":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-25888\\user-data\\temp"}
+[2026-05-13T22:12:18.570Z] app ready
+[2026-05-13T22:12:18.570Z] createWindow called
+[2026-05-13T22:12:18.736Z] BrowserWindow created {"width":480,"height":180,"x":936,"y":24}
+[2026-05-13T22:12:19.029Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:19.061Z] renderer did-finish-load
+[2026-05-13T22:12:19.062Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":475,"error":""}
+[2026-05-13T22:12:19.063Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":475,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:19.063Z] renderer console {"level":2,"message":"%cElectron Security Warning (Insecure Content-Security-Policy) font-weight: bold; This renderer process has either no Content Security\n  Policy set or a policy with \"unsafe-eval\" enabled. This exposes users of\n  this app to unnecessary security risks.\n\nFor more information and help, consult\nhttps://electronjs.org/docs/tutorial/security.\nThis warning will not show up\nonce the app is packaged.","line":2,"sourceId":"node:electron/js2c/renderer_init"}
+[2026-05-13T22:12:19.069Z] ready-to-show
+[2026-05-13T22:12:19.071Z] window shown
+[2026-05-13T22:12:20.039Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:20.047Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":474,"error":""}
+[2026-05-13T22:12:20.047Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":474,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:21.034Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:21.041Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":473,"error":""}
+[2026-05-13T22:12:21.042Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":473,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:22.038Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:22.046Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":472,"error":""}
+[2026-05-13T22:12:22.047Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":472,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:23.032Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:23.040Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":471,"error":""}
+[2026-05-13T22:12:23.041Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":471,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:24.031Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:24.038Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":470,"error":""}
+[2026-05-13T22:12:24.039Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":470,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:25.034Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:25.042Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":469,"error":""}
+[2026-05-13T22:12:25.043Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":469,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:26.033Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:26.042Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":468,"error":""}
+[2026-05-13T22:12:26.042Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":468,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:27.032Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:27.039Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":467,"error":""}
+[2026-05-13T22:12:27.040Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":467,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:28.042Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:28.051Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":466,"error":""}
+[2026-05-13T22:12:28.052Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":466,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:29.034Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:29.043Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":465,"error":""}
+[2026-05-13T22:12:29.043Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":465,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:30.034Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:30.040Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":464,"error":""}
+[2026-05-13T22:12:30.041Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":464,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:31.033Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:31.039Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":463,"error":""}
+[2026-05-13T22:12:31.039Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":463,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:32.034Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:32.042Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":462,"error":""}
+[2026-05-13T22:12:32.043Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":462,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:33.037Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:33.044Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":461,"error":""}
+[2026-05-13T22:12:33.044Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":461,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:34.036Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:34.043Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":460,"error":""}
+[2026-05-13T22:12:34.043Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":460,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:35.034Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:35.041Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":459,"error":""}
+[2026-05-13T22:12:35.042Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":459,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:36.045Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:36.052Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":458,"error":""}
+[2026-05-13T22:12:36.052Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":458,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:37.034Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:37.043Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":457,"error":""}
+[2026-05-13T22:12:37.044Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":457,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:38.035Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:38.048Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":456,"error":""}
+[2026-05-13T22:12:38.051Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":456,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:39.044Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:39.054Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":455,"error":""}
+[2026-05-13T22:12:39.056Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":455,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:40.037Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:40.043Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"해야 할 일을 세 덩어리로 나누기","remaining":454,"error":""}
+[2026-05-13T22:12:40.044Z] renderer render status tasks {"source":"api","title":"해야 할 일을 세 덩어리로 나누기","remaining_time":454,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-13T22:12:40.845Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-13T22:12:41.042Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:41.049Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 첫 조각만 끝내기","remaining":453,"error":""}
+[2026-05-13T22:12:41.049Z] renderer render status tasks {"source":"api","title":"가장 쉬운 첫 조각만 끝내기","remaining_time":453,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T22:12:41.179Z] renderer complete current result {"ok":true,"result":{"completed_task":"해야 할 일을 세 덩어리로 나누기","next_task":{"category":"WORK","duration_minutes":12,"id":"step_3","order":3,"status":"active","title":"가장 쉬운 첫 조각만 끝내기"},"plan_completed":false,"success":true}}
+[2026-05-13T22:12:41.559Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:41.565Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 첫 조각만 끝내기","remaining":720,"error":""}
+[2026-05-13T22:12:41.566Z] renderer render status tasks {"source":"api","title":"가장 쉬운 첫 조각만 끝내기","remaining_time":720,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T22:12:42.034Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:42.042Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 첫 조각만 끝내기","remaining":720,"error":""}
+[2026-05-13T22:12:42.043Z] renderer render status tasks {"source":"api","title":"가장 쉬운 첫 조각만 끝내기","remaining_time":720,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T22:12:43.034Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:43.042Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 첫 조각만 끝내기","remaining":719,"error":""}
+[2026-05-13T22:12:43.043Z] renderer render status tasks {"source":"api","title":"가장 쉬운 첫 조각만 끝내기","remaining_time":719,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T22:12:44.036Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:44.044Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 첫 조각만 끝내기","remaining":718,"error":""}
+[2026-05-13T22:12:44.045Z] renderer render status tasks {"source":"api","title":"가장 쉬운 첫 조각만 끝내기","remaining_time":718,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-13T22:12:44.710Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-13T22:12:45.037Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:45.043Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"막힌 지점 하나 적기","remaining":717,"error":""}
+[2026-05-13T22:12:45.044Z] renderer render status tasks {"source":"api","title":"막힌 지점 하나 적기","remaining_time":717,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T22:12:45.237Z] renderer complete current result {"ok":true,"result":{"completed_task":"가장 쉬운 첫 조각만 끝내기","next_task":{"category":"WORK","duration_minutes":5,"id":"step_4","order":4,"status":"active","title":"막힌 지점 하나 적기"},"plan_completed":false,"success":true}}
+[2026-05-13T22:12:45.610Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:45.618Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"막힌 지점 하나 적기","remaining":300,"error":""}
+[2026-05-13T22:12:45.619Z] renderer render status tasks {"source":"api","title":"막힌 지점 하나 적기","remaining_time":300,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T22:12:46.038Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:46.047Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"막힌 지점 하나 적기","remaining":300,"error":""}
+[2026-05-13T22:12:46.047Z] renderer render status tasks {"source":"api","title":"막힌 지점 하나 적기","remaining_time":300,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T22:12:47.036Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:47.045Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"막힌 지점 하나 적기","remaining":299,"error":""}
+[2026-05-13T22:12:47.046Z] renderer render status tasks {"source":"api","title":"막힌 지점 하나 적기","remaining_time":299,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T22:12:48.033Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:48.040Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"막힌 지점 하나 적기","remaining":298,"error":""}
+[2026-05-13T22:12:48.042Z] renderer render status tasks {"source":"api","title":"막힌 지점 하나 적기","remaining_time":298,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-13T22:12:48.434Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-13T22:12:49.033Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:49.041Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"짧게 쉬고 다음 행동 남기기","remaining":297,"error":""}
+[2026-05-13T22:12:49.042Z] renderer render status tasks {"source":"api","title":"짧게 쉬고 다음 행동 남기기","remaining_time":297,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T22:12:49.345Z] renderer complete current result {"ok":true,"result":{"completed_task":"막힌 지점 하나 적기","next_task":{"category":"ROUTINE","duration_minutes":5,"id":"step_5","order":5,"status":"active","title":"짧게 쉬고 다음 행동 남기기"},"plan_completed":false,"success":true}}
+[2026-05-13T22:12:49.707Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:49.716Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"짧게 쉬고 다음 행동 남기기","remaining":300,"error":""}
+[2026-05-13T22:12:49.717Z] renderer render status tasks {"source":"api","title":"짧게 쉬고 다음 행동 남기기","remaining_time":300,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T22:12:50.038Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:50.044Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"짧게 쉬고 다음 행동 남기기","remaining":300,"error":""}
+[2026-05-13T22:12:50.045Z] renderer render status tasks {"source":"api","title":"짧게 쉬고 다음 행동 남기기","remaining_time":300,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T22:12:51.031Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:51.042Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"짧게 쉬고 다음 행동 남기기","remaining":299,"error":""}
+[2026-05-13T22:12:51.043Z] renderer render status tasks {"source":"api","title":"짧게 쉬고 다음 행동 남기기","remaining_time":299,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T22:12:52.034Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:52.041Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"짧게 쉬고 다음 행동 남기기","remaining":298,"error":""}
+[2026-05-13T22:12:52.042Z] renderer render status tasks {"source":"api","title":"짧게 쉬고 다음 행동 남기기","remaining_time":298,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-13T22:12:52.971Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-13T22:12:52.987Z] renderer complete current result {"ok":true,"result":{"completed_task":"짧게 쉬고 다음 행동 남기기","next_task":null,"plan_completed":true,"success":true}}
+[2026-05-13T22:12:53.031Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:53.040Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":297,"error":""}
+[2026-05-13T22:12:53.040Z] renderer render status tasks {"source":"api","title":"","remaining_time":297,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T22:12:53.356Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:53.362Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":296,"error":""}
+[2026-05-13T22:12:53.363Z] renderer render status tasks {"source":"api","title":"","remaining_time":296,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T22:12:54.039Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:54.046Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":296,"error":""}
+[2026-05-13T22:12:54.047Z] renderer render status tasks {"source":"api","title":"","remaining_time":296,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T22:12:55.033Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:55.039Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":295,"error":""}
+[2026-05-13T22:12:55.040Z] renderer render status tasks {"source":"api","title":"","remaining_time":295,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T22:12:56.036Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-13T22:12:56.043Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":294,"error":""}
+[2026-05-13T22:12:56.043Z] renderer render status tasks {"source":"api","title":"","remaining_time":294,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-13T22:12:56.180Z] window closed
+[2026-05-13T22:12:56.182Z] window-all-closed

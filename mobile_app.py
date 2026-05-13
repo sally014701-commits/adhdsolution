@@ -167,6 +167,55 @@ def build_mobile_plan(goal, total_minutes=45, blocked_apps=None, blocked_sites=N
     return plan
 
 
+def normalize_incoming_plan(data):
+    incoming = data.get("plan") if isinstance(data.get("plan"), dict) else data
+    raw_steps = incoming.get("steps") if isinstance(incoming.get("steps"), list) else []
+    goal = (incoming.get("goal_title") or incoming.get("goal") or "").strip() or "\uc774\ub984 \uc5c6\ub294 \uc791\uc5c5"
+
+    steps = []
+    for index, step in enumerate(raw_steps, start=1):
+        if not isinstance(step, dict):
+            continue
+        category = "ROUTINE" if step.get("category") == "ROUTINE" else "WORK"
+        status = step.get("status") if step.get("status") in {"pending", "active", "completed"} else "pending"
+        steps.append({
+            "id": step.get("id") or f"step_{index}",
+            "title": step.get("title") or "\uc791\uc740 \uc791\uc5c5",
+            "duration_minutes": clamp_minutes(step.get("duration_minutes"), default=5, minimum=3, maximum=180),
+            "category": category,
+            "status": status,
+            "order": int(step.get("order") or index),
+        })
+
+    if not steps:
+        return build_mobile_plan(
+            goal,
+            incoming.get("total_minutes", 45),
+            incoming.get("blocked_apps", ""),
+            incoming.get("blocked_sites", ""),
+            incoming.get("metadata_permission", False),
+        )
+
+    active_index = next((index for index, step in enumerate(steps) if step.get("status") == "active"), 0)
+    plan = {
+        "plan_id": incoming.get("plan_id") or f"plan-{uuid4().hex[:12]}",
+        "goal_title": goal,
+        "created_at": incoming.get("created_at") or datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds"),
+        "total_minutes": int(incoming.get("total_minutes") or sum(step["duration_minutes"] for step in steps)),
+        "metadata_permission": bool(incoming.get("metadata_permission", True)),
+        "blocked_apps": parse_list(incoming.get("blocked_apps", [])),
+        "blocked_sites": parse_list(incoming.get("blocked_sites", [])),
+        "status": incoming.get("status") or "draft",
+        "current_step_index": int(incoming.get("current_step_index") or active_index),
+        "source": incoming.get("source") or "mobile",
+        "steps": steps,
+    }
+    mobile_plan_store["latest"] = plan
+    mobile_plan_store["plans"][plan["plan_id"]] = plan
+    save_current_plan(plan)
+    return plan
+
+
 def create_mobile_blueprint(get_tracker):
     mobile_bp = Blueprint("mobile", __name__)
 
@@ -177,13 +226,16 @@ def create_mobile_blueprint(get_tracker):
     @mobile_bp.route("/api/mobile/plan", methods=["POST"])
     def create_mobile_plan():
         data = request.json or {}
-        plan = build_mobile_plan(
-            data.get("goal", ""),
-            data.get("total_minutes", 45),
-            data.get("blocked_apps", ""),
-            data.get("blocked_sites", ""),
-            data.get("metadata_permission", False),
-        )
+        if isinstance(data, dict) and (data.get("steps") or isinstance(data.get("plan"), dict)):
+            plan = normalize_incoming_plan(data)
+        else:
+            plan = build_mobile_plan(
+                data.get("goal", ""),
+                data.get("total_minutes", 45),
+                data.get("blocked_apps", ""),
+                data.get("blocked_sites", ""),
+                data.get("metadata_permission", False),
+            )
         return jsonify(plan)
 
     @mobile_bp.route("/api/mobile/latest_plan", methods=["GET"])

@@ -104,9 +104,10 @@ def split_goal_into_steps(goal, total_minutes=45):
     for index, (title, minutes) in enumerate(template, start=1):
         step_minutes = max(3, int(round(minutes * scale)))
         steps.append({
-            "id": f"step-{index}",
+            "id": f"step_{index}",
             "title": title,
             "duration_minutes": step_minutes,
+            "category": "WORK",
             "status": "pending",
             "order": index,
         })
@@ -211,14 +212,41 @@ def create_mobile_blueprint(get_tracker):
     @mobile_bp.route("/api/mobile/start_plan", methods=["POST"])
     def start_mobile_plan():
         data = request.json or {}
-        plan = mobile_plan_store["plans"].get(str(data.get("plan_id", ""))) or mobile_plan_store["latest"]
+        incoming_plan = data.get("plan")
+        if isinstance(incoming_plan, dict) and incoming_plan.get("plan_id"):
+            plan = incoming_plan
+            mobile_plan_store["latest"] = plan
+            mobile_plan_store["plans"][plan["plan_id"]] = plan
+            save_current_plan(plan)
+        else:
+            plan = mobile_plan_store["plans"].get(str(data.get("plan_id", ""))) or mobile_plan_store["latest"]
         tracker = get_tracker()
         if not plan or not tracker:
             return jsonify({"error": "No mobile plan or tracker available"}), 400
         next_step = next((step for step in plan["steps"] if step.get("status") != "completed"), plan["steps"][0])
+        for step in plan.get("steps", []):
+            if step is next_step:
+                step["status"] = "active"
+            elif step.get("status") == "active":
+                step["status"] = "pending"
+        plan["current_step_index"] = max(0, int(next_step.get("order", 1)) - 1)
+        plan["status"] = "active"
+        plan["task_start_time"] = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+        mobile_plan_store["latest"] = plan
+        mobile_plan_store["plans"][plan["plan_id"]] = plan
+        save_current_plan(plan)
         task = f"{plan.get('goal_title', '')} - {next_step['title']}".strip(" -")
         blocked_apps = ", ".join(plan.get("blocked_apps", []))
-        tracker.start_monitoring(task, blocked_apps, next_step.get("duration_minutes", 25), "")
+        blocked_sites = ", ".join(plan.get("blocked_sites", []))
+        metadata_permission = bool(plan.get("metadata_permission", True))
+        tracker.start_monitoring(
+            task,
+            blocked_apps,
+            next_step.get("duration_minutes", 25),
+            "",
+            blocked_sites,
+            metadata_permission,
+        )
         return jsonify({"status": "ok", "started_step": next_step, "plan": plan})
 
     return mobile_bp

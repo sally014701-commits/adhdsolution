@@ -61,6 +61,7 @@
         "id",
         "title",
         "duration_minutes",
+        "category",
         "status",
         "order"
       ],
@@ -76,6 +77,13 @@
         "duration_minutes": {
           "type": "integer",
           "minimum": 1
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "WORK",
+            "ROUTINE"
+          ]
         },
         "status": {
           "type": "string",

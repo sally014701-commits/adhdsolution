@@ -1,0 +1,88 @@
+==================================================
+대시보드 주소: http://localhost:5000
+==================================================
+ * Serving Flask app 'focus_tracker'
+ * Debug mode: off
+[WindowSwitch] monitor_window thread started | alive=True | initial_hwnd=0
+[WindowSwitch] attached monitor thread to input desktop
+[WindowSwitch] baseline hwnd=3672426 process=chrome.exe
+[WindowSwitch] monitor_window loop entered | running=True
+집중 모니터링 시스템 시작
+[Transition] phase=wrapup_soon remaining=360s overrun=0s
+
+모니터링을 종료합니다.
+[WindowSwitch] monitor_window thread started | alive=True | initial_hwnd=0
+집중 모니터링 시스템 시작
+[WindowSwitch] attached monitor thread to input desktop
+[WindowSwitch] baseline hwnd=3672426 process=chrome.exe
+[WindowSwitch] monitor_window loop entered | running=True
+[Transition] phase=wrapup_soon remaining=600s overrun=0s
+
+모니터링을 종료합니다.
+[WindowSwitch] monitor_window thread started | alive=True | initial_hwnd=0
+[WindowSwitch] attached monitor thread to input desktop
+[WindowSwitch] baseline hwnd=3672426 process=chrome.exe
+집중 모니터링 시스템 시작
+[WindowSwitch] monitor_window loop entered | running=True
+
+모니터링을 종료합니다.
+[WindowSwitch] monitor_window thread started | alive=True | initial_hwnd=0
+[WindowSwitch] attached monitor thread to input desktop
+집중 모니터링 시스템 시작
+[WindowSwitch] baseline hwnd=3672426 process=chrome.exe
+[WindowSwitch] monitor_window loop entered | running=True
+[Transition] phase=wrapup_soon remaining=360s overrun=0s
+
+모니터링을 종료합니다.
+
+모니터링을 종료합니다.
+[WindowSwitch] monitor_window thread started | alive=True | initial_hwnd=0
+[WindowSwitch] attached monitor thread to input desktop
+[WindowSwitch] baseline hwnd=3672426 process=chrome.exe
+집중 모니터링 시스템 시작
+[WindowSwitch] monitor_window loop entered | running=True
+[Transition] phase=wrapup_soon remaining=480s overrun=0s
+[WindowSwitch:monitor] previous_hwnd=3672426 current_hwnd=919902 previous_process=chrome.exe process=KakaoTalk.exe window_switch_count=1
+[WindowSwitch:monitor] previous_hwnd=919902 current_hwnd=1508344 previous_process=KakaoTalk.exe process=explorer.exe window_switch_count=2
+[WindowSwitch:monitor] previous_hwnd=1508344 current_hwnd=3672426 previous_process=explorer.exe process=chrome.exe window_switch_count=3
+==================================================
+대시보드 주소: http://localhost:5000
+==================================================
+ * Serving Flask app 'focus_tracker'
+ * Debug mode: off
+[WindowSwitch] monitor_window thread started | alive=True | initial_hwnd=0
+[WindowSwitch] attached monitor thread to input desktop
+집중 모니터링 시스템 시작
+[WindowSwitch] baseline hwnd=197610 process=Codex.exe
+[WindowSwitch] monitor_window loop entered | running=True
+[Transition] phase=wrapup_soon remaining=300s overrun=0s
+
+모니터링을 종료합니다.
+[WindowSwitch] monitor_window thread started | alive=True | initial_hwnd=0
+집중 모니터링 시스템 시작
+[WindowSwitch] attached monitor thread to input desktop
+[WindowSwitch] baseline hwnd=197610 process=Codex.exe
+[WindowSwitch] monitor_window loop entered | running=True
+[Transition] phase=wrapup_soon remaining=600s overrun=0s
+
+모니터링을 종료합니다.
+
+모니터링을 종료합니다.
+[WindowSwitch] monitor_window thread started | alive=True | initial_hwnd=0
+[WindowSwitch] attached monitor thread to input desktop
+[WindowSwitch] baseline hwnd=197610 process=Codex.exe
+집중 모니터링 시스템 시작
+[WindowSwitch] monitor_window loop entered | running=True
+[WindowSwitch] monitor_window thread started | alive=True | initial_hwnd=197610
+[WindowSwitch] attached monitor thread to input desktop
+집중 모니터링 시스템 시작
+[WindowSwitch] baseline hwnd=197610 process=Codex.exe
+[WindowSwitch] monitor_window loop entered | running=True
+
+모니터링을 종료합니다.
+[WindowSwitch] monitor_window thread started | alive=True | initial_hwnd=0
+[WindowSwitch] attached monitor thread to input desktop
+집중 모니터링 시스템 시작
+[WindowSwitch] baseline hwnd=197610 process=Codex.exe
+[WindowSwitch] monitor_window loop entered | running=True
+[Transition] phase=wrapup_soon remaining=300s overrun=0s

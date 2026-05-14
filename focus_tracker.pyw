@@ -49,6 +49,8 @@ DESKTOP_READOBJECTS = 0x0001
 DESKTOP_SWITCHDESKTOP = 0x0100
 
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.jinja_env.auto_reload = True
 # Flask 로깅 최소화 (콘솔 지저분해짐 방지)
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -58,6 +60,8 @@ def add_mobile_cors_headers(response):
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Headers"] = "Content-Type"
     response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    if response.content_type.startswith("text/html"):
+        response.headers["Cache-Control"] = "no-store, max-age=0"
     return response
 
 for stream in (sys.stdout, sys.stderr):
@@ -528,6 +532,11 @@ def start_current_plan():
         return jsonify({"error": "No current plan found"}), 404
 
     selected = find_startable_step(plan)
+    if not selected and plan.get("steps"):
+        for item in plan.get("steps", []):
+            item["status"] = "pending"
+        selected = find_startable_step(plan)
+
     if not selected:
         return jsonify({"error": "No pending task found"}), 400
 
@@ -688,6 +697,7 @@ def get_status():
 
     current_task = None
     next_task = None
+    plan_steps = []
     plan_progress = {"completed": 0, "total": 0, "percent": 0}
     goal_title = ""
     metadata_permission = True
@@ -697,6 +707,7 @@ def get_status():
 
     if plan:
         goal_title = plan.get("goal_title", "")
+        plan_steps = plan.get("steps", [])
         metadata_permission = bool(plan.get("metadata_permission", True))
         blocked_apps = plan.get("blocked_apps", blocked_apps)
         blocked_sites = plan.get("blocked_sites", [])
@@ -775,6 +786,7 @@ def get_status():
         "goal_title": goal_title,
         "current_task": current_task,
         "next_task": next_task,
+        "plan_steps": plan_steps,
         "plan_progress": plan_progress,
         "plan_completed": plan_completed,
         "metadata_permission": metadata_permission,
@@ -861,8 +873,6 @@ class FocusTracker:
         
     def start_monitoring(self, task, blocked_input, target_minutes=60, extra_allowed_input="", blocked_sites_input="", metadata_permission=True):
         with self.lock:
-            if self.is_active:
-                return
             self.is_active = True
             
         # 이전 스레드가 완전히 종료될 때까지 대기

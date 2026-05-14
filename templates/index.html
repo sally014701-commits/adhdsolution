@@ -583,10 +583,1144 @@
             font-size: 14px;
         }
 
+        /* Calm HUD desktop skin: keep widget styles and behavior untouched. */
+        :root {
+            --bg-base: rgba(255, 250, 248, 0.60);
+            --bg-surface: rgba(255, 252, 250, 0.88);
+            --bg-page: #FFF8F5;
+            --text-primary: #3D312E;
+            --text-secondary: #8C7A76;
+            --text-faded: #BDB0AD;
+            --border-soft: rgba(255, 255, 255, 0.65);
+            --border-subtle: rgba(61, 49, 46, 0.06);
+            --chip-peach: #FFD6B8;
+            --chip-apricot: #FFB86C;
+            --chip-coral: #FF8A7A;
+            --chip-cream: #FFF2CC;
+            --state-focus-bg: linear-gradient(135deg, #C8F0C5 0%, #DFFAB0 60%, #FFF2CC 100%);
+            --state-focus-accent: #72C96D;
+            --state-focus-glow: rgba(168, 230, 163, 0.50);
+            --state-focus-label: #3A6B36;
+            --state-warning-bg: linear-gradient(135deg, #FFD6B8 0%, #FFB86C 100%);
+            --state-warning-accent: #FFB86C;
+            --state-warning-glow: rgba(255, 184, 108, 0.55);
+            --state-warning-label: #8A4800;
+            --state-alert-bg: linear-gradient(135deg, #FF8A7A 0%, #FFD6B8 100%);
+            --state-alert-accent: #FF8A7A;
+            --state-alert-glow: rgba(255, 138, 122, 0.50);
+            --state-alert-label: #9E2A1A;
+            --rounded-md: 16px;
+            --rounded-sm: 8px;
+            --font-calm-display: Inter, "SF Pro Display", system-ui, -apple-system, sans-serif;
+            --font-calm-body: Inter, "SF Pro Text", system-ui, -apple-system, sans-serif;
+            --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255, 184, 108, 0.20), transparent 34rem),
+                linear-gradient(180deg, #FFF8F5 0%, #F6FBF0 100%);
+            color: var(--text-primary);
+            transition: background 500ms var(--ease-smooth), color 320ms var(--ease-smooth);
+        }
+        body.state-focused,
+        body.state-吏묒쨷 {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(168, 230, 163, 0.34), transparent 34rem),
+                linear-gradient(180deg, #F6FBF0 0%, #FFF8F5 100%);
+        }
+        body.state-warning {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255, 184, 108, 0.34), transparent 34rem),
+                linear-gradient(180deg, #FFF8F5 0%, #FFF2CC 100%);
+        }
+        body.state-distracted,
+        body.state-?댄깉 {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255, 138, 122, 0.34), transparent 34rem),
+                linear-gradient(180deg, #FFF8F5 0%, #FFEDE8 100%);
+        }
+
+        .container {
+            max-width: 920px;
+            padding: 32px;
+            font-family: var(--font-calm-body);
+        }
+
+        .setup-card,
+        .launcher-card,
+        .report-card,
+        #dashboard-view.container {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-soft);
+            border-radius: 24px;
+            box-shadow:
+                0 12px 48px rgba(168, 230, 163, 0.22),
+                0 2px 12px rgba(61, 49, 46, 0.04),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.82),
+                inset 0 4px 16px rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(20px) saturate(1.6);
+            -webkit-backdrop-filter: blur(20px) saturate(1.6);
+        }
+
+        #dashboard-view.container {
+            max-width: 760px;
+            padding: 32px;
+            background: var(--canvas);
+            box-shadow: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            text-align: left;
+        }
+
+        body.state-warning #dashboard-view.container {
+            box-shadow: none;
+        }
+
+        body.state-distracted #dashboard-view.container,
+        body.state-?댄깉 #dashboard-view.container {
+            box-shadow: none;
+        }
+
+        .launcher-card,
+        .legacy-setup,
+        .report-card {
+            max-width: 760px;
+        }
+
+        .launcher-eyebrow,
+        .transition-label,
+        .plan-section h3,
+        .allowed-preview-title,
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            line-height: 1.5;
+            text-transform: uppercase;
+        }
+
+        .launcher-title,
+        .setup-card h2,
+        .report-title {
+            color: var(--text-primary);
+            font-family: var(--font-calm-display);
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 1.2;
+        }
+
+        .launcher-subtitle,
+        .help-text,
+        .empty-state,
+        .step-minutes {
+            color: var(--text-secondary);
+        }
+
+        .plan-grid {
+            gap: 16px;
+        }
+
+        .plan-section,
+        .legacy-setup .setup-card,
+        .allowed-preview,
+        .distractions-list,
+        .stat-card,
+        .transition-panel {
+            background: rgba(255, 252, 250, 0.70);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            box-shadow: none;
+        }
+
+        .step-item {
+            grid-template-columns: 32px 1fr auto;
+            gap: 12px;
+        }
+
+        .step-order {
+            width: 32px;
+            height: 32px;
+            background: var(--state-focus-bg);
+            color: var(--state-focus-label);
+        }
+
+        .step-name {
+            color: var(--text-primary);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .app-chip {
+            background: rgba(255, 255, 255, 0.74);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .permission-note {
+            background: rgba(255, 184, 108, 0.18);
+            color: var(--state-warning-label);
+            border: 1px solid rgba(255, 184, 108, 0.25);
+        }
+
+        .permission-note.allowed {
+            background: rgba(200, 240, 197, 0.40);
+            color: var(--state-focus-label);
+            border-color: rgba(114, 201, 109, 0.22);
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            background: rgba(255, 255, 255, 0.74);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            color: var(--text-primary);
+            transition: border-color 180ms var(--ease-smooth), box-shadow 180ms var(--ease-smooth);
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: rgba(114, 201, 109, 0.60);
+            box-shadow: 0 0 0 4px rgba(168, 230, 163, 0.24);
+        }
+
+        button.btn-primary,
+        .btn-secondary {
+            border-radius: 100px;
+            font-weight: 700;
+            transition: transform 180ms var(--ease-spring), box-shadow 180ms var(--ease-smooth), background 320ms var(--ease-smooth);
+        }
+
+        button.btn-primary {
+            background: var(--state-focus-bg);
+            color: var(--state-focus-label);
+            box-shadow: 0 10px 24px rgba(168, 230, 163, 0.32);
+        }
+
+        button.btn-primary:hover {
+            background: var(--state-focus-bg);
+            box-shadow: 0 12px 28px rgba(168, 230, 163, 0.44);
+            transform: translateY(-1px);
+        }
+
+        button.btn-primary:active,
+        .btn-secondary:active,
+        button.btn-danger:active {
+            transform: scale(0.97);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.68);
+            border-color: var(--border-subtle);
+            color: var(--text-primary);
+        }
+
+        button.btn-danger {
+            background: var(--state-alert-bg);
+            color: var(--state-alert-label);
+            box-shadow: 0 10px 24px rgba(255, 138, 122, 0.22);
+        }
+
+        button.btn-danger:hover {
+            background: var(--state-alert-bg);
+            box-shadow: 0 12px 28px rgba(255, 138, 122, 0.34);
+        }
+
+        h1.state-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 100%;
+            margin-bottom: 14px;
+            padding: 6px 14px 6px 10px;
+            border-radius: 100px;
+            background: var(--state-focus-bg);
+            color: var(--state-focus-label);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            line-height: 1.5;
+            text-transform: uppercase;
+        }
+
+        h1.state-title::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--state-focus-accent);
+            box-shadow: 0 0 14px rgba(114, 201, 109, 0.72);
+            animation: calmPulse 2.4s ease-in-out infinite;
+            flex: 0 0 auto;
+        }
+
+        body.state-warning h1.state-title {
+            background: var(--state-warning-bg);
+            color: var(--state-warning-label);
+        }
+
+        body.state-warning h1.state-title::before {
+            background: var(--state-warning-accent);
+            box-shadow: 0 0 14px rgba(255, 184, 108, 0.72);
+        }
+
+        body.state-distracted h1.state-title,
+        body.state-?댄깉 h1.state-title {
+            background: var(--state-alert-bg);
+            color: var(--state-alert-label);
+        }
+
+        body.state-distracted h1.state-title::before,
+        body.state-?댄깉 h1.state-title::before {
+            background: var(--state-alert-accent);
+            box-shadow: 0 0 14px rgba(255, 138, 122, 0.72);
+        }
+
+        p.current-app {
+            max-width: 100%;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+
+        .stats-grid {
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .stat-card {
+            align-items: flex-start;
+            min-height: 104px;
+            padding: 18px;
+        }
+
+        .stat-value,
+        .report-stat-val {
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            line-height: 1.2;
+        }
+
+        .val-focus { color: var(--state-focus-label); }
+        .val-dist { color: var(--state-alert-label); }
+        .val-idle { color: var(--text-secondary); }
+
+        .timer-badge {
+            background: rgba(61, 49, 46, 0.08);
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+
+        .transition-panel {
+            margin-bottom: 18px;
+        }
+
+        .transition-panel.urgent {
+            background: rgba(255, 214, 184, 0.46);
+            border-color: rgba(255, 138, 122, 0.28);
+        }
+
+        .transition-message {
+            color: var(--text-primary);
+            font-size: 16px;
+        }
+
+        .time-progress,
+        .progress-bar-container {
+            background: rgba(61, 49, 46, 0.06);
+            height: 8px;
+        }
+
+        .time-progress-fill {
+            background: var(--state-focus-bg);
+            transition: width 1000ms linear, background 500ms var(--ease-smooth);
+        }
+
+        .transition-panel.urgent .time-progress-fill {
+            background: var(--state-alert-bg);
+        }
+
+        .progress-segment {
+            transition: width 1000ms linear;
+        }
+
+        .alert-overlay {
+            background: rgba(255, 250, 248, 0.46);
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+        }
+
+        .alert-card {
+            background: rgba(255, 252, 250, 0.88);
+            border: 1px solid var(--border-soft);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-product), inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(20px) saturate(1.6);
+            -webkit-backdrop-filter: blur(20px) saturate(1.6);
+        }
+
+        .alert-title {
+            color: var(--state-alert-label);
+        }
+
+        .alert-subtitle {
+            color: var(--text-secondary);
+        }
+
+        .report-stats {
+            gap: 16px;
+        }
+
+        .report-stat-item {
+            min-width: 112px;
+            padding: 12px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.46);
+        }
+
+        .distractions-list {
+            color: var(--text-primary);
+        }
+
+        #dashboard-view.container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #dashboard-view .state-title { order: 1; }
+        #dashboard-view .current-task-title { order: 2; }
+        #dashboard-view .current-app { order: 3; }
+        #dashboard-view .task-progress-panel { order: 4; }
+        #dashboard-view .stats-grid { order: 5; }
+        #dashboard-view .transition-panel { order: 6; }
+        #dashboard-view .timer-badge { order: 7; }
+        #dashboard-view br { display: none; }
+        #dashboard-view #next-task-button,
+        #dashboard-view .btn-danger { order: 8; }
+
+        .current-task-title {
+            margin: 0 0 8px;
+            color: var(--text-primary);
+            font-family: var(--font-calm-display);
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 1.25;
+            overflow-wrap: anywhere;
+        }
+
+        p.current-app {
+            margin-bottom: 18px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .task-progress-panel {
+            margin-bottom: 18px;
+            padding: 18px;
+            background: rgba(255, 252, 250, 0.70);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+        }
+
+        .task-progress-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .task-progress-label,
+        .task-progress-count {
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            line-height: 1.5;
+            text-transform: uppercase;
+        }
+
+        .dashboard-task-list {
+            display: grid;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .dashboard-task-item {
+            display: grid;
+            grid-template-columns: 28px 1fr auto;
+            align-items: center;
+            gap: 10px;
+            min-height: 34px;
+            color: var(--text-primary);
+        }
+
+        .dashboard-task-mark {
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            border-radius: 999px;
+            background: rgba(61, 49, 46, 0.06);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .dashboard-task-name {
+            min-width: 0;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+
+        .dashboard-task-time {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .dashboard-task-item.completed .dashboard-task-mark {
+            background: var(--state-focus-bg);
+            color: var(--state-focus-label);
+        }
+
+        .dashboard-task-item.completed .dashboard-task-name {
+            color: var(--text-faded);
+            text-decoration: line-through;
+        }
+
+        .dashboard-task-item.active .dashboard-task-mark {
+            background: var(--state-warning-bg);
+            color: var(--state-warning-label);
+        }
+
+        .transition-panel .btn-small {
+            display: none;
+        }
+
+        #next-task-button.final-action {
+            background: var(--state-focus-bg);
+            color: var(--state-focus-label);
+            box-shadow: 0 10px 24px rgba(168, 230, 163, 0.32);
+        }
+
+        /* Desktop shell for the PC planning screen. */
+        #setup-view.container {
+            width: min(1480px, calc(100vw - 32px));
+            max-width: none;
+            min-height: calc(100vh - 32px);
+            padding: 0;
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr);
+            align-items: stretch;
+            text-align: left;
+            gap: 0;
+        }
+
+        .pc-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            padding: 36px 28px;
+            background: var(--canvas);
+            border: 1px solid var(--border-soft);
+            border-right: 1px solid var(--border-subtle);
+            border-radius: 18px 0 0 18px;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .brand-mark {
+            width: 28px;
+            height: 28px;
+            border-radius: 10px;
+            background: var(--state-focus-bg);
+            box-shadow: 0 8px 20px rgba(168, 230, 163, 0.30);
+        }
+
+        .sidebar-nav {
+            display: grid;
+            gap: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            min-height: 42px;
+            padding: 0 14px;
+            border: 0;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .sidebar-link.active {
+            background: rgba(200, 240, 197, 0.38);
+            color: var(--state-focus-label);
+        }
+
+        .sidebar-progress {
+            margin-top: auto;
+            padding: 18px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.58);
+        }
+
+        .sidebar-progress-title,
+        .sidebar-progress-note {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .sidebar-progress-value {
+            display: block;
+            margin: 10px 0 8px;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        #setup-view .launcher-card {
+            position: relative;
+            max-width: none;
+            margin: 0;
+            padding: 44px 44px 40px;
+            background: var(--canvas);
+            border: 1px solid var(--border-soft);
+            border-left: 0;
+            border-radius: 0 18px 18px 0;
+            box-shadow: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        #setup-view .launcher-eyebrow {
+            margin-bottom: 12px;
+            color: var(--state-focus-label);
+        }
+
+        #setup-view .launcher-title {
+            max-width: calc(100% - 260px);
+            margin-bottom: 10px;
+            font-size: 40px;
+        }
+
+        #setup-view .launcher-subtitle {
+            max-width: calc(100% - 260px);
+            margin-bottom: 34px;
+            font-size: 14px;
+        }
+
+        #setup-view .launcher-actions {
+            position: absolute;
+            top: 46px;
+            right: 44px;
+            display: flex;
+            width: auto;
+            margin: 0;
+        }
+
+        #setup-view #start-plan-button {
+            width: auto;
+            min-width: 150px;
+            padding: 13px 22px;
+            border-radius: 10px;
+        }
+
+        #setup-view #plan-action-note {
+            display: none;
+        }
+
+        #setup-view .plan-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 18px;
+            align-items: start;
+            margin: 0;
+        }
+
+        #setup-view .plan-section {
+            background: rgba(255, 252, 250, 0.70);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        #setup-view .plan-section:first-child {
+            min-height: 420px;
+        }
+
+        #setup-view .plan-section:first-child h3 {
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        #setup-view .step-list {
+            gap: 0;
+        }
+
+        #setup-view .step-item {
+            grid-template-columns: 40px minmax(0, 1fr) auto;
+            min-height: 74px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        #setup-view .step-item:last-child {
+            border-bottom: 0;
+        }
+
+        #setup-view .step-order {
+            width: 36px;
+            height: 36px;
+            font-size: 14px;
+        }
+
+        #setup-view .step-name {
+            font-size: 17px;
+        }
+
+        #setup-view .step-minutes {
+            font-size: 14px;
+        }
+
+        #setup-view .plan-section:nth-child(2) {
+            display: grid;
+            gap: 14px;
+            padding: 0;
+            background: transparent;
+            border: 0;
+        }
+
+        #setup-view .plan-section:nth-child(2) h3 {
+            margin: 0;
+            padding: 18px 20px 0;
+            background: rgba(255, 252, 250, 0.70);
+            border: 1px solid var(--border-subtle);
+            border-bottom: 0;
+            border-radius: 14px 14px 0 0;
+        }
+
+        #setup-view #blocked-apps-list,
+        #setup-view #blocked-sites-list {
+            min-height: 54px;
+            margin-top: -14px;
+            padding: 38px 20px 18px;
+            background: rgba(255, 252, 250, 0.70);
+            border: 1px solid var(--border-subtle);
+            border-top: 0;
+            border-radius: 0 0 14px 14px;
+        }
+
+        #setup-view .permission-note {
+            margin: 0;
+            padding: 18px 20px;
+            border-radius: 14px;
+        }
+
+        #setup-view .legacy-setup {
+            grid-column: 2;
+            max-width: none;
+            margin: 14px 44px 0;
+        }
+
+        @keyframes calmPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.88); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 180ms !important;
+            }
+        }
+
         @media (max-width: 760px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .plan-grid,
             .launcher-actions { grid-template-columns: 1fr; }
+            #setup-view.container {
+                width: 1180px;
+                min-height: calc(100vh - 32px);
+                display: grid;
+                grid-template-columns: 220px minmax(0, 1fr);
+                padding: 0;
+            }
+            .pc-sidebar {
+                display: flex;
+            }
+            #setup-view .launcher-card {
+                border: 1px solid var(--border-soft);
+                border-left: 0;
+                border-radius: 0 18px 18px 0;
+                padding: 44px 44px 40px;
+            }
+            #setup-view .launcher-title,
+            #setup-view .launcher-subtitle {
+                max-width: calc(100% - 260px);
+            }
+            #setup-view .launcher-actions {
+                position: absolute;
+                top: 46px;
+                right: 44px;
+                margin: 0;
+            }
+            #setup-view .plan-grid {
+                grid-template-columns: minmax(0, 1fr) 320px;
+            }
+            #dashboard-view.container,
+            .launcher-card,
+            .setup-card,
+            .report-card {
+                padding: 24px;
+            }
+        }
+
+        /* Reference lock: keep navigation as a true left sidebar on PC. */
+        #setup-view.container {
+            position: relative !important;
+            display: block !important;
+            width: min(1480px, calc(100vw - 32px)) !important;
+            min-width: 1180px !important;
+            max-width: none !important;
+            min-height: calc(100vh - 32px) !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+        }
+
+        #setup-view .pc-sidebar {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            bottom: 0 !important;
+            width: 220px !important;
+            box-sizing: border-box !important;
+            background: var(--canvas) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            display: flex !important;
+            flex-direction: column !important;
+            z-index: 2 !important;
+        }
+
+        #setup-view .sidebar-nav {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 8px !important;
+            width: 100% !important;
+        }
+
+        #setup-view .sidebar-link {
+            display: flex !important;
+            width: 100% !important;
+            justify-content: flex-start !important;
+        }
+
+        #setup-view .launcher-card {
+            margin-left: 220px !important;
+            min-height: calc(100vh - 32px) !important;
+            background: var(--canvas) !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-left: 0 !important;
+            border-radius: 0 18px 18px 0 !important;
+        }
+
+        #setup-view .legacy-setup {
+            margin-left: 264px !important;
+            margin-right: 44px !important;
+        }
+
+        body:has(#setup-view[style*="block"]) {
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+            overflow-x: auto !important;
+            padding: 16px !important;
+            box-sizing: border-box !important;
+        }
+
+        body:has(#setup-view[style*="block"]) #setup-view.container {
+            flex: 0 0 auto !important;
+            margin: 0 !important;
+        }
+
+        @media (min-width: 761px) {
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                background: var(--canvas) !important;
+                overflow: hidden !important;
+            }
+
+            body:has(#setup-view[style*="block"]) {
+                align-items: stretch !important;
+                justify-content: flex-start !important;
+                padding: 0 !important;
+                background: var(--canvas) !important;
+                overflow: hidden !important;
+            }
+
+            body:has(#setup-view[style*="block"]) #setup-view.container {
+                width: 100vw !important;
+                min-width: 0 !important;
+                height: 100vh !important;
+                min-height: 100vh !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                overflow: hidden !important;
+            }
+
+            #setup-view .pc-sidebar {
+                width: 200px !important;
+                gap: 18px !important;
+                padding: 26px 24px !important;
+                border-radius: 0 !important;
+            }
+
+            #setup-view .sidebar-brand {
+                gap: 10px !important;
+                font-size: 15px !important;
+            }
+
+            #setup-view .brand-mark {
+                width: 24px !important;
+                height: 24px !important;
+            }
+
+            #setup-view .sidebar-nav {
+                gap: 6px !important;
+            }
+
+            #setup-view .sidebar-link {
+                min-height: 36px !important;
+                padding: 0 12px !important;
+                font-size: 13px !important;
+            }
+
+            #setup-view .sidebar-progress {
+                padding: 14px !important;
+                border-radius: 12px !important;
+            }
+
+            #setup-view .sidebar-progress-value {
+                margin: 6px 0 4px !important;
+                font-size: 22px !important;
+            }
+
+            #setup-view .launcher-card {
+                margin-left: 200px !important;
+                height: 100vh !important;
+                min-height: 100vh !important;
+                padding: 26px 36px 28px !important;
+                border-radius: 0 !important;
+                overflow: hidden !important;
+            }
+
+            #setup-view .launcher-eyebrow {
+                margin-bottom: 8px !important;
+                font-size: 11px !important;
+            }
+
+            #setup-view .launcher-title {
+                max-width: calc(100% - 250px) !important;
+                margin-bottom: 6px !important;
+                font-size: 32px !important;
+                line-height: 1.08 !important;
+            }
+
+            #setup-view .launcher-subtitle {
+                max-width: calc(100% - 250px) !important;
+                margin-bottom: 22px !important;
+                font-size: 13px !important;
+            }
+
+            #setup-view .launcher-actions {
+                top: 28px !important;
+                right: 36px !important;
+            }
+
+            #setup-view #start-plan-button {
+                min-width: 132px !important;
+                padding: 11px 18px !important;
+            }
+
+            #setup-view .plan-grid {
+                grid-template-columns: minmax(0, 1fr) 300px !important;
+                gap: 14px !important;
+            }
+
+            #setup-view .plan-section {
+                padding: 18px !important;
+                border-radius: 12px !important;
+            }
+
+            #setup-view .plan-section:first-child {
+                min-height: 0 !important;
+            }
+
+            #setup-view .plan-section:first-child h3 {
+                padding-bottom: 12px !important;
+            }
+
+            #setup-view .step-item {
+                grid-template-columns: 34px minmax(0, 1fr) auto !important;
+                min-height: 58px !important;
+                padding: 10px 0 !important;
+            }
+
+            #setup-view .step-order {
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 13px !important;
+            }
+
+            #setup-view .step-name {
+                font-size: 15px !important;
+                line-height: 1.28 !important;
+            }
+
+            #setup-view .step-minutes {
+                font-size: 13px !important;
+            }
+
+            #setup-view .plan-section:nth-child(2) {
+                gap: 10px !important;
+            }
+
+            #setup-view .plan-section:nth-child(2) h3 {
+                padding: 14px 16px 0 !important;
+                border-radius: 12px 12px 0 0 !important;
+            }
+
+            #setup-view #blocked-apps-list,
+            #setup-view #blocked-sites-list {
+                min-height: 44px !important;
+                margin-top: -10px !important;
+                padding: 30px 16px 14px !important;
+            }
+
+            #setup-view .permission-note {
+                padding: 14px 16px !important;
+                font-size: 13px !important;
+            }
+
+            #setup-view .plan-status-title {
+                margin-top: 0 !important;
+            }
+
+            #setup-view .plan-status-card {
+                display: grid;
+                gap: 8px;
+                min-height: 54px;
+                padding: 14px 16px;
+                background: rgba(255, 252, 250, 0.70);
+                border: 1px solid var(--border-subtle);
+                border-radius: 12px;
+            }
+
+            #setup-view .plan-status-card strong {
+                color: var(--text-primary);
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+            #setup-view .plan-status-card span {
+                color: var(--text-secondary);
+                font-size: 13px;
+                line-height: 1.35;
+            }
+
+            #setup-view .plan-summary {
+                margin-top: 14px;
+                padding: 16px 18px;
+                background: rgba(255, 252, 250, 0.70);
+                border: 1px solid var(--border-subtle);
+                border-radius: 12px;
+            }
+
+            #setup-view .plan-summary h3 {
+                margin: 0 0 12px;
+                color: var(--text-secondary);
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                line-height: 1.5;
+                text-transform: uppercase;
+            }
+
+            #setup-view .plan-summary-grid {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 14px;
+            }
+
+            #setup-view .plan-summary-grid span {
+                display: grid;
+                gap: 4px;
+                min-width: 0;
+            }
+
+            #setup-view .plan-summary-grid strong {
+                color: var(--text-primary);
+                font-size: 14px;
+                font-weight: 600;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            #setup-view .plan-summary-grid small {
+                color: var(--text-secondary);
+                font-size: 12px;
+            }
+
+            #setup-view .legacy-setup {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -598,6 +1732,24 @@
 
     <!-- Setup View -->
     <div id="setup-view" class="container">
+        <aside class="pc-sidebar" aria-label="PC app navigation">
+            <div class="sidebar-brand">
+                <span class="brand-mark"></span>
+                <span>FocusPlan</span>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="sidebar-link active" type="button" onclick="selectSidebarNav(this, 'setup-view')">Today Plan</button>
+                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">My Plans</button>
+                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">Focus Log</button>
+                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">Statistics</button>
+                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">Settings</button>
+            </nav>
+            <div class="sidebar-progress">
+                <span class="sidebar-progress-title">Today Progress</span>
+                <span class="sidebar-progress-value" id="sidebar-progress-value">0%</span>
+                <span class="sidebar-progress-note" id="sidebar-progress-note">계획을 불러오는 중</span>
+            </div>
+        </aside>
         <div class="launcher-card">
             <p class="launcher-eyebrow">Mobile plan ready</p>
             <h2 class="launcher-title" id="plan-goal-title">모바일 계획을 불러오는 중</h2>
@@ -608,22 +1760,120 @@
             </div>
 
             <div id="plan-content" style="display: none;">
-                <div class="plan-grid">
-                    <div class="plan-section">
-                        <h3>Steps</h3>
-                        <ul class="step-list" id="plan-steps"></ul>
+                <div class="plan-layout">
+                    <div class="plan-main-column">
+                        <section class="plan-section current-task-card">
+                            <div class="section-heading-row">
+                                <h3>현재 태스크</h3>
+                                <span class="status-pill" id="current-task-status">진행 준비</span>
+                            </div>
+                            <div class="focus-task-box">
+                                <span class="step-order" id="current-task-order">1</span>
+                                <div class="focus-task-copy">
+                                    <strong id="current-task-title">작업 화면 열기</strong>
+                                    <div class="task-meta-row">
+                                        <span id="current-task-category">WORK</span>
+                                        <span id="current-task-minutes">5분</span>
+                                    </div>
+                                    <p id="current-task-description">필요한 프로그램과 자료를 모두 준비하고 작업 환경을 정리합니다.</p>
+                                </div>
+                                <span class="task-estimate" id="current-task-estimate">예상 5분</span>
+                                <button class="btn-primary task-start-button" type="button" onclick="startPlan()">시작하기</button>
+                            </div>
+                            <div class="task-tip">
+                                <strong>TIP</strong>
+                                <span>작업 시작 전에 잠깐 호흡을 고르고, 한 번에 하나씩만 집중해요.</span>
+                            </div>
+                        </section>
+
+                        <section class="plan-section next-task-card">
+                            <h3>다음 태스크</h3>
+                            <div class="next-task-row">
+                                <span class="step-order" id="next-task-order">2</span>
+                                <div>
+                                    <strong id="next-task-title">해야 할 일을 세 덩어리로 나누기</strong>
+                                    <div class="task-meta-row">
+                                        <span id="next-task-category">WORK</span>
+                                        <span id="next-task-minutes">8분</span>
+                                    </div>
+                                </div>
+                                <span class="task-estimate" id="next-task-estimate">예상 8분</span>
+                            </div>
+                        </section>
+
+                        <section class="plan-section all-tasks-card">
+                            <div class="section-heading-row">
+                                <h3>전체 태스크 <span id="all-task-count">(5)</span></h3>
+                                <span class="collapse-mark">⌃</span>
+                            </div>
+                            <ul class="compact-task-list" id="plan-steps"></ul>
+                        </section>
+                        <p class="task-lock-note">태스크 편집/재정렬은 모바일 앱에서만 가능합니다.</p>
                     </div>
-                    <div class="plan-section">
-                        <h3>Blocked apps</h3>
-                        <div class="chip-list" id="blocked-apps-list"></div>
-                        <h3 style="margin-top: 18px;">Blocked sites</h3>
-                        <div class="chip-list" id="blocked-sites-list"></div>
-                        <div class="permission-note" id="metadata-note"></div>
+
+                    <aside class="plan-side-column">
+                        <section class="side-info-card session-card">
+                            <h3>세션 상태</h3>
+                            <div class="session-status-grid">
+                                <span class="session-ring"><strong id="session-percent">0%</strong></span>
+                                <div>
+                                    <span>진행률</span>
+                                    <strong id="session-total-time">예상 총 시간 35분</strong>
+                                    <strong id="session-total-steps">예상 단계 5단계</strong>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="side-info-card intervention-card">
+                            <h3>개입 상태</h3>
+                            <div class="intervention-list">
+                                <span>80% 개입 <strong>0회</strong></span>
+                                <span>100% 개입 <strong>0회</strong></span>
+                                <span>반복 초과 <strong>0회</strong></span>
+                            </div>
+                            <div class="soft-input">개입이 발생하면 여기에 표시됩니다.</div>
+                        </section>
+
+                        <section class="side-info-card context-card">
+                            <h3>컨텍스트 요약</h3>
+                            <dl>
+                                <div><dt>앱</dt><dd id="context-app">-</dd></div>
+                                <div><dt>윈도우</dt><dd id="context-window">-</dd></div>
+                                <div><dt>URL</dt><dd id="context-url">-</dd></div>
+                            </dl>
+                            <span class="muted-line">1분 전 업데이트</span>
+                        </section>
+
+                        <section class="side-info-card connection-card">
+                            <h3>연결 상태</h3>
+                            <p><span class="green-dot"></span> 연결됨</p>
+                            <span class="muted-line">동기화 완료 · 1분 전</span>
+                            <button class="btn-secondary connection-detail-button" type="button">연결 상태 상세 보기</button>
+                        </section>
+                    </aside>
+                </div>
+
+                <div class="plan-summary">
+                    <h3>Plan Summary</h3>
+                    <div class="plan-summary-grid">
+                        <span>
+                            <strong id="summary-total-time">--분</strong>
+                            <small>총 예상 시간</small>
+                        </span>
+                        <span>
+                            <strong id="summary-total-steps">--단계</strong>
+                            <small>예상 단계</small>
+                        </span>
+                        <span>
+                            <strong id="summary-created-at">--</strong>
+                            <small>생성 시간</small>
+                        </span>
                     </div>
                 </div>
 
                 <div class="launcher-actions">
-                    <button class="btn-primary" id="start-plan-button" type="button" onclick="startPlan()">Start Plan</button>
+                    <button class="more-button" type="button" aria-label="More options">•••</button>
+                    <button class="btn-primary" id="start-plan-button" type="button" onclick="startPlan()">▶ Start Plan</button>
                 </div>
                 <span class="help-text" id="plan-action-note">Start Plan은 모바일 plan의 첫 task를 기존 tracking 화면으로 실행합니다.</span>
             </div>
@@ -655,9 +1905,18 @@
 
     <!-- Dashboard View -->
     <div id="dashboard-view" class="container">
+        <h2 class="current-task-title" id="current-task-title">현재 작업을 불러오는 중</h2>
         <h1 class="state-title" id="state-text">수집 중</h1>
         <p class="current-app" id="app-text">대기 중...</p>
         
+        <section class="task-progress-panel" aria-label="전체 작업 진행">
+            <div class="task-progress-head">
+                <span class="task-progress-label">Plan progress</span>
+                <span class="task-progress-count" id="task-progress-count">0 / 0</span>
+            </div>
+            <ul class="dashboard-task-list" id="dashboard-task-list"></ul>
+        </section>
+
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-value" id="val-remaining">--:--</div>
@@ -749,6 +2008,7 @@
     <script>
         let widgetRunning = false;
         let currentPlan = null;
+        let latestStatus = null;
 
         function setWidgetButton(running, message = '') {
             widgetRunning = running;
@@ -806,6 +2066,13 @@
             document.getElementById(viewId).style.display = 'block';
         }
 
+        function selectSidebarNav(item, viewId) {
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.toggle('active', link === item);
+            });
+            if (viewId) showView(viewId);
+        }
+
         function formatTimeMinSec(seconds) {
             const m = Math.floor(seconds / 60);
             const s = seconds % 60;
@@ -824,6 +2091,67 @@
             const m = Math.floor(abs / 60);
             const s = abs % 60;
             return `${sign}${m}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function getTaskTitle(task, fallback = '') {
+            if (!task) return fallback;
+            if (typeof task === 'string') return task;
+            return task.title || task.name || fallback;
+        }
+
+        function getCurrentTaskDisplay(data) {
+            const current = getTaskTitle(data.current_task);
+            if (current) return current;
+            const raw = data.task || '';
+            const goal = data.goal_title || '';
+            return goal && raw.startsWith(`${goal} - `) ? raw.slice(goal.length + 3) : (raw || '현재 작업');
+        }
+
+        function renderDashboardTasks(data) {
+            const list = document.getElementById('dashboard-task-list');
+            const count = document.getElementById('task-progress-count');
+            if (!list || !count) return;
+
+            const steps = Array.isArray(data.plan_steps) ? data.plan_steps : [];
+            const completed = steps.filter(step => step.status === 'completed').length;
+            count.innerText = `${completed} / ${steps.length}`;
+            list.innerHTML = '';
+
+            if (!steps.length) {
+                const item = document.createElement('li');
+                item.className = 'dashboard-task-item active';
+                item.innerHTML = `
+                    <span class="dashboard-task-mark">1</span>
+                    <span class="dashboard-task-name">${getCurrentTaskDisplay(data)}</span>
+                    <span class="dashboard-task-time">${data.target_minutes || 0}m</span>
+                `;
+                list.appendChild(item);
+                return;
+            }
+
+            steps.forEach((step, index) => {
+                const item = document.createElement('li');
+                const status = step.status || 'pending';
+                item.className = `dashboard-task-item ${status}`;
+                const mark = status === 'completed' ? '✓' : (step.order || index + 1);
+                item.innerHTML = `
+                    <span class="dashboard-task-mark">${mark}</span>
+                    <span class="dashboard-task-name">${step.title || '작업'}</span>
+                    <span class="dashboard-task-time">${step.duration_minutes || 0}m</span>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function updateAdvanceButton(data) {
+            const btn = document.getElementById('next-task-button') || document.querySelector('#dashboard-view .btn-danger');
+            if (!btn) return;
+            btn.id = 'next-task-button';
+            btn.onclick = advanceTask;
+            const hasPlanTask = Boolean(data.current_task);
+            const hasNext = Boolean(data.next_task);
+            btn.innerText = hasPlanTask ? (hasNext ? '다음 작업' : '마무리하고 보고서 보기') : '작업 종료';
+            btn.classList.toggle('final-action', hasPlanTask && !hasNext);
         }
 
         function renderChipList(containerId, items, emptyText) {
@@ -852,6 +2180,18 @@
             document.getElementById('plan-created-at').innerText =
                 plan.created_at ? `모바일에서 생성됨 · ${plan.created_at}` : '모바일에서 생성된 계획입니다.';
 
+            const progress = plan.plan_progress || {};
+            const stepsForProgress = plan.steps || [];
+            const completed = progress.completed ?? stepsForProgress.filter(step => step.status === 'completed').length;
+            const total = progress.total ?? stepsForProgress.length;
+            const percent = total ? Math.round((completed / total) * 100) : 0;
+            document.getElementById('sidebar-progress-value').innerText = `${percent}%`;
+            document.getElementById('sidebar-progress-note').innerText = `총 계획 ${total}개 중 ${completed}개 완료`;
+            document.getElementById('summary-total-time').innerText =
+                `${stepsForProgress.reduce((sum, step) => sum + (Number(step.duration_minutes) || 0), 0)}분`;
+            document.getElementById('summary-total-steps').innerText = `${total}단계`;
+            document.getElementById('summary-created-at').innerText = plan.created_at || '--';
+
             const steps = document.getElementById('plan-steps');
             steps.innerHTML = '';
             (plan.steps || []).forEach(step => {
@@ -873,6 +2213,13 @@
             note.innerText = plan.metadata_permission
                 ? '윈도우 activity, idle, window 데이터 수집이 사용자의 허용 상태로 저장되어 있습니다.'
                 : 'metadata_permission이 꺼져 있습니다. 다음 단계에서 activity, idle, window 데이터 수집은 비활성화될 예정입니다.';
+
+            const statusText = plan.status === 'completed'
+                ? '완료됨'
+                : (plan.status === 'active' ? '진행 중' : '대기 중');
+            document.getElementById('plan-status-label').innerText = statusText;
+            document.getElementById('plan-status-detail').innerText =
+                plan.status === 'completed' ? '모든 단계가 완료되었습니다.' : '시작 전 상태입니다.';
         }
 
         function showNoPlan(message = '아직 저장된 모바일 plan이 없습니다. 모바일 화면에서 목표를 쪼갠 뒤 이 페이지를 새로고침하세요.') {
@@ -1048,6 +2395,7 @@
                 const response = await fetch('/status');
                 if (!response.ok) return false;
                 const data = await response.json();
+                latestStatus = data;
                 if (!data.is_active) return false;
                 showView('dashboard-view');
                 if (pollInterval) clearInterval(pollInterval);
@@ -1073,6 +2421,38 @@
             }
         }
         
+        async function advanceTask() {
+            const btn = document.getElementById('next-task-button') || document.querySelector('#dashboard-view .btn-danger');
+            const hasPlanTask = Boolean(latestStatus && latestStatus.current_task);
+            const hasNext = Boolean(latestStatus && latestStatus.next_task);
+
+            if (!hasPlanTask) {
+                stopTracking(true);
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = hasNext ? '넘어가는 중...' : '마무리 중...';
+
+            try {
+                const response = await fetch('/api/tasks/complete_current', { method: 'POST' });
+                const result = await response.json().catch(() => ({}));
+                if (!response.ok || result.error) {
+                    throw new Error(result.error || '다음 작업으로 넘어가지 못했습니다.');
+                }
+                if (result.plan_completed) {
+                    await stopTracking(false);
+                    return;
+                }
+                await fetchStatus();
+            } catch (err) {
+                console.error('Failed to advance task:', err);
+                btn.innerText = '다음 작업';
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
         function showReport(report) {
             clearInterval(pollInterval);
             stopTransitionAudio();
@@ -1113,6 +2493,7 @@
                 if (response.status === 500) return; // not initialized
                 
                 const data = await response.json();
+                latestStatus = data;
                 
                 if (!data.is_active) {
                     // 보고서 화면이 아닐 때만 setup 뷰로 강제 이동 (in-flight fetch 방어)
@@ -1132,6 +2513,7 @@
 
                 // Update Texts
                 document.getElementById('state-text').innerText = data.state;
+                document.getElementById('current-task-title').innerText = getCurrentTaskDisplay(data);
                 document.getElementById('alert-subtitle').innerText =
                     data.alert_message || '다시 원래 하던 일로 돌아가세요.';
                 
@@ -1143,7 +2525,9 @@
                     if(title.length > 30) title = title.substring(0, 30) + '...';
                     appDisplay += ` - ${title}`;
                 }
-                document.getElementById('app-text').innerText = appDisplay || '바탕화면';
+                document.getElementById('app-text').innerText = `현재 활성 창: ${appDisplay || '바탕화면'}`;
+                renderDashboardTasks(data);
+                updateAdvanceButton(data);
 
                 const remainingDisplay = data.overrun_seconds > 0
                     ? formatCountdown(-data.overrun_seconds)

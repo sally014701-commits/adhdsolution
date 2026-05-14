@@ -1377,7 +1377,7 @@
             }
         }
 
-        @media (max-width: 760px) {
+        @media (min-width: 700px) and (max-width: 760px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .plan-grid,
             .launcher-actions { grid-template-columns: 1fr; }
@@ -1487,7 +1487,7 @@
             margin: 0 !important;
         }
 
-        @media (min-width: 761px) {
+        @media (min-width: 700px) {
             html,
             body {
                 width: 100%;
@@ -2042,6 +2042,578 @@
                 font-weight: 700;
             }
 
+            #setup-view .sessions-layout {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 410px;
+                gap: 22px;
+                align-items: start;
+            }
+
+            #setup-view .sessions-main-card,
+            #setup-view .sessions-detail-card {
+                background: var(--canvas);
+                border: 1px solid var(--border-subtle);
+                border-radius: 12px;
+            }
+
+            #setup-view .sessions-main-card {
+                padding: 12px 10px 14px;
+            }
+
+            #setup-view .sessions-filter-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 14px;
+                padding: 8px 14px 16px;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            #setup-view .session-tabs {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            #setup-view .session-tabs button,
+            #setup-view .session-sort {
+                min-height: 36px;
+                padding: 0 14px;
+                border: 1px solid transparent;
+                border-radius: 10px;
+                background: transparent;
+                color: var(--text-secondary);
+                font-family: inherit;
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            #setup-view .session-tabs button.active {
+                background: rgba(200, 240, 197, 0.40);
+                color: var(--state-focus-label);
+            }
+
+            #setup-view .session-sort {
+                border-color: var(--border-subtle);
+                color: var(--text-primary);
+            }
+
+            #setup-view .sessions-main-card > h3 {
+                margin: 18px 14px 12px;
+                color: var(--text-primary);
+                font-size: 15px;
+            }
+
+            #setup-view .session-list {
+                display: grid;
+                gap: 10px;
+                padding-bottom: 8px;
+            }
+
+            #setup-view .session-row {
+                display: grid;
+                grid-template-columns: 46px minmax(0, 1fr) 110px 120px 20px;
+                align-items: center;
+                gap: 14px;
+                min-height: 92px;
+                padding: 14px;
+                border: 1px solid var(--border-subtle);
+                border-radius: 10px;
+                background: var(--canvas);
+            }
+
+            #setup-view .session-row.selected {
+                border-color: rgba(114, 201, 109, 0.55);
+                background: rgba(200, 240, 197, 0.11);
+            }
+
+            #setup-view .session-icon {
+                width: 36px;
+                height: 36px;
+                display: grid;
+                place-items: center;
+                border-radius: 999px;
+                font-weight: 800;
+            }
+
+            #setup-view .session-icon.completed {
+                background: rgba(200, 240, 197, 0.50);
+                color: var(--state-focus-label);
+            }
+
+            #setup-view .session-icon.paused {
+                background: rgba(255, 184, 108, 0.22);
+                color: var(--state-warning-label);
+            }
+
+            #setup-view .session-icon.queued {
+                background: rgba(61, 49, 46, 0.06);
+                color: var(--text-secondary);
+            }
+
+            #setup-view .session-copy,
+            #setup-view .session-meta {
+                display: grid;
+                gap: 5px;
+                min-width: 0;
+            }
+
+            #setup-view .session-copy strong {
+                color: var(--text-primary);
+                font-size: 15px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            #setup-view .session-copy span,
+            #setup-view .session-meta span,
+            #setup-view .sessions-detail-card > p {
+                color: var(--text-secondary);
+                font-size: 12px;
+            }
+
+            #setup-view .session-copy em {
+                width: fit-content;
+                padding: 2px 8px;
+                border-radius: 999px;
+                background: rgba(200, 240, 197, 0.38);
+                color: var(--state-focus-label);
+                font-size: 11px;
+                font-style: normal;
+                font-weight: 700;
+            }
+
+            #setup-view .session-copy em.paused {
+                background: rgba(255, 184, 108, 0.20);
+                color: var(--state-warning-label);
+            }
+
+            #setup-view .session-copy em.queued {
+                background: rgba(61, 49, 46, 0.06);
+                color: var(--text-secondary);
+            }
+
+            #setup-view .session-meta {
+                padding-left: 16px;
+                border-left: 1px solid var(--border-subtle);
+            }
+
+            #setup-view .session-meta strong,
+            #setup-view .session-row.selected .session-meta strong {
+                color: var(--state-focus-label);
+                font-size: 13px;
+                font-weight: 700;
+            }
+
+            #setup-view .session-arrow {
+                color: var(--text-secondary);
+                font-size: 24px;
+            }
+
+            #setup-view .load-more-sessions,
+            #setup-view .session-wide-button {
+                width: 100%;
+                min-height: 36px;
+                border: 1px solid var(--border-subtle);
+                border-radius: 8px;
+                background: var(--canvas);
+                color: var(--text-primary);
+                font-family: inherit;
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            #setup-view .sessions-detail-card {
+                position: relative;
+                padding: 22px 20px;
+            }
+
+            #setup-view .session-close {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                border: 0;
+                background: transparent;
+                color: var(--text-secondary);
+                font-size: 24px;
+            }
+
+            #setup-view .sessions-detail-card h3 {
+                margin: 0 0 12px;
+                color: var(--text-primary);
+                font-size: 18px;
+            }
+
+            #setup-view .sessions-detail-card h3 span {
+                display: inline-flex;
+                margin-left: 8px;
+                padding: 2px 8px;
+                border-radius: 999px;
+                background: rgba(200, 240, 197, 0.38);
+                color: var(--state-focus-label);
+                font-size: 12px;
+            }
+
+            #setup-view .session-score-grid {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                margin: 18px 0;
+                border: 1px solid var(--border-subtle);
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            #setup-view .session-score-grid span {
+                display: grid;
+                gap: 6px;
+                padding: 14px 10px;
+                text-align: center;
+                border-right: 1px solid var(--border-subtle);
+            }
+
+            #setup-view .session-score-grid span:last-child {
+                border-right: 0;
+            }
+
+            #setup-view .session-score-grid small,
+            #setup-view .session-timeline span,
+            #setup-view .session-timeline em,
+            #setup-view .session-detail-section p {
+                color: var(--text-secondary);
+                font-size: 12px;
+            }
+
+            #setup-view .session-score-grid strong {
+                color: var(--text-primary);
+                font-size: 18px;
+            }
+
+            #setup-view .session-score-grid span:nth-child(2) strong {
+                color: var(--state-focus-label);
+            }
+
+            #setup-view .sessions-detail-card h4 {
+                margin: 16px 0 10px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+
+            #setup-view .session-timeline {
+                display: grid;
+                gap: 10px;
+                margin: 0 0 14px;
+                padding: 0;
+                list-style: none;
+            }
+
+            #setup-view .session-timeline li {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 3px 12px;
+                position: relative;
+                padding-left: 28px;
+                color: var(--text-primary);
+                font-size: 13px;
+            }
+
+            #setup-view .session-timeline li::before {
+                content: "✓";
+                position: absolute;
+                left: 0;
+                top: 1px;
+                width: 16px;
+                height: 16px;
+                display: grid;
+                place-items: center;
+                border-radius: 999px;
+                background: rgba(200, 240, 197, 0.60);
+                color: var(--state-focus-label);
+                font-size: 10px;
+                font-weight: 800;
+            }
+
+            #setup-view .session-timeline em {
+                grid-row: span 2;
+                align-self: center;
+                font-style: normal;
+            }
+
+            #setup-view .session-detail-section {
+                margin-top: 16px;
+                padding-top: 14px;
+                border-top: 1px solid var(--border-subtle);
+            }
+
+            #setup-view .session-detail-section p {
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                margin: 8px 0 0;
+            }
+
+            #setup-view .insights-layout {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 350px;
+                gap: 18px;
+                align-items: start;
+            }
+
+            #setup-view .insights-main-column {
+                display: grid;
+                grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+                gap: 14px;
+            }
+
+            #setup-view .insights-overview-card,
+            #setup-view .insight-card,
+            #setup-view .insights-side-column .side-info-card {
+                background: var(--canvas);
+                border: 1px solid var(--border-subtle);
+                border-radius: 12px;
+                padding: 14px;
+            }
+
+            #setup-view .insights-overview-card {
+                grid-column: 1 / -1;
+            }
+
+            #setup-view .insights-tabs {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 14px;
+            }
+
+            #setup-view .insights-tabs button,
+            #setup-view .context-tabs span {
+                min-height: 32px;
+                padding: 0 12px;
+                border: 0;
+                border-radius: 10px;
+                background: transparent;
+                color: var(--text-secondary);
+                font-family: inherit;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            #setup-view .insights-tabs button.active,
+            #setup-view .context-tabs span:first-child {
+                background: rgba(200, 240, 197, 0.40);
+                color: var(--state-focus-label);
+            }
+
+            #setup-view .insights-tabs .insights-date {
+                margin-left: auto;
+                border: 1px solid var(--border-subtle);
+                color: var(--text-primary);
+            }
+
+            #setup-view .metric-grid {
+                display: grid;
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                border: 1px solid var(--border-subtle);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            #setup-view .metric-grid div {
+                display: grid;
+                gap: 6px;
+                min-height: 96px;
+                padding: 16px 10px;
+                text-align: center;
+                border-right: 1px solid var(--border-subtle);
+            }
+
+            #setup-view .metric-grid div:last-child {
+                border-right: 0;
+            }
+
+            #setup-view .metric-grid span,
+            #setup-view .metric-grid small,
+            #setup-view .chart-labels,
+            #setup-view .insights-side-column span,
+            #setup-view .insights-side-column small {
+                color: var(--text-secondary);
+                font-size: 11px;
+            }
+
+            #setup-view .metric-grid strong {
+                color: var(--text-primary);
+                font-size: 22px;
+            }
+
+            #setup-view .insight-card h3,
+            #setup-view .insights-side-column h3 {
+                margin: 0 0 12px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+
+            #setup-view .chart-card {
+                min-height: 226px;
+            }
+
+            #setup-view .focus-chart {
+                height: 150px;
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 22px;
+                align-items: end;
+                padding: 10px 20px 0;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            #setup-view .focus-chart span {
+                border-radius: 4px 4px 0 0;
+                background: linear-gradient(180deg, rgba(114, 201, 109, 0.38), rgba(114, 201, 109, 0.20));
+            }
+
+            #setup-view .chart-labels {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 8px;
+                margin-top: 8px;
+                text-align: center;
+            }
+
+            #setup-view .heatmap-grid {
+                display: grid;
+                grid-template-columns: repeat(7, 22px);
+                gap: 7px;
+                justify-content: center;
+            }
+
+            #setup-view .heatmap-grid::before {
+                content: "";
+                display: contents;
+            }
+
+            #setup-view .heatmap-grid span {
+                width: 22px;
+                height: 18px;
+                border-radius: 4px;
+                background: rgba(114, 201, 109, 0.14);
+            }
+
+            #setup-view .events-card,
+            #setup-view .contexts-card {
+                min-height: 230px;
+            }
+
+            #setup-view .progress-row {
+                display: grid;
+                grid-template-columns: 92px minmax(0, 1fr) 72px;
+                gap: 10px;
+                align-items: center;
+                margin: 14px 0;
+                color: var(--text-secondary);
+                font-size: 12px;
+            }
+
+            #setup-view .progress-row b {
+                height: 5px;
+                border-radius: 999px;
+                background: var(--state-focus-accent);
+            }
+
+            #setup-view .progress-row em {
+                color: var(--text-secondary);
+                font-style: normal;
+                text-align: right;
+            }
+
+            #setup-view .context-tabs {
+                display: flex;
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+
+            #setup-view .contexts-card ul {
+                display: grid;
+                gap: 8px;
+                margin: 0 0 12px;
+                padding: 0;
+                list-style: none;
+            }
+
+            #setup-view .contexts-card li {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 40px 44px;
+                gap: 10px;
+                color: var(--text-primary);
+                font-size: 12px;
+            }
+
+            #setup-view .contexts-card b,
+            #setup-view .contexts-card em {
+                color: var(--text-secondary);
+                font-style: normal;
+                font-weight: 500;
+                text-align: right;
+            }
+
+            #setup-view .insights-side-column {
+                display: grid;
+                gap: 14px;
+            }
+
+            #setup-view .insights-side-column p {
+                margin: 0 0 12px;
+                color: var(--text-primary);
+                font-size: 13px;
+                line-height: 1.45;
+            }
+
+            #setup-view .goal-bar {
+                height: 7px;
+                margin: 12px 0 6px;
+                border-radius: 999px;
+                background: rgba(61, 49, 46, 0.06);
+                overflow: hidden;
+            }
+
+            #setup-view .goal-bar span {
+                display: block;
+                width: 78%;
+                height: 100%;
+                background: var(--state-focus-accent);
+            }
+
+            #setup-view .launcher-card {
+                padding-top: 22px !important;
+            }
+
+            #setup-view .launcher-title {
+                font-size: 30px !important;
+            }
+
+            #setup-view .launcher-subtitle {
+                margin-bottom: 16px !important;
+            }
+
+            #setup-view .focus-task-box {
+                margin-top: 12px;
+                padding: 16px;
+            }
+
+            #setup-view .task-tip,
+            #setup-view .next-task-row {
+                margin-top: 10px;
+                padding: 12px 14px;
+            }
+
+            #setup-view .session-row {
+                min-height: 78px;
+                padding: 11px 12px;
+            }
+
+            #setup-view .sessions-detail-card {
+                padding: 18px 18px;
+            }
+
             #dashboard-view.container {
                 width: 100vw !important;
                 max-width: none !important;
@@ -2151,7 +2723,7 @@
         }
 
         body:has(#dashboard-view[style*="block"]) .widget-control {
-            display: none !important;
+            display: flex !important;
         }
 
         body:has(#dashboard-view[style*="block"]) #dashboard-view.container {
@@ -2326,9 +2898,9 @@
                 <span>FocusPlan</span>
             </div>
             <nav class="sidebar-nav">
-                <button class="sidebar-link active" type="button" onclick="selectSidebarNav(this, 'setup-view')">⌂ Today</button>
-                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">▣ Sessions</button>
-                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">▥ Insights</button>
+                <button class="sidebar-link active" type="button" onclick="selectSidebarNav(this, 'setup-view', 'today')">⌂ Today</button>
+                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this, 'setup-view', 'sessions')">▣ Sessions</button>
+                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this, 'setup-view', 'insights')">▥ Insights</button>
                 <span class="sidebar-divider"></span>
                 <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">▧ Widget <span class="sidebar-on">ON</span></button>
                 <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">⚙ Connected <span class="green-dot"></span></button>
@@ -2465,6 +3037,203 @@
                     <button class="btn-primary" id="start-plan-button" type="button" onclick="startPlan()">▶ Start Plan</button>
                 </div>
                 <span class="help-text" id="plan-action-note">Start Plan은 모바일 plan의 첫 task를 기존 tracking 화면으로 실행합니다.</span>
+            </div>
+
+            <div id="sessions-content" style="display: none;">
+                <div class="sessions-layout">
+                    <section class="sessions-main-card">
+                        <div class="sessions-filter-row">
+                            <div class="session-tabs" aria-label="Session filters">
+                                <button class="active" type="button">전체</button>
+                                <button type="button">오늘</button>
+                                <button type="button">이번 주</button>
+                                <button type="button">이번 달</button>
+                            </div>
+                            <button class="session-sort" type="button">최신순⌄</button>
+                        </div>
+
+                        <h3>최근 세션</h3>
+                        <div class="session-list">
+                            <article class="session-row selected">
+                                <span class="session-icon completed">✓</span>
+                                <div class="session-copy">
+                                    <strong>학습지 풀기</strong>
+                                    <span>2026-05-14 (수) 09:02 - 10:06</span>
+                                    <em>완료</em>
+                                </div>
+                                <div class="session-meta"><span>총 5단계</span><strong>완료율 100%</strong></div>
+                                <div class="session-meta"><span>실행 시간</span><strong>1시간 04분</strong></div>
+                                <span class="session-arrow">›</span>
+                            </article>
+                            <article class="session-row">
+                                <span class="session-icon paused">Ⅱ</span>
+                                <div class="session-copy">
+                                    <strong>자료조사 및 아이디어 정리</strong>
+                                    <span>2026-05-13 (화) 14:15 - 15:02</span>
+                                    <em class="paused">중단</em>
+                                </div>
+                                <div class="session-meta"><span>총 4단계</span><strong>완료율 50%</strong></div>
+                                <div class="session-meta"><span>실행 시간</span><strong>47분</strong></div>
+                                <span class="session-arrow">›</span>
+                            </article>
+                            <article class="session-row">
+                                <span class="session-icon queued">↻</span>
+                                <div class="session-copy">
+                                    <strong>보고서 초안 작성</strong>
+                                    <span>2026-05-12 (월) 10:00 - 11:20</span>
+                                    <em class="queued">연기됨</em>
+                                </div>
+                                <div class="session-meta"><span>총 6단계</span><strong>완료율 0%</strong></div>
+                                <div class="session-meta"><span>실행 시간</span><strong>0분</strong></div>
+                                <span class="session-arrow">›</span>
+                            </article>
+                            <article class="session-row">
+                                <span class="session-icon completed">✓</span>
+                                <div class="session-copy">
+                                    <strong>발표 자료 구성</strong>
+                                    <span>2026-05-11 (일) 16:40 - 17:30</span>
+                                    <em>완료</em>
+                                </div>
+                                <div class="session-meta"><span>총 4단계</span><strong>완료율 100%</strong></div>
+                                <div class="session-meta"><span>실행 시간</span><strong>50분</strong></div>
+                                <span class="session-arrow">›</span>
+                            </article>
+                            <article class="session-row">
+                                <span class="session-icon paused">Ⅱ</span>
+                                <div class="session-copy">
+                                    <strong>독서 및 요약</strong>
+                                    <span>2026-05-10 (토) 19:20 - 20:05</span>
+                                    <em class="paused">중단</em>
+                                </div>
+                                <div class="session-meta"><span>총 3단계</span><strong>완료율 33%</strong></div>
+                                <div class="session-meta"><span>실행 시간</span><strong>25분</strong></div>
+                                <span class="session-arrow">›</span>
+                            </article>
+                        </div>
+                        <button class="load-more-sessions" type="button">더 많은 세션 보기⌄</button>
+                    </section>
+
+                    <aside class="sessions-detail-card">
+                        <button class="session-close" type="button" aria-label="Close session detail">×</button>
+                        <h3>학습지 풀기 <span>완료</span></h3>
+                        <p>2026-05-14 (수) 09:02 - 10:06 (1시간 04분)</p>
+                        <div class="session-score-grid">
+                            <span><small>총 단계</small><strong>5</strong></span>
+                            <span><small>완료율</small><strong>100%</strong></span>
+                            <span><small>집중 시간</small><strong>1시간 04분</strong></span>
+                        </div>
+                        <h4>세션 타임라인</h4>
+                        <ol class="session-timeline">
+                            <li><strong>작업 화면 열기</strong><span>09:02 - 09:07</span><em>5분</em></li>
+                            <li><strong>해야 할 일을 세 덩어리로 나누기</strong><span>09:07 - 09:15</span><em>8분</em></li>
+                            <li><strong>가장 쉬운 첫 조각만 끝내기</strong><span>09:15 - 09:27</span><em>12분</em></li>
+                            <li><strong>막힌 지점 하나 적기</strong><span>09:27 - 09:32</span><em>5분</em></li>
+                            <li><strong>짧게 쉬고 다음 행동 남기기</strong><span>09:32 - 09:37</span><em>5분</em></li>
+                        </ol>
+                        <button class="session-wide-button" type="button">전체 타임라인 보기</button>
+                        <div class="session-detail-section">
+                            <h4>개입 이벤트</h4>
+                            <p>80% 개입 <span>없음</span></p>
+                            <p>100% 개입 <span>없음</span></p>
+                            <p>반복 초과 <span>없음</span></p>
+                        </div>
+                        <div class="session-detail-section">
+                            <h4>컨텍스트 요약</h4>
+                            <p>앱 <span>Chrome</span></p>
+                            <p>윈도우 <span>Google Docs</span></p>
+                            <p>URL <span>docs.google.com/...</span></p>
+                            <button class="session-wide-button" type="button">자세히 보기 ↗</button>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            <div id="insights-content" style="display: none;">
+                <div class="insights-layout">
+                    <main class="insights-main-column">
+                        <section class="insights-overview-card">
+                            <div class="insights-tabs">
+                                <button class="active" type="button">개요</button>
+                                <button type="button">시간</button>
+                                <button type="button">집중</button>
+                                <button type="button">방해 요소</button>
+                                <button type="button">개입 이벤트</button>
+                                <button class="insights-date" type="button">2026-05-08 ~ 2026-05-14⌄</button>
+                            </div>
+                            <div class="metric-grid">
+                                <div><span>총 세션</span><strong>12</strong><small>지난 주 대비 ▲ 2</small></div>
+                                <div><span>총 집중 시간</span><strong>9시간 24분</strong><small>지난 주 대비 ▲ 1시간 15분</small></div>
+                                <div><span>평균 집중 시간</span><strong>47분</strong><small>지난 주 대비 ▲ 6분</small></div>
+                                <div><span>완료율</span><strong>78%</strong><small>지난 주 대비 ▲ 12%</small></div>
+                                <div><span>개입 이벤트</span><strong>6회</strong><small>지난 주 대비 ▼ 1</small></div>
+                            </div>
+                        </section>
+
+                        <section class="insight-card chart-card">
+                            <div class="section-heading-row">
+                                <h3>집중 시간 추이</h3>
+                                <button class="session-sort" type="button">일별⌄</button>
+                            </div>
+                            <div class="focus-chart" aria-label="Focus time trend">
+                                <span style="height: 54%"></span>
+                                <span style="height: 42%"></span>
+                                <span style="height: 72%"></span>
+                                <span style="height: 46%"></span>
+                                <span style="height: 78%"></span>
+                                <span style="height: 66%"></span>
+                                <span style="height: 50%"></span>
+                            </div>
+                            <div class="chart-labels"><span>05.08</span><span>05.09</span><span>05.10</span><span>05.11</span><span>05.12</span><span>05.13</span><span>05.14</span></div>
+                        </section>
+
+                        <section class="insight-card heatmap-card">
+                            <h3>시간대별 집중 분포</h3>
+                            <div class="heatmap-grid" aria-label="Focus heatmap"></div>
+                        </section>
+
+                        <section class="insight-card events-card">
+                            <h3>자주 발생한 개입 이벤트</h3>
+                            <div class="progress-row"><span>80% 개입</span><b style="width: 50%"></b><em>3회 · 50%</em></div>
+                            <div class="progress-row"><span>100% 개입</span><b style="width: 33%"></b><em>2회 · 33%</em></div>
+                            <div class="progress-row"><span>반복 초과</span><b style="width: 17%"></b><em>1회 · 17%</em></div>
+                            <button class="session-wide-button" type="button">모든 이벤트 보기 ›</button>
+                        </section>
+
+                        <section class="insight-card contexts-card">
+                            <h3>방해가 많았던 컨텍스트 TOP 5</h3>
+                            <div class="context-tabs"><span>앱</span><span>웹사이트</span><span>윈도우</span></div>
+                            <ul>
+                                <li><span>Chrome</span><b>4회</b><em>40%</em></li>
+                                <li><span>YouTube</span><b>3회</b><em>30%</em></li>
+                                <li><span>카카오톡</span><b>2회</b><em>20%</em></li>
+                                <li><span>Notion</span><b>1회</b><em>10%</em></li>
+                                <li><span>Instagram</span><b>1회</b><em>10%</em></li>
+                            </ul>
+                            <button class="session-wide-button" type="button">전체 컨텍스트 보기 ›</button>
+                        </section>
+                    </main>
+
+                    <aside class="insights-side-column">
+                        <section class="side-info-card">
+                            <h3>이번 주 요약</h3>
+                            <p><strong>↗ 집중 시간이 지난 주보다 1시간 15분 증가했어요!</strong></p>
+                            <p><strong>☆ 목표 완료율이 12% 향상됐어요!</strong></p>
+                            <p><strong>▣ 개입 이벤트가 1회 감소했어요!</strong></p>
+                        </section>
+                        <section class="side-info-card">
+                            <h3>패턴 인사이트</h3>
+                            <p><strong>오후 2시 - 5시 사이의 집중력이 가장 높아요</strong><br><span>이 시간대를 중요한 작업에 활용해보세요.</span></p>
+                            <p><strong>월요일 오전에 방해가 많이 발생해요</strong><br><span>시작 루틴을 점검해보는 건 어떨까요?</span></p>
+                            <p><strong>자료조사 관련 태스크에서 초과 시간이 자주 발생해요</strong><br><span>시간을 더 여유 있게 계획해보세요.</span></p>
+                        </section>
+                        <section class="side-info-card">
+                            <h3>주간 목표 제안</h3>
+                            <p>다음 주 목표 완료율 85% 달성을 목표로 해보세요!</p>
+                            <div class="goal-bar"><span></span></div>
+                            <small>78% · 목표 85%</small>
+                        </section>
+                    </aside>
+                </div>
             </div>
         </div>
 
@@ -2648,6 +3417,25 @@
             }
         }
 
+        async function ensureWidgetRunning() {
+            if (widgetRunning) return;
+            const btn = document.getElementById('widget-toggle');
+            const error = document.getElementById('widget-error');
+            btn.disabled = true;
+            error.innerText = '';
+
+            try {
+                const res = await fetch('/widget/start', { method: 'POST' });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    throw new Error(data.error || 'Electron widget start failed');
+                }
+                setWidgetButton(Boolean(data.running));
+            } catch (err) {
+                setWidgetButton(widgetRunning, err.message || 'Widget control failed');
+            }
+        }
+
         function showView(viewId) {
             document.getElementById('setup-view').style.display = 'none';
             document.getElementById('dashboard-view').style.display = 'none';
@@ -2655,11 +3443,51 @@
             document.getElementById(viewId).style.display = 'block';
         }
 
-        function selectSidebarNav(item, viewId) {
+        function selectSidebarNav(item, viewId, panel = 'today') {
             document.querySelectorAll('.sidebar-link').forEach(link => {
                 link.classList.toggle('active', link === item);
             });
             if (viewId) showView(viewId);
+            setSetupPanel(panel);
+        }
+
+        function setSetupPanel(panel) {
+            const today = document.getElementById('plan-content');
+            const sessions = document.getElementById('sessions-content');
+            const insights = document.getElementById('insights-content');
+            const title = document.getElementById('plan-goal-title');
+            const subtitle = document.getElementById('plan-created-at');
+            const actions = document.querySelector('#setup-view .launcher-actions');
+            const eyebrow = document.querySelector('#setup-view .launcher-eyebrow');
+            if (!today || !sessions || !insights || !title || !subtitle) return;
+
+            const isSessions = panel === 'sessions';
+            const isInsights = panel === 'insights';
+            today.style.display = (!isSessions && !isInsights) ? 'block' : 'none';
+            sessions.style.display = isSessions ? 'block' : 'none';
+            insights.style.display = isInsights ? 'block' : 'none';
+            title.innerText = isSessions
+                ? 'Sessions'
+                : (isInsights ? 'Insights' : (currentPlan?.goal_title || '모바일 계획을 불러오는 중'));
+            subtitle.innerText = isSessions
+                ? '실행 기록과 세션을 확인하고 성과를 돌아보세요.'
+                : (isInsights
+                    ? '당신의 집중 패턴과 실행 데이터를 분석했어요.'
+                    : (currentPlan?.created_at ? `모바일에서 생성됨 · ${currentPlan.created_at}` : '휴대폰에서 만든 계획을 PC에서 실행할 준비를 합니다.'));
+            if (eyebrow) eyebrow.innerText = 'MOBILE PLAN READY';
+            if (actions) actions.style.display = (isSessions || isInsights) ? 'flex' : '';
+            renderInsightHeatmap();
+        }
+
+        function renderInsightHeatmap() {
+            const grid = document.querySelector('.heatmap-grid');
+            if (!grid || grid.children.length) return;
+            for (let i = 0; i < 49; i += 1) {
+                const cell = document.createElement('span');
+                const level = 0.10 + ((i * 7) % 8) * 0.045;
+                cell.style.background = `rgba(114, 201, 109, ${level})`;
+                grid.appendChild(cell);
+            }
         }
 
         function formatTimeMinSec(seconds) {
@@ -2873,6 +3701,7 @@
 
             try {
                 showView('dashboard-view');
+                ensureWidgetRunning();
                 if (pollInterval) clearInterval(pollInterval);
                 pollInterval = setInterval(fetchStatus, 1000);
                 fetchStatus();

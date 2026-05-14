@@ -1,0 +1,14 @@
+
+> mobile-app-expo@1.0.0 start
+> expo start --host lan
+
+Starting project at C:\Users\gram\Desktop\adhd\mobile-app-expo
+Starting Metro Bundler
+Waiting on http://localhost:8081
+Logs for your project will appear below.
+Web .\index.ts ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 544ms index.ts (220 modules)
+ LOG  [web] Logs will appear in the browser console
+Web .\index.ts ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 16ms index.ts (1 module)
+ LOG  [web] Logs will appear in the browser console

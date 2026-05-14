@@ -6278,3 +6278,1336 @@
 [2026-05-14T03:54:49.306Z] renderer render status tasks {"source":"api","title":"","remaining_time":3600,"progress":{"completed":5,"percent":100,"total":5}}
 [2026-05-14T03:54:50.226Z] window closed
 [2026-05-14T03:54:50.228Z] window-all-closed
+[2026-05-14T11:37:24.493Z] main process started
+[2026-05-14T11:37:24.495Z] runtime paths {"userData":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-14080\\user-data","sessionData":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-14080\\user-data","cache":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-14080\\cache","temp":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-14080\\user-data\\temp"}
+[2026-05-14T11:37:24.559Z] app ready
+[2026-05-14T11:37:24.560Z] createWindow called
+[2026-05-14T11:37:24.625Z] BrowserWindow created {"width":480,"height":180,"x":936,"y":24}
+[2026-05-14T11:37:25.072Z] ready-to-show
+[2026-05-14T11:37:25.076Z] window shown
+[2026-05-14T11:37:25.078Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:25.087Z] renderer did-finish-load
+[2026-05-14T11:37:25.089Z] renderer console {"level":2,"message":"%cElectron Security Warning (Insecure Content-Security-Policy) font-weight: bold; This renderer process has either no Content Security\n  Policy set or a policy with \"unsafe-eval\" enabled. This exposes users of\n  this app to unnecessary security risks.\n\nFor more information and help, consult\nhttps://electronjs.org/docs/tutorial/security.\nThis warning will not show up\nonce the app is packaged.","line":2,"sourceId":"node:electron/js2c/renderer_init"}
+[2026-05-14T11:37:25.104Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":283,"error":""}
+[2026-05-14T11:37:25.106Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":283,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:26.085Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:26.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":300,"error":""}
+[2026-05-14T11:37:26.092Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":300,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:27.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:27.090Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":299,"error":""}
+[2026-05-14T11:37:27.091Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":299,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:28.085Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:28.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":298,"error":""}
+[2026-05-14T11:37:28.093Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":298,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:29.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:29.094Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":297,"error":""}
+[2026-05-14T11:37:29.094Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":297,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:30.080Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:30.115Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":296,"error":""}
+[2026-05-14T11:37:30.116Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":296,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:31.081Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:31.090Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":295,"error":""}
+[2026-05-14T11:37:31.091Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":295,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:32.086Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:32.095Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":294,"error":""}
+[2026-05-14T11:37:32.096Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":294,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:33.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:33.094Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":293,"error":""}
+[2026-05-14T11:37:33.095Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":293,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:34.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:34.097Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":292,"error":""}
+[2026-05-14T11:37:34.098Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":292,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:35.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:35.094Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":291,"error":""}
+[2026-05-14T11:37:35.096Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":291,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:36.086Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:36.097Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":290,"error":""}
+[2026-05-14T11:37:36.098Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":290,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:37.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:37.094Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":289,"error":""}
+[2026-05-14T11:37:37.095Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":289,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:38.089Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:38.100Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":288,"error":""}
+[2026-05-14T11:37:38.101Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":288,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:39.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:39.097Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":287,"error":""}
+[2026-05-14T11:37:39.098Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":287,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:40.081Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:40.093Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":286,"error":""}
+[2026-05-14T11:37:40.093Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":286,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:41.082Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:41.097Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":285,"error":""}
+[2026-05-14T11:37:41.099Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":285,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:42.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:42.093Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":284,"error":""}
+[2026-05-14T11:37:42.094Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":284,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:43.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:43.095Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":283,"error":""}
+[2026-05-14T11:37:43.096Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":283,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:44.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:44.094Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":282,"error":""}
+[2026-05-14T11:37:44.095Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":282,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:45.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:45.095Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":281,"error":""}
+[2026-05-14T11:37:45.096Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":281,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:46.086Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:46.100Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":280,"error":""}
+[2026-05-14T11:37:46.101Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":280,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:47.090Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:47.102Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":279,"error":""}
+[2026-05-14T11:37:47.104Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":279,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:48.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:48.093Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":278,"error":""}
+[2026-05-14T11:37:48.093Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":278,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:49.089Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:49.099Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":277,"error":""}
+[2026-05-14T11:37:49.100Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":277,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:50.088Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:50.098Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":276,"error":""}
+[2026-05-14T11:37:50.099Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":276,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:51.095Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:51.104Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":275,"error":""}
+[2026-05-14T11:37:51.105Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":275,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:52.090Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:52.100Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":274,"error":""}
+[2026-05-14T11:37:52.102Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":274,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:53.088Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:53.098Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":273,"error":""}
+[2026-05-14T11:37:53.099Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":273,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:54.094Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:54.104Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":272,"error":""}
+[2026-05-14T11:37:54.105Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":272,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:55.082Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:55.091Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":271,"error":""}
+[2026-05-14T11:37:55.092Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":271,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:56.092Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:56.102Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":270,"error":""}
+[2026-05-14T11:37:56.103Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":270,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:57.085Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:57.095Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":269,"error":""}
+[2026-05-14T11:37:57.096Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":269,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:58.091Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:58.103Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":268,"error":""}
+[2026-05-14T11:37:58.104Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":268,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:37:59.082Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:37:59.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":267,"error":""}
+[2026-05-14T11:37:59.093Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":267,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:38:00.080Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:00.095Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":266,"error":""}
+[2026-05-14T11:38:00.096Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":266,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:38:01.086Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:01.096Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":265,"error":""}
+[2026-05-14T11:38:01.097Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":265,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:38:02.080Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:02.088Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":264,"error":""}
+[2026-05-14T11:38:02.090Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":264,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:38:02.366Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-14T11:38:03.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:03.091Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":263,"error":""}
+[2026-05-14T11:38:03.092Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":263,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:03.279Z] renderer complete current result {"ok":true,"result":{"completed_task":"공부 범위 한 줄에 적기","next_task":{"category":"WORK","duration_minutes":10,"id":"step_2","order":2,"status":"active","title":"가장 쉬운 개념 3개 체크하기"},"plan_completed":false,"success":true}}
+[2026-05-14T11:38:03.676Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:03.689Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":600,"error":""}
+[2026-05-14T11:38:03.690Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":600,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:04.082Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:04.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":600,"error":""}
+[2026-05-14T11:38:04.093Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":600,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:05.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:05.116Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":599,"error":""}
+[2026-05-14T11:38:05.117Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":599,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:06.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:06.095Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":598,"error":""}
+[2026-05-14T11:38:06.096Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":598,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:07.080Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:07.089Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":597,"error":""}
+[2026-05-14T11:38:07.090Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":597,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:08.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:08.093Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":596,"error":""}
+[2026-05-14T11:38:08.094Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":596,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:09.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:09.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":595,"error":""}
+[2026-05-14T11:38:09.093Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":595,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:10.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:10.091Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":594,"error":""}
+[2026-05-14T11:38:10.092Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":594,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:11.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:11.093Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":593,"error":""}
+[2026-05-14T11:38:11.094Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":593,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:12.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:12.093Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":592,"error":""}
+[2026-05-14T11:38:12.095Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":592,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:13.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:13.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":591,"error":""}
+[2026-05-14T11:38:13.092Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":591,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:14.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:14.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":590,"error":""}
+[2026-05-14T11:38:14.093Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":590,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:15.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:15.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":589,"error":""}
+[2026-05-14T11:38:15.093Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":589,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:16.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:16.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":588,"error":""}
+[2026-05-14T11:38:16.093Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":588,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:17.080Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:17.089Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":587,"error":""}
+[2026-05-14T11:38:17.091Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":587,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:18.080Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:18.088Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":586,"error":""}
+[2026-05-14T11:38:18.089Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":586,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:19.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:19.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":585,"error":""}
+[2026-05-14T11:38:19.093Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":585,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:20.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:20.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":584,"error":""}
+[2026-05-14T11:38:20.093Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":584,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:38:20.454Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-14T11:38:21.085Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:21.093Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":583,"error":""}
+[2026-05-14T11:38:21.094Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":583,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-14T11:38:21.369Z] renderer complete current result {"ok":true,"result":{"completed_task":"가장 쉬운 개념 3개 체크하기","next_task":{"category":"WORK","duration_minutes":10,"id":"step_3","order":3,"status":"active","title":"헷갈리는 부분 2개 표시하기"},"plan_completed":false,"success":true}}
+[2026-05-14T11:38:21.739Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:21.750Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":600,"error":""}
+[2026-05-14T11:38:21.751Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":600,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-14T11:38:22.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:22.089Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":600,"error":""}
+[2026-05-14T11:38:22.090Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":600,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-14T11:38:23.081Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:23.095Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":599,"error":""}
+[2026-05-14T11:38:23.097Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":599,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-14T11:38:24.082Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:24.095Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":598,"error":""}
+[2026-05-14T11:38:24.096Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":598,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-14T11:38:25.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:25.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":597,"error":""}
+[2026-05-14T11:38:25.094Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":597,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-14T11:38:25.627Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-14T11:38:26.080Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:26.091Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"지금 문제 예시 3개 풀기","remaining":596,"error":""}
+[2026-05-14T11:38:26.092Z] renderer render status tasks {"source":"api","title":"지금 문제 예시 3개 풀기","remaining_time":596,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-14T11:38:26.416Z] renderer complete current result {"ok":true,"result":{"completed_task":"헷갈리는 부분 2개 표시하기","next_task":{"category":"WORK","duration_minutes":15,"id":"step_4","order":4,"status":"active","title":"지금 문제 예시 3개 풀기"},"plan_completed":false,"success":true}}
+[2026-05-14T11:38:26.783Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:26.800Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"지금 문제 예시 3개 풀기","remaining":900,"error":""}
+[2026-05-14T11:38:26.801Z] renderer render status tasks {"source":"api","title":"지금 문제 예시 3개 풀기","remaining_time":900,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-14T11:38:27.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:27.095Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"지금 문제 예시 3개 풀기","remaining":900,"error":""}
+[2026-05-14T11:38:27.096Z] renderer render status tasks {"source":"api","title":"지금 문제 예시 3개 풀기","remaining_time":900,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-14T11:38:27.837Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-14T11:38:28.084Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:28.096Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"스트레칭하고 다음 복습 적기","remaining":899,"error":""}
+[2026-05-14T11:38:28.097Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":899,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:38:28.453Z] renderer complete current result {"ok":true,"result":{"completed_task":"지금 문제 예시 3개 풀기","next_task":{"category":"ROUTINE","duration_minutes":5,"id":"step_5","order":5,"status":"active","title":"스트레칭하고 다음 복습 적기"},"plan_completed":false,"success":true}}
+[2026-05-14T11:38:28.815Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:28.827Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":300,"error":""}
+[2026-05-14T11:38:28.828Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":300,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:38:29.082Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:29.090Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":300,"error":""}
+[2026-05-14T11:38:29.091Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":300,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:38:30.081Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:30.087Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":299,"error":""}
+[2026-05-14T11:38:30.088Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":299,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:38:31.090Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:31.100Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":298,"error":""}
+[2026-05-14T11:38:31.101Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":298,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:38:31.995Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-14T11:38:32.022Z] renderer complete current result {"ok":true,"result":{"completed_task":"스트레칭하고 다음 복습 적기","next_task":null,"plan_completed":true,"success":true}}
+[2026-05-14T11:38:32.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:32.095Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":297,"error":""}
+[2026-05-14T11:38:32.096Z] renderer render status tasks {"source":"api","title":"","remaining_time":297,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:32.383Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:32.393Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":297,"error":""}
+[2026-05-14T11:38:32.395Z] renderer render status tasks {"source":"api","title":"","remaining_time":297,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:33.080Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:33.090Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":296,"error":""}
+[2026-05-14T11:38:33.090Z] renderer render status tasks {"source":"api","title":"","remaining_time":296,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:34.083Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:34.093Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":295,"error":""}
+[2026-05-14T11:38:34.093Z] renderer render status tasks {"source":"api","title":"","remaining_time":295,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:35.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:35.091Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":294,"error":""}
+[2026-05-14T11:38:35.092Z] renderer render status tasks {"source":"api","title":"","remaining_time":294,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:36.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:36.093Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":293,"error":""}
+[2026-05-14T11:38:36.093Z] renderer render status tasks {"source":"api","title":"","remaining_time":293,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:37.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:37.091Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":292,"error":""}
+[2026-05-14T11:38:37.093Z] renderer render status tasks {"source":"api","title":"","remaining_time":292,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:38.080Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:38.089Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":291,"error":""}
+[2026-05-14T11:38:38.090Z] renderer render status tasks {"source":"api","title":"","remaining_time":291,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:39.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:39.091Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":290,"error":""}
+[2026-05-14T11:38:39.092Z] renderer render status tasks {"source":"api","title":"","remaining_time":290,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:40.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:40.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":289,"error":""}
+[2026-05-14T11:38:40.093Z] renderer render status tasks {"source":"api","title":"","remaining_time":289,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:41.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:41.088Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":288,"error":""}
+[2026-05-14T11:38:41.089Z] renderer render status tasks {"source":"api","title":"","remaining_time":288,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:42.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:42.091Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":287,"error":""}
+[2026-05-14T11:38:42.092Z] renderer render status tasks {"source":"api","title":"","remaining_time":287,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:43.085Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:43.093Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":286,"error":""}
+[2026-05-14T11:38:43.094Z] renderer render status tasks {"source":"api","title":"","remaining_time":286,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:44.081Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:44.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":285,"error":""}
+[2026-05-14T11:38:44.093Z] renderer render status tasks {"source":"api","title":"","remaining_time":285,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:45.081Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:45.091Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":284,"error":""}
+[2026-05-14T11:38:45.092Z] renderer render status tasks {"source":"api","title":"","remaining_time":284,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:46.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:46.087Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":283,"error":""}
+[2026-05-14T11:38:46.088Z] renderer render status tasks {"source":"api","title":"","remaining_time":283,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:47.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:47.090Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":282,"error":""}
+[2026-05-14T11:38:47.091Z] renderer render status tasks {"source":"api","title":"","remaining_time":282,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:48.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:48.092Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":281,"error":""}
+[2026-05-14T11:38:48.092Z] renderer render status tasks {"source":"api","title":"","remaining_time":281,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:49.079Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:38:49.090Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":280,"error":""}
+[2026-05-14T11:38:49.091Z] renderer render status tasks {"source":"api","title":"","remaining_time":280,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:38:49.571Z] window closed
+[2026-05-14T11:38:49.573Z] window-all-closed
+[2026-05-14T11:40:56.549Z] main process started
+[2026-05-14T11:40:56.553Z] runtime paths {"userData":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-14080\\user-data","sessionData":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-14080\\user-data","cache":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-14080\\cache","temp":"C:\\Users\\gram\\Desktop\\adhd\\widget-runtime\\session-14080\\user-data\\temp"}
+[2026-05-14T11:40:56.626Z] app ready
+[2026-05-14T11:40:56.626Z] createWindow called
+[2026-05-14T11:40:56.764Z] BrowserWindow created {"width":480,"height":180,"x":936,"y":24}
+[2026-05-14T11:40:57.165Z] ready-to-show
+[2026-05-14T11:40:57.168Z] window shown
+[2026-05-14T11:40:57.170Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:40:57.178Z] renderer did-finish-load
+[2026-05-14T11:40:57.179Z] renderer console {"level":2,"message":"%cElectron Security Warning (Insecure Content-Security-Policy) font-weight: bold; This renderer process has either no Content Security\n  Policy set or a policy with \"unsafe-eval\" enabled. This exposes users of\n  this app to unnecessary security risks.\n\nFor more information and help, consult\nhttps://electronjs.org/docs/tutorial/security.\nThis warning will not show up\nonce the app is packaged.","line":2,"sourceId":"node:electron/js2c/renderer_init"}
+[2026-05-14T11:40:57.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":293,"error":""}
+[2026-05-14T11:40:57.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":293,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:40:58.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:40:58.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":292,"error":""}
+[2026-05-14T11:40:58.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":292,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:40:59.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:40:59.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":291,"error":""}
+[2026-05-14T11:40:59.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":291,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:00.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:00.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":290,"error":""}
+[2026-05-14T11:41:00.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":290,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:01.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:01.201Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":289,"error":""}
+[2026-05-14T11:41:01.203Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":289,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:02.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:02.204Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":288,"error":""}
+[2026-05-14T11:41:02.206Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":288,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:03.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:03.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":287,"error":""}
+[2026-05-14T11:41:03.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":287,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:04.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:04.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":286,"error":""}
+[2026-05-14T11:41:04.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":286,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:05.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:05.200Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":285,"error":""}
+[2026-05-14T11:41:05.202Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":285,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:06.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:06.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":284,"error":""}
+[2026-05-14T11:41:06.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":284,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:07.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:07.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":283,"error":""}
+[2026-05-14T11:41:07.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":283,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:08.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:08.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":282,"error":""}
+[2026-05-14T11:41:08.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":282,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:09.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:09.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":281,"error":""}
+[2026-05-14T11:41:09.199Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":281,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:10.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:10.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":280,"error":""}
+[2026-05-14T11:41:10.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":280,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:11.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:11.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":279,"error":""}
+[2026-05-14T11:41:11.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":279,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:12.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:12.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":278,"error":""}
+[2026-05-14T11:41:12.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":278,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:13.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:13.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":277,"error":""}
+[2026-05-14T11:41:13.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":277,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:14.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:14.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":276,"error":""}
+[2026-05-14T11:41:14.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":276,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:15.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:15.199Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":275,"error":""}
+[2026-05-14T11:41:15.200Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":275,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:16.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:16.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":274,"error":""}
+[2026-05-14T11:41:16.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":274,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:17.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:17.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":273,"error":""}
+[2026-05-14T11:41:17.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":273,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:18.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:18.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":272,"error":""}
+[2026-05-14T11:41:18.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":272,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:19.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:19.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":271,"error":""}
+[2026-05-14T11:41:19.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":271,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:20.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:20.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":270,"error":""}
+[2026-05-14T11:41:20.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":270,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:21.188Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:21.201Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":269,"error":""}
+[2026-05-14T11:41:21.202Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":269,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:22.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:22.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":268,"error":""}
+[2026-05-14T11:41:22.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":268,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:23.188Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:23.215Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":267,"error":""}
+[2026-05-14T11:41:23.217Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":267,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:24.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:24.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":266,"error":""}
+[2026-05-14T11:41:24.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":266,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:25.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:25.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":265,"error":""}
+[2026-05-14T11:41:25.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":265,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:26.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:26.183Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":264,"error":""}
+[2026-05-14T11:41:26.184Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":264,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:27.187Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:27.198Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":263,"error":""}
+[2026-05-14T11:41:27.199Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":263,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:28.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:28.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":262,"error":""}
+[2026-05-14T11:41:28.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":262,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:29.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:29.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":261,"error":""}
+[2026-05-14T11:41:29.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":261,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:30.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:30.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":260,"error":""}
+[2026-05-14T11:41:30.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":260,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:31.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:31.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":259,"error":""}
+[2026-05-14T11:41:31.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":259,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:32.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:32.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":258,"error":""}
+[2026-05-14T11:41:32.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":258,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:33.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:33.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":257,"error":""}
+[2026-05-14T11:41:33.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":257,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:34.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:34.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":256,"error":""}
+[2026-05-14T11:41:34.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":256,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:35.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:35.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":255,"error":""}
+[2026-05-14T11:41:35.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":255,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:36.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:36.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":254,"error":""}
+[2026-05-14T11:41:36.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":254,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:37.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:37.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":253,"error":""}
+[2026-05-14T11:41:37.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":253,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:38.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:38.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":252,"error":""}
+[2026-05-14T11:41:38.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":252,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:39.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:39.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":251,"error":""}
+[2026-05-14T11:41:39.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":251,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:40.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:40.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":250,"error":""}
+[2026-05-14T11:41:40.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":250,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:41.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:41.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":249,"error":""}
+[2026-05-14T11:41:41.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":249,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:42.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:42.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":248,"error":""}
+[2026-05-14T11:41:42.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":248,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:43.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:43.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":247,"error":""}
+[2026-05-14T11:41:43.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":247,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:44.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:44.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":246,"error":""}
+[2026-05-14T11:41:44.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":246,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:45.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:45.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":245,"error":""}
+[2026-05-14T11:41:45.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":245,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:46.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:46.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":244,"error":""}
+[2026-05-14T11:41:46.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":244,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:47.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:47.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":243,"error":""}
+[2026-05-14T11:41:47.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":243,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:48.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:48.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":242,"error":""}
+[2026-05-14T11:41:48.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":242,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:49.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:49.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":241,"error":""}
+[2026-05-14T11:41:49.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":241,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:50.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:50.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":240,"error":""}
+[2026-05-14T11:41:50.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":240,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:51.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:51.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":239,"error":""}
+[2026-05-14T11:41:51.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":239,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:52.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:52.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":238,"error":""}
+[2026-05-14T11:41:52.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":238,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:53.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:53.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":237,"error":""}
+[2026-05-14T11:41:53.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":237,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:54.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:54.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":236,"error":""}
+[2026-05-14T11:41:54.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":236,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:55.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:55.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":235,"error":""}
+[2026-05-14T11:41:55.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":235,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:56.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:56.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":234,"error":""}
+[2026-05-14T11:41:56.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":234,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:57.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:57.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":233,"error":""}
+[2026-05-14T11:41:57.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":233,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:58.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:58.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":232,"error":""}
+[2026-05-14T11:41:58.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":232,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:41:59.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:41:59.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":231,"error":""}
+[2026-05-14T11:41:59.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":231,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:00.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:00.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":230,"error":""}
+[2026-05-14T11:42:00.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":230,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:01.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:01.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":229,"error":""}
+[2026-05-14T11:42:01.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":229,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:02.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:02.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":228,"error":""}
+[2026-05-14T11:42:02.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":228,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:03.187Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:03.206Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":227,"error":""}
+[2026-05-14T11:42:03.207Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":227,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:04.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:04.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":226,"error":""}
+[2026-05-14T11:42:04.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":226,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:05.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:05.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":225,"error":""}
+[2026-05-14T11:42:05.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":225,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:06.188Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:06.199Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":224,"error":""}
+[2026-05-14T11:42:06.200Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":224,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:07.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:07.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":223,"error":""}
+[2026-05-14T11:42:07.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":223,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:08.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:08.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":222,"error":""}
+[2026-05-14T11:42:08.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":222,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:09.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:09.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":221,"error":""}
+[2026-05-14T11:42:09.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":221,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:10.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:10.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":220,"error":""}
+[2026-05-14T11:42:10.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":220,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:11.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:11.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":219,"error":""}
+[2026-05-14T11:42:11.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":219,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:12.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:12.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":218,"error":""}
+[2026-05-14T11:42:12.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":218,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:13.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:13.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":217,"error":""}
+[2026-05-14T11:42:13.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":217,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:14.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:14.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":216,"error":""}
+[2026-05-14T11:42:14.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":216,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:15.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:15.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":215,"error":""}
+[2026-05-14T11:42:15.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":215,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:16.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:16.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":214,"error":""}
+[2026-05-14T11:42:16.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":214,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:17.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:17.198Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":213,"error":""}
+[2026-05-14T11:42:17.199Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":213,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:18.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:18.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":212,"error":""}
+[2026-05-14T11:42:18.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":212,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:19.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:19.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":211,"error":""}
+[2026-05-14T11:42:19.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":211,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:20.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:20.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":210,"error":""}
+[2026-05-14T11:42:20.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":210,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:21.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:21.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":209,"error":""}
+[2026-05-14T11:42:21.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":209,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:22.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:22.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":208,"error":""}
+[2026-05-14T11:42:22.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":208,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:23.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:23.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":207,"error":""}
+[2026-05-14T11:42:23.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":207,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:24.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:24.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":206,"error":""}
+[2026-05-14T11:42:24.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":206,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:25.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:25.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":205,"error":""}
+[2026-05-14T11:42:25.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":205,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:26.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:26.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":204,"error":""}
+[2026-05-14T11:42:26.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":204,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:27.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:27.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":203,"error":""}
+[2026-05-14T11:42:27.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":203,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:28.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:28.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":202,"error":""}
+[2026-05-14T11:42:28.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":202,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:29.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:29.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":201,"error":""}
+[2026-05-14T11:42:29.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":201,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:30.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:30.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":200,"error":""}
+[2026-05-14T11:42:30.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":200,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:31.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:31.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":199,"error":""}
+[2026-05-14T11:42:31.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":199,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:32.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:32.198Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":198,"error":""}
+[2026-05-14T11:42:32.199Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":198,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:33.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:33.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":197,"error":""}
+[2026-05-14T11:42:33.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":197,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:34.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:34.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":196,"error":""}
+[2026-05-14T11:42:34.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":196,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:35.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:35.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":195,"error":""}
+[2026-05-14T11:42:35.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":195,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:36.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:36.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":194,"error":""}
+[2026-05-14T11:42:36.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":194,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:37.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:37.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":193,"error":""}
+[2026-05-14T11:42:37.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":193,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:38.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:38.202Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":192,"error":""}
+[2026-05-14T11:42:38.204Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":192,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:39.187Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:39.198Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":191,"error":""}
+[2026-05-14T11:42:39.200Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":191,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:40.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:40.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":190,"error":""}
+[2026-05-14T11:42:40.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":190,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:41.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:41.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":189,"error":""}
+[2026-05-14T11:42:41.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":189,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:42.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:42.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":188,"error":""}
+[2026-05-14T11:42:42.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":188,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:43.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:43.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":187,"error":""}
+[2026-05-14T11:42:43.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":187,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:44.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:44.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":186,"error":""}
+[2026-05-14T11:42:44.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":186,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:45.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:45.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":185,"error":""}
+[2026-05-14T11:42:45.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":185,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:46.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:46.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":184,"error":""}
+[2026-05-14T11:42:46.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":184,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:47.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:47.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":183,"error":""}
+[2026-05-14T11:42:47.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":183,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:48.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:48.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":182,"error":""}
+[2026-05-14T11:42:48.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":182,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:49.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:49.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":181,"error":""}
+[2026-05-14T11:42:49.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":181,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:50.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:50.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":180,"error":""}
+[2026-05-14T11:42:50.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":180,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:51.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:51.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":179,"error":""}
+[2026-05-14T11:42:51.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":179,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:52.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:52.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":178,"error":""}
+[2026-05-14T11:42:52.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":178,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:53.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:53.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":177,"error":""}
+[2026-05-14T11:42:53.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":177,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:54.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:54.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":176,"error":""}
+[2026-05-14T11:42:54.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":176,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:55.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:55.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":175,"error":""}
+[2026-05-14T11:42:55.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":175,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:56.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:56.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":174,"error":""}
+[2026-05-14T11:42:56.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":174,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:57.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:57.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":173,"error":""}
+[2026-05-14T11:42:57.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":173,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:58.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:58.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":172,"error":""}
+[2026-05-14T11:42:58.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":172,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:42:59.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:42:59.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":171,"error":""}
+[2026-05-14T11:42:59.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":171,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:00.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:00.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":170,"error":""}
+[2026-05-14T11:43:00.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":170,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:01.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:01.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":169,"error":""}
+[2026-05-14T11:43:01.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":169,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:02.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:02.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":168,"error":""}
+[2026-05-14T11:43:02.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":168,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:03.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:03.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":167,"error":""}
+[2026-05-14T11:43:03.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":167,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:04.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:04.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":166,"error":""}
+[2026-05-14T11:43:04.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":166,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:05.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:05.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":165,"error":""}
+[2026-05-14T11:43:05.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":165,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:06.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:06.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":164,"error":""}
+[2026-05-14T11:43:06.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":164,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:07.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:07.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":163,"error":""}
+[2026-05-14T11:43:07.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":163,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:08.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:08.198Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":162,"error":""}
+[2026-05-14T11:43:08.206Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":162,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:09.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:09.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":161,"error":""}
+[2026-05-14T11:43:09.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":161,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:10.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:10.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":160,"error":""}
+[2026-05-14T11:43:10.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":160,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:11.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:11.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":159,"error":""}
+[2026-05-14T11:43:11.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":159,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:12.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:12.200Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":158,"error":""}
+[2026-05-14T11:43:12.201Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":158,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:13.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:13.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":157,"error":""}
+[2026-05-14T11:43:13.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":157,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:14.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:14.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":156,"error":""}
+[2026-05-14T11:43:14.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":156,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:15.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:15.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":155,"error":""}
+[2026-05-14T11:43:15.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":155,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:16.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:16.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":154,"error":""}
+[2026-05-14T11:43:16.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":154,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:17.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:17.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":153,"error":""}
+[2026-05-14T11:43:17.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":153,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:18.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:18.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":152,"error":""}
+[2026-05-14T11:43:18.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":152,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:19.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:19.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":151,"error":""}
+[2026-05-14T11:43:19.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":151,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:20.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:20.182Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":150,"error":""}
+[2026-05-14T11:43:20.184Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":150,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:21.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:21.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":149,"error":""}
+[2026-05-14T11:43:21.202Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":149,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:22.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:22.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":148,"error":""}
+[2026-05-14T11:43:22.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":148,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:23.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:23.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":147,"error":""}
+[2026-05-14T11:43:23.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":147,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:24.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:24.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":146,"error":""}
+[2026-05-14T11:43:24.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":146,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:25.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:25.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":145,"error":""}
+[2026-05-14T11:43:25.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":145,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:26.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:26.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":144,"error":""}
+[2026-05-14T11:43:26.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":144,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:27.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:27.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":143,"error":""}
+[2026-05-14T11:43:27.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":143,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:28.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:28.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":142,"error":""}
+[2026-05-14T11:43:28.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":142,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:29.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:29.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":141,"error":""}
+[2026-05-14T11:43:29.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":141,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:30.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:30.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":140,"error":""}
+[2026-05-14T11:43:30.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":140,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:31.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:31.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":139,"error":""}
+[2026-05-14T11:43:31.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":139,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:32.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:32.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":138,"error":""}
+[2026-05-14T11:43:32.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":138,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:33.188Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:33.200Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":137,"error":""}
+[2026-05-14T11:43:33.201Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":137,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:34.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:34.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":136,"error":""}
+[2026-05-14T11:43:34.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":136,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:35.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:35.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":135,"error":""}
+[2026-05-14T11:43:35.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":135,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:36.187Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:36.199Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":134,"error":""}
+[2026-05-14T11:43:36.201Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":134,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:37.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:37.198Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":133,"error":""}
+[2026-05-14T11:43:37.199Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":133,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:38.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:38.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":132,"error":""}
+[2026-05-14T11:43:38.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":132,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:39.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:39.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":131,"error":""}
+[2026-05-14T11:43:39.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":131,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:40.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:40.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":130,"error":""}
+[2026-05-14T11:43:40.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":130,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:41.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:41.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":129,"error":""}
+[2026-05-14T11:43:41.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":129,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:42.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:42.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":128,"error":""}
+[2026-05-14T11:43:42.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":128,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:43.188Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:43.198Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":127,"error":""}
+[2026-05-14T11:43:43.199Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":127,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:44.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:44.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":126,"error":""}
+[2026-05-14T11:43:44.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":126,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:45.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:45.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":125,"error":""}
+[2026-05-14T11:43:45.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":125,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:46.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:46.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":124,"error":""}
+[2026-05-14T11:43:46.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":124,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:47.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:47.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":123,"error":""}
+[2026-05-14T11:43:47.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":123,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:48.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:48.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":122,"error":""}
+[2026-05-14T11:43:48.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":122,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:49.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:49.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":121,"error":""}
+[2026-05-14T11:43:49.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":121,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:50.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:50.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":120,"error":""}
+[2026-05-14T11:43:50.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":120,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:51.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:51.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":119,"error":""}
+[2026-05-14T11:43:51.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":119,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:52.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:52.198Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":118,"error":""}
+[2026-05-14T11:43:52.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":118,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:53.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:53.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":117,"error":""}
+[2026-05-14T11:43:53.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":117,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:54.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:54.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":116,"error":""}
+[2026-05-14T11:43:54.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":116,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:55.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:55.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":115,"error":""}
+[2026-05-14T11:43:55.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":115,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:56.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:56.182Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":114,"error":""}
+[2026-05-14T11:43:56.183Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":114,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:57.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:57.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":113,"error":""}
+[2026-05-14T11:43:57.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":113,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:58.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:58.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":112,"error":""}
+[2026-05-14T11:43:58.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":112,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:43:59.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:43:59.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":111,"error":""}
+[2026-05-14T11:43:59.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":111,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:00.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:00.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":110,"error":""}
+[2026-05-14T11:44:00.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":110,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:01.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:01.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":109,"error":""}
+[2026-05-14T11:44:01.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":109,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:02.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:02.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":108,"error":""}
+[2026-05-14T11:44:02.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":108,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:03.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:03.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":107,"error":""}
+[2026-05-14T11:44:03.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":107,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:04.188Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:04.199Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":106,"error":""}
+[2026-05-14T11:44:04.200Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":106,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:05.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:05.182Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":105,"error":""}
+[2026-05-14T11:44:05.183Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":105,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:06.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:06.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":104,"error":""}
+[2026-05-14T11:44:06.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":104,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:07.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:07.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":103,"error":""}
+[2026-05-14T11:44:07.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":103,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:08.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:08.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":102,"error":""}
+[2026-05-14T11:44:08.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":102,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:09.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:09.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":101,"error":""}
+[2026-05-14T11:44:09.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":101,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:10.188Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:10.199Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":100,"error":""}
+[2026-05-14T11:44:10.201Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":100,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:11.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:11.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":99,"error":""}
+[2026-05-14T11:44:11.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":99,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:12.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:12.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":98,"error":""}
+[2026-05-14T11:44:12.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":98,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:13.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:13.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":97,"error":""}
+[2026-05-14T11:44:13.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":97,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:14.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:14.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":96,"error":""}
+[2026-05-14T11:44:14.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":96,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:15.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:15.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":95,"error":""}
+[2026-05-14T11:44:15.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":95,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:16.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:16.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":94,"error":""}
+[2026-05-14T11:44:16.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":94,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:17.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:17.200Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":93,"error":""}
+[2026-05-14T11:44:17.201Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":93,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:18.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:18.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":92,"error":""}
+[2026-05-14T11:44:18.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":92,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:19.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:19.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":91,"error":""}
+[2026-05-14T11:44:19.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":91,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:20.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:20.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":90,"error":""}
+[2026-05-14T11:44:20.206Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":90,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:21.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:21.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":89,"error":""}
+[2026-05-14T11:44:21.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":89,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:22.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:22.201Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":88,"error":""}
+[2026-05-14T11:44:22.202Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":88,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:23.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:23.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":87,"error":""}
+[2026-05-14T11:44:23.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":87,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:24.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:24.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":86,"error":""}
+[2026-05-14T11:44:24.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":86,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:25.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:25.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":85,"error":""}
+[2026-05-14T11:44:25.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":85,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:26.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:26.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":84,"error":""}
+[2026-05-14T11:44:26.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":84,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:27.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:27.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":83,"error":""}
+[2026-05-14T11:44:27.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":83,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:28.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:28.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":82,"error":""}
+[2026-05-14T11:44:28.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":82,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:29.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:29.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":81,"error":""}
+[2026-05-14T11:44:29.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":81,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:30.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:30.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":80,"error":""}
+[2026-05-14T11:44:30.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":80,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:31.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:31.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":79,"error":""}
+[2026-05-14T11:44:31.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":79,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:32.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:32.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":78,"error":""}
+[2026-05-14T11:44:32.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":78,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:33.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:33.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":77,"error":""}
+[2026-05-14T11:44:33.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":77,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:34.172Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:34.183Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":76,"error":""}
+[2026-05-14T11:44:34.184Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":76,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:35.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:35.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":75,"error":""}
+[2026-05-14T11:44:35.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":75,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:36.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:36.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":74,"error":""}
+[2026-05-14T11:44:36.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":74,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:37.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:37.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":73,"error":""}
+[2026-05-14T11:44:37.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":73,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:38.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:38.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":72,"error":""}
+[2026-05-14T11:44:38.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":72,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:39.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:39.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":71,"error":""}
+[2026-05-14T11:44:39.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":71,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:40.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:40.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":70,"error":""}
+[2026-05-14T11:44:40.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":70,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:41.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:41.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":69,"error":""}
+[2026-05-14T11:44:41.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":69,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:42.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:42.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":68,"error":""}
+[2026-05-14T11:44:42.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":68,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:43.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:43.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":67,"error":""}
+[2026-05-14T11:44:43.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":67,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:44.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:44.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":66,"error":""}
+[2026-05-14T11:44:44.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":66,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:45.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:45.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":65,"error":""}
+[2026-05-14T11:44:45.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":65,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:46.180Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:46.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":64,"error":""}
+[2026-05-14T11:44:46.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":64,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:47.172Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:47.183Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":63,"error":""}
+[2026-05-14T11:44:47.184Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":63,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:48.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:48.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":62,"error":""}
+[2026-05-14T11:44:48.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":62,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:49.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:49.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":61,"error":""}
+[2026-05-14T11:44:49.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":61,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:50.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:50.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":60,"error":""}
+[2026-05-14T11:44:50.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":60,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:51.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:51.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":59,"error":""}
+[2026-05-14T11:44:51.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":59,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:52.172Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:52.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":58,"error":""}
+[2026-05-14T11:44:52.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":58,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:53.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:53.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":57,"error":""}
+[2026-05-14T11:44:53.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":57,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:54.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:54.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":56,"error":""}
+[2026-05-14T11:44:54.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":56,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:55.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:55.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":55,"error":""}
+[2026-05-14T11:44:55.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":55,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:56.172Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:56.183Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":54,"error":""}
+[2026-05-14T11:44:56.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":54,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:57.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:57.183Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":53,"error":""}
+[2026-05-14T11:44:57.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":53,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:58.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:58.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"idle","currentTask":"공부 범위 한 줄에 적기","remaining":52,"error":""}
+[2026-05-14T11:44:58.194Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":52,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:44:59.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:44:59.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":51,"error":""}
+[2026-05-14T11:44:59.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":51,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:00.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:00.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":50,"error":""}
+[2026-05-14T11:45:00.199Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":50,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:01.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:01.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":49,"error":""}
+[2026-05-14T11:45:01.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":49,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:02.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:02.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":48,"error":""}
+[2026-05-14T11:45:02.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":48,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:03.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:03.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":47,"error":""}
+[2026-05-14T11:45:03.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":47,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:04.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:04.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":46,"error":""}
+[2026-05-14T11:45:04.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":46,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:05.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:05.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":45,"error":""}
+[2026-05-14T11:45:05.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":45,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:06.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:06.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":44,"error":""}
+[2026-05-14T11:45:06.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":44,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:07.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:07.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":43,"error":""}
+[2026-05-14T11:45:07.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":43,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:08.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:08.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":42,"error":""}
+[2026-05-14T11:45:08.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":42,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:09.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:09.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":41,"error":""}
+[2026-05-14T11:45:09.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":41,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:10.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:10.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":40,"error":""}
+[2026-05-14T11:45:10.185Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":40,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:11.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:11.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":39,"error":""}
+[2026-05-14T11:45:11.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":39,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:12.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:12.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":38,"error":""}
+[2026-05-14T11:45:12.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":38,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:13.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:13.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":37,"error":""}
+[2026-05-14T11:45:13.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":37,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:14.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:14.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":36,"error":""}
+[2026-05-14T11:45:14.195Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":36,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:15.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:15.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":35,"error":""}
+[2026-05-14T11:45:15.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":35,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:16.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:16.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":34,"error":""}
+[2026-05-14T11:45:16.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":34,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:17.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:17.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":33,"error":""}
+[2026-05-14T11:45:17.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":33,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:18.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:18.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":32,"error":""}
+[2026-05-14T11:45:18.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":32,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:19.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:19.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":31,"error":""}
+[2026-05-14T11:45:19.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":31,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:20.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:20.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":30,"error":""}
+[2026-05-14T11:45:20.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":30,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:21.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:21.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":29,"error":""}
+[2026-05-14T11:45:21.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":29,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:22.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:22.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":28,"error":""}
+[2026-05-14T11:45:22.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":28,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:23.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:23.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":27,"error":""}
+[2026-05-14T11:45:23.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":27,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:24.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:24.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":26,"error":""}
+[2026-05-14T11:45:24.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":26,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:25.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:25.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":25,"error":""}
+[2026-05-14T11:45:25.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":25,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:26.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:26.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":24,"error":""}
+[2026-05-14T11:45:26.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":24,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:27.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:27.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":23,"error":""}
+[2026-05-14T11:45:27.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":23,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:28.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:28.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":22,"error":""}
+[2026-05-14T11:45:28.192Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":22,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:29.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:29.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":21,"error":""}
+[2026-05-14T11:45:29.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":21,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:30.184Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:30.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":20,"error":""}
+[2026-05-14T11:45:30.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":20,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:31.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:31.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":19,"error":""}
+[2026-05-14T11:45:31.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":19,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:32.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:32.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":18,"error":""}
+[2026-05-14T11:45:32.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":18,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:33.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:33.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":17,"error":""}
+[2026-05-14T11:45:33.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":17,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:34.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:34.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":16,"error":""}
+[2026-05-14T11:45:34.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":16,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:35.185Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:35.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":15,"error":""}
+[2026-05-14T11:45:35.197Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":15,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:36.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:36.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":14,"error":""}
+[2026-05-14T11:45:36.186Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":14,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:37.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:37.183Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":13,"error":""}
+[2026-05-14T11:45:37.184Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":13,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:38.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:38.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":12,"error":""}
+[2026-05-14T11:45:38.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":12,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:39.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:39.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":11,"error":""}
+[2026-05-14T11:45:39.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":11,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:40.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:40.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":10,"error":""}
+[2026-05-14T11:45:40.188Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":10,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:41.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:41.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":9,"error":""}
+[2026-05-14T11:45:41.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":9,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:42.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:42.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":8,"error":""}
+[2026-05-14T11:45:42.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":8,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:43.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:43.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":7,"error":""}
+[2026-05-14T11:45:43.199Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":7,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:44.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:44.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":6,"error":""}
+[2026-05-14T11:45:44.187Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":6,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:45.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:45.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":5,"error":""}
+[2026-05-14T11:45:45.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":5,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:46.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:46.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":4,"error":""}
+[2026-05-14T11:45:46.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":4,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:47.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:47.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":3,"error":""}
+[2026-05-14T11:45:47.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":3,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:48.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:48.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":2,"error":""}
+[2026-05-14T11:45:48.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":2,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:49.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:49.188Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":1,"error":""}
+[2026-05-14T11:45:49.189Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":1,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:50.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:50.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"공부 범위 한 줄에 적기","remaining":0,"error":""}
+[2026-05-14T11:45:50.190Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":0,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:51.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:51.198Z] renderer refresh focus status result {"source":"api","ok":true,"state":"distracted","currentTask":"공부 범위 한 줄에 적기","remaining":0,"error":""}
+[2026-05-14T11:45:51.199Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":0,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:52.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:52.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"distracted","currentTask":"공부 범위 한 줄에 적기","remaining":0,"error":""}
+[2026-05-14T11:45:52.193Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":0,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:53.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:53.197Z] renderer refresh focus status result {"source":"api","ok":true,"state":"distracted","currentTask":"공부 범위 한 줄에 적기","remaining":0,"error":""}
+[2026-05-14T11:45:53.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":0,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:54.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:54.196Z] renderer refresh focus status result {"source":"api","ok":true,"state":"distracted","currentTask":"공부 범위 한 줄에 적기","remaining":0,"error":""}
+[2026-05-14T11:45:54.198Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":0,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:55.187Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:55.204Z] renderer refresh focus status result {"source":"api","ok":true,"state":"distracted","currentTask":"공부 범위 한 줄에 적기","remaining":0,"error":""}
+[2026-05-14T11:45:55.206Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":0,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:56.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:56.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"distracted","currentTask":"공부 범위 한 줄에 적기","remaining":0,"error":""}
+[2026-05-14T11:45:56.191Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":0,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:57.186Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:57.210Z] renderer refresh focus status result {"source":"api","ok":true,"state":"distracted","currentTask":"공부 범위 한 줄에 적기","remaining":0,"error":""}
+[2026-05-14T11:45:57.211Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":0,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:58.183Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:58.198Z] renderer refresh focus status result {"source":"api","ok":true,"state":"distracted","currentTask":"공부 범위 한 줄에 적기","remaining":0,"error":""}
+[2026-05-14T11:45:58.200Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":0,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:59.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:45:59.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"distracted","currentTask":"공부 범위 한 줄에 적기","remaining":0,"error":""}
+[2026-05-14T11:45:59.196Z] renderer render status tasks {"source":"api","title":"공부 범위 한 줄에 적기","remaining_time":0,"progress":{"completed":0,"percent":0,"total":5}}
+[2026-05-14T11:45:59.694Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-14T11:46:00.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:00.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"distracted","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":0,"error":""}
+[2026-05-14T11:46:00.196Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":0,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:00.250Z] renderer complete current result {"ok":true,"result":{"completed_task":"공부 범위 한 줄에 적기","next_task":{"category":"WORK","duration_minutes":10,"id":"step_2","order":2,"status":"active","title":"가장 쉬운 개념 3개 체크하기"},"plan_completed":false,"success":true}}
+[2026-05-14T11:46:00.655Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:00.671Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":600,"error":""}
+[2026-05-14T11:46:00.674Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":600,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:01.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:01.195Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":600,"error":""}
+[2026-05-14T11:46:01.198Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":600,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:02.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:02.182Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":599,"error":""}
+[2026-05-14T11:46:02.183Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":599,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:03.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:03.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":598,"error":""}
+[2026-05-14T11:46:03.192Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":598,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:04.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:04.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":597,"error":""}
+[2026-05-14T11:46:04.186Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":597,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:05.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:05.191Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":596,"error":""}
+[2026-05-14T11:46:05.192Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":596,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:06.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:06.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":595,"error":""}
+[2026-05-14T11:46:06.185Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":595,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:07.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:07.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":594,"error":""}
+[2026-05-14T11:46:07.195Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":594,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:08.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:08.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":593,"error":""}
+[2026-05-14T11:46:08.185Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":593,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:09.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:09.189Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":592,"error":""}
+[2026-05-14T11:46:09.190Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":592,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:10.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:10.213Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":590,"error":""}
+[2026-05-14T11:46:10.216Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":590,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:11.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:11.186Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"가장 쉬운 개념 3개 체크하기","remaining":590,"error":""}
+[2026-05-14T11:46:11.187Z] renderer render status tasks {"source":"api","title":"가장 쉬운 개념 3개 체크하기","remaining_time":590,"progress":{"completed":1,"percent":20,"total":5}}
+[2026-05-14T11:46:12.158Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-14T11:46:12.179Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:12.205Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":589,"error":""}
+[2026-05-14T11:46:12.206Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":589,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-14T11:46:12.320Z] renderer complete current result {"ok":true,"result":{"completed_task":"가장 쉬운 개념 3개 체크하기","next_task":{"category":"WORK","duration_minutes":10,"id":"step_3","order":3,"status":"active","title":"헷갈리는 부분 2개 표시하기"},"plan_completed":false,"success":true}}
+[2026-05-14T11:46:12.689Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:12.700Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":600,"error":""}
+[2026-05-14T11:46:12.702Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":600,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-14T11:46:13.181Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:13.194Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"헷갈리는 부분 2개 표시하기","remaining":600,"error":""}
+[2026-05-14T11:46:13.195Z] renderer render status tasks {"source":"api","title":"헷갈리는 부분 2개 표시하기","remaining_time":600,"progress":{"completed":2,"percent":40,"total":5}}
+[2026-05-14T11:46:13.818Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-14T11:46:14.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:14.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"지금 문제 예시 3개 풀기","remaining":599,"error":""}
+[2026-05-14T11:46:14.185Z] renderer render status tasks {"source":"api","title":"지금 문제 예시 3개 풀기","remaining_time":599,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-14T11:46:14.332Z] renderer complete current result {"ok":true,"result":{"completed_task":"헷갈리는 부분 2개 표시하기","next_task":{"category":"WORK","duration_minutes":15,"id":"step_4","order":4,"status":"active","title":"지금 문제 예시 3개 풀기"},"plan_completed":false,"success":true}}
+[2026-05-14T11:46:14.698Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:14.708Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"지금 문제 예시 3개 풀기","remaining":900,"error":""}
+[2026-05-14T11:46:14.709Z] renderer render status tasks {"source":"api","title":"지금 문제 예시 3개 풀기","remaining_time":900,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-14T11:46:15.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:15.190Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"지금 문제 예시 3개 풀기","remaining":900,"error":""}
+[2026-05-14T11:46:15.192Z] renderer render status tasks {"source":"api","title":"지금 문제 예시 3개 풀기","remaining_time":900,"progress":{"completed":3,"percent":60,"total":5}}
+[2026-05-14T11:46:15.500Z] renderer complete current start http://127.0.0.1:5000/api/tasks/complete_current
+[2026-05-14T11:46:16.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:16.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"focused","currentTask":"스트레칭하고 다음 복습 적기","remaining":899,"error":""}
+[2026-05-14T11:46:16.188Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":899,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:46:16.426Z] renderer complete current result {"ok":true,"result":{"completed_task":"지금 문제 예시 3개 풀기","next_task":{"category":"ROUTINE","duration_minutes":5,"id":"step_5","order":5,"status":"active","title":"스트레칭하고 다음 복습 적기"},"plan_completed":false,"success":true}}
+[2026-05-14T11:46:16.787Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:16.797Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":300,"error":""}
+[2026-05-14T11:46:16.798Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":300,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:46:17.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:17.181Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":300,"error":""}
+[2026-05-14T11:46:17.182Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":300,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:46:18.172Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:18.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":299,"error":""}
+[2026-05-14T11:46:18.185Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":299,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:46:19.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:19.182Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":298,"error":""}
+[2026-05-14T11:46:19.183Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":298,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:46:20.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:20.180Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":297,"error":""}
+[2026-05-14T11:46:20.180Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":297,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:46:21.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:21.185Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":296,"error":""}
+[2026-05-14T11:46:21.186Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":296,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:46:22.177Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:22.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":295,"error":""}
+[2026-05-14T11:46:22.194Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":295,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:46:23.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:23.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"warning","currentTask":"스트레칭하고 다음 복습 적기","remaining":294,"error":""}
+[2026-05-14T11:46:23.189Z] renderer render status tasks {"source":"api","title":"스트레칭하고 다음 복습 적기","remaining_time":294,"progress":{"completed":4,"percent":80,"total":5}}
+[2026-05-14T11:46:24.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:24.192Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":293,"error":""}
+[2026-05-14T11:46:24.194Z] renderer render status tasks {"source":"api","title":"","remaining_time":293,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:46:25.182Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:25.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":292,"error":""}
+[2026-05-14T11:46:25.194Z] renderer render status tasks {"source":"api","title":"","remaining_time":292,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:46:26.178Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:26.193Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":291,"error":""}
+[2026-05-14T11:46:26.195Z] renderer render status tasks {"source":"api","title":"","remaining_time":291,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:46:27.174Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:27.182Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":290,"error":""}
+[2026-05-14T11:46:27.183Z] renderer render status tasks {"source":"api","title":"","remaining_time":290,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:46:28.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:28.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":289,"error":""}
+[2026-05-14T11:46:28.185Z] renderer render status tasks {"source":"api","title":"","remaining_time":289,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:46:29.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:29.187Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":288,"error":""}
+[2026-05-14T11:46:29.188Z] renderer render status tasks {"source":"api","title":"","remaining_time":288,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:46:30.176Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:30.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":287,"error":""}
+[2026-05-14T11:46:30.185Z] renderer render status tasks {"source":"api","title":"","remaining_time":287,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:46:31.175Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:31.184Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":286,"error":""}
+[2026-05-14T11:46:31.185Z] renderer render status tasks {"source":"api","title":"","remaining_time":286,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:46:32.172Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:32.182Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":285,"error":""}
+[2026-05-14T11:46:32.183Z] renderer render status tasks {"source":"api","title":"","remaining_time":285,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:46:33.173Z] renderer fetch status start http://127.0.0.1:5000/status
+[2026-05-14T11:46:33.181Z] renderer refresh focus status result {"source":"api","ok":true,"state":"completed","currentTask":"","remaining":284,"error":""}
+[2026-05-14T11:46:33.182Z] renderer render status tasks {"source":"api","title":"","remaining_time":284,"progress":{"completed":5,"percent":100,"total":5}}
+[2026-05-14T11:46:33.337Z] window closed
+[2026-05-14T11:46:33.339Z] window-all-closed

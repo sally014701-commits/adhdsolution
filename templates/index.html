@@ -1003,6 +1003,7 @@
         }
 
         #dashboard-view .state-title { order: 1; }
+        #dashboard-view .dashboard-status-row { order: 1; }
         #dashboard-view .current-task-title { order: 2; }
         #dashboard-view .current-app { order: 3; }
         #dashboard-view .task-progress-panel { order: 4; }
@@ -1420,7 +1421,6 @@
         /* Reference lock: keep navigation as a true left sidebar on PC. */
         #setup-view.container {
             position: relative !important;
-            display: block !important;
             width: min(1480px, calc(100vw - 32px)) !important;
             min-width: 1180px !important;
             max-width: none !important;
@@ -1721,6 +1721,594 @@
             #setup-view .legacy-setup {
                 display: none !important;
             }
+
+            body:has(#setup-view[style*="block"]) .widget-control {
+                display: none !important;
+            }
+
+            #setup-view .sidebar-divider {
+                height: 1px;
+                margin: 14px 12px 12px;
+                background: var(--border-subtle);
+            }
+
+            #setup-view .sidebar-on {
+                margin-left: auto;
+                padding: 2px 8px;
+                border-radius: 999px;
+                background: var(--state-focus-bg);
+                color: var(--state-focus-label);
+                font-size: 10px;
+                font-weight: 700;
+            }
+
+            #setup-view .green-dot {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                margin-left: auto;
+                border-radius: 999px;
+                background: var(--state-focus-accent);
+            }
+
+            #setup-view .sidebar-progress {
+                display: grid !important;
+                grid-template-columns: 32px 1fr;
+                column-gap: 10px;
+                align-items: center;
+            }
+
+            #setup-view .account-mark {
+                grid-row: span 2;
+                width: 32px;
+                height: 32px;
+                display: grid;
+                place-items: center;
+                border-radius: 999px;
+                background: var(--state-focus-bg);
+                color: var(--state-focus-label);
+                font-weight: 700;
+            }
+
+            #setup-view .plan-layout {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 320px;
+                gap: 18px;
+                align-items: start;
+            }
+
+            #setup-view .plan-main-column,
+            #setup-view .plan-side-column {
+                display: grid;
+                gap: 14px;
+                min-width: 0;
+            }
+
+            #setup-view .section-heading-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+            }
+
+            #setup-view .status-pill,
+            #setup-view .task-meta-row span {
+                display: inline-flex;
+                align-items: center;
+                min-height: 24px;
+                padding: 0 12px;
+                border-radius: 999px;
+                background: rgba(200, 240, 197, 0.42);
+                color: var(--state-focus-label);
+                font-size: 12px;
+                font-weight: 700;
+            }
+
+            #setup-view .focus-task-box {
+                display: grid;
+                grid-template-columns: 46px minmax(0, 1fr) auto 160px;
+                align-items: center;
+                gap: 18px;
+                margin-top: 18px;
+                padding: 22px;
+                border: 1px solid var(--border-subtle);
+                border-radius: 12px;
+                background: var(--canvas);
+            }
+
+            #setup-view .focus-task-copy {
+                display: grid;
+                gap: 8px;
+                min-width: 0;
+            }
+
+            #setup-view .focus-task-copy strong,
+            #setup-view .next-task-row strong {
+                color: var(--text-primary);
+                font-size: 17px;
+                line-height: 1.28;
+            }
+
+            #setup-view .focus-task-copy p {
+                margin: 0;
+                color: var(--text-secondary);
+                font-size: 13px;
+                line-height: 1.45;
+            }
+
+            #setup-view .task-meta-row {
+                display: flex;
+                gap: 8px;
+            }
+
+            #setup-view .task-meta-row span {
+                min-height: 22px;
+                padding: 0 10px;
+                background: rgba(61, 49, 46, 0.06);
+                color: var(--text-secondary);
+                font-size: 11px;
+            }
+
+            #setup-view .task-estimate {
+                color: var(--text-secondary);
+                font-size: 13px;
+                white-space: nowrap;
+            }
+
+            #setup-view .task-start-button {
+                min-width: 0 !important;
+                width: 100% !important;
+                padding: 11px 18px !important;
+                border-radius: 8px !important;
+            }
+
+            #setup-view .task-tip {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                margin-top: 16px;
+                padding: 14px 20px;
+                border-radius: 10px;
+                background: rgba(200, 240, 197, 0.26);
+                color: var(--text-primary);
+                font-size: 13px;
+            }
+
+            #setup-view .task-tip strong {
+                color: var(--state-focus-label);
+            }
+
+            #setup-view .next-task-row {
+                display: grid;
+                grid-template-columns: 42px minmax(0, 1fr) auto;
+                align-items: center;
+                gap: 16px;
+                margin-top: 14px;
+                padding: 16px;
+                border: 1px solid var(--border-subtle);
+                border-radius: 10px;
+                background: var(--canvas);
+            }
+
+            #setup-view .compact-task-list {
+                display: grid;
+                gap: 0;
+                margin: 10px 0 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            #setup-view .compact-task-list .step-item {
+                grid-template-columns: 30px minmax(0, 1fr) auto !important;
+                min-height: 38px !important;
+                padding: 7px 0 !important;
+            }
+
+            #setup-view .compact-task-list .step-order {
+                width: 24px !important;
+                height: 24px !important;
+                background: rgba(61, 49, 46, 0.06) !important;
+                color: var(--text-primary) !important;
+                font-size: 12px !important;
+            }
+
+            #setup-view .compact-task-list .step-name {
+                font-size: 13px !important;
+                font-weight: 500 !important;
+            }
+
+            #setup-view .task-lock-note {
+                margin: 4px 0 0;
+                color: var(--text-secondary);
+                font-size: 12px;
+                text-align: center;
+            }
+
+            #setup-view .side-info-card {
+                padding: 18px;
+                border: 1px solid var(--border-subtle);
+                border-radius: 12px;
+                background: var(--canvas);
+            }
+
+            #setup-view .side-info-card h3 {
+                margin: 0 0 14px;
+                color: var(--text-primary);
+                font-size: 13px;
+                font-weight: 700;
+            }
+
+            #setup-view .session-status-grid {
+                display: grid;
+                grid-template-columns: 82px 1fr;
+                gap: 16px;
+                align-items: center;
+            }
+
+            #setup-view .session-ring {
+                width: 74px;
+                height: 74px;
+                display: grid;
+                place-items: center;
+                border-radius: 999px;
+                background:
+                    radial-gradient(circle at center, var(--canvas) 52%, transparent 53%),
+                    conic-gradient(rgba(114, 201, 109, 0.32) 0 25%, rgba(61, 49, 46, 0.07) 25% 100%);
+            }
+
+            #setup-view .session-ring strong {
+                font-size: 18px;
+            }
+
+            #setup-view .session-status-grid div,
+            #setup-view .intervention-list {
+                display: grid;
+                gap: 8px;
+                color: var(--text-secondary);
+                font-size: 13px;
+            }
+
+            #setup-view .session-status-grid strong,
+            #setup-view .intervention-list strong {
+                color: var(--state-focus-label);
+                font-size: 14px;
+            }
+
+            #setup-view .intervention-list span {
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            #setup-view .soft-input {
+                margin-top: 14px;
+                padding: 12px 14px;
+                border: 1px solid var(--border-subtle);
+                border-radius: 8px;
+                color: var(--text-secondary);
+                font-size: 12px;
+            }
+
+            #setup-view .context-card dl {
+                display: grid;
+                gap: 8px;
+                margin: 0 0 12px;
+            }
+
+            #setup-view .context-card dl div {
+                display: grid;
+                grid-template-columns: 64px minmax(0, 1fr);
+                gap: 10px;
+                color: var(--text-secondary);
+                font-size: 13px;
+            }
+
+            #setup-view .context-card dt,
+            #setup-view .context-card dd {
+                margin: 0;
+            }
+
+            #setup-view .muted-line {
+                color: var(--text-secondary);
+                font-size: 12px;
+            }
+
+            #setup-view .connection-card p {
+                margin: 0 0 8px;
+                color: var(--text-primary);
+                font-size: 13px;
+            }
+
+            #setup-view .connection-detail-button {
+                width: 100%;
+                margin-top: 14px;
+                padding: 10px 12px;
+                border-radius: 8px;
+                font-size: 12px;
+            }
+
+            #setup-view .plan-summary {
+                display: none !important;
+            }
+
+            #setup-view .more-button {
+                width: 48px;
+                height: 44px;
+                border: 1px solid var(--border-subtle);
+                border-radius: 10px;
+                background: var(--canvas);
+                color: var(--text-primary);
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+            #dashboard-view.container {
+                width: 100vw !important;
+                max-width: none !important;
+                min-height: 100vh !important;
+                height: 100vh !important;
+                padding: 26px 36px !important;
+                border-radius: 0 !important;
+                overflow: hidden !important;
+                box-sizing: border-box !important;
+            }
+
+            #dashboard-view .current-task-title {
+                margin: 0 0 8px !important;
+                font-size: 24px !important;
+                line-height: 1.18 !important;
+                white-space: normal !important;
+                overflow: visible !important;
+                text-overflow: clip !important;
+            }
+
+            #dashboard-view .state-title {
+                margin-bottom: 10px !important;
+            }
+
+            #dashboard-view .current-app {
+                margin-bottom: 14px !important;
+            }
+
+            #dashboard-view .task-progress-panel {
+                margin-bottom: 14px !important;
+                padding: 14px !important;
+            }
+
+            #dashboard-view .dashboard-task-list {
+                gap: 8px !important;
+            }
+
+            #dashboard-view .dashboard-task-item {
+                min-height: 30px !important;
+            }
+
+            #dashboard-view .stats-grid {
+                gap: 12px !important;
+                margin-bottom: 14px !important;
+            }
+
+            #dashboard-view .stat-card {
+                min-height: 82px !important;
+                padding: 14px !important;
+            }
+
+            #dashboard-view .stat-value {
+                font-size: 22px !important;
+            }
+
+            #dashboard-view .transition-panel {
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 0 14px !important;
+                padding: 14px 16px !important;
+                box-sizing: border-box !important;
+            }
+
+            #dashboard-view .transition-message {
+                margin-bottom: 10px !important;
+                font-size: 14px !important;
+            }
+
+            #dashboard-view .timer-badge,
+            #dashboard-view #next-task-button,
+            #dashboard-view .btn-danger {
+                width: 180px !important;
+                height: 44px !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 16px !important;
+                margin: 0 !important;
+                border-radius: 999px !important;
+                box-sizing: border-box !important;
+                font-size: 14px !important;
+                font-weight: 700 !important;
+                line-height: 1 !important;
+            }
+
+            #dashboard-view .timer-badge {
+                order: 8 !important;
+                align-self: flex-start !important;
+                margin-right: 12px !important;
+            }
+
+            #dashboard-view #next-task-button,
+            #dashboard-view .btn-danger {
+                order: 9 !important;
+                align-self: flex-start !important;
+                margin-top: -44px !important;
+                margin-left: 196px !important;
+            }
+        }
+
+        body:has(#dashboard-view[style*="block"]) {
+            align-items: stretch !important;
+            justify-content: flex-start !important;
+            padding: 0 !important;
+            background: var(--canvas) !important;
+            overflow: hidden !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) .widget-control {
+            display: none !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view.container {
+            width: 100vw !important;
+            max-width: none !important;
+            height: 100vh !important;
+            min-height: 100vh !important;
+            padding: clamp(14px, 3vw, 28px) !important;
+            border-radius: 0 !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .current-task-title {
+            margin: 0 0 6px !important;
+            font-size: clamp(21px, 5vw, 30px) !important;
+            line-height: 1.12 !important;
+            white-space: normal !important;
+            overflow: visible !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .state-title {
+            margin: 0 !important;
+            padding: 5px 12px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .dashboard-status-row {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            order: 2 !important;
+            margin-bottom: 10px !important;
+            min-width: 0 !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .current-task-title {
+            order: 1 !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .current-app {
+            margin-bottom: 10px !important;
+            font-size: 12px !important;
+            line-height: 1.35 !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .task-progress-panel {
+            margin-bottom: 10px !important;
+            padding: 12px !important;
+            border-radius: 12px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .task-progress-head {
+            margin-bottom: 8px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .dashboard-task-list {
+            gap: 4px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .dashboard-task-item {
+            grid-template-columns: 24px minmax(0, 1fr) auto !important;
+            min-height: 28px !important;
+            gap: 8px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .dashboard-task-mark {
+            width: 24px !important;
+            height: 24px !important;
+            font-size: 11px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .dashboard-task-name {
+            font-size: 12px !important;
+            line-height: 1.22 !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .dashboard-task-time {
+            font-size: 11px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .stats-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+            gap: 10px !important;
+            margin-bottom: 10px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .stat-card {
+            min-height: 72px !important;
+            padding: 12px !important;
+            border-radius: 12px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .stat-value {
+            font-size: clamp(18px, 4vw, 24px) !important;
+            margin-bottom: 4px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .stat-label {
+            font-size: 10px !important;
+            line-height: 1.2 !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .transition-panel {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 0 10px !important;
+            padding: 12px !important;
+            border-radius: 12px !important;
+            box-sizing: border-box !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .transition-message {
+            margin-bottom: 8px !important;
+            font-size: 12px !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .timer-badge,
+        body:has(#dashboard-view[style*="block"]) #dashboard-view #next-task-button,
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .btn-danger {
+            width: auto !important;
+            height: auto !important;
+            min-height: 28px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 5px 12px !important;
+            margin: 0 !important;
+            border-radius: 999px !important;
+            box-sizing: border-box !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            line-height: 1.5 !important;
+            white-space: nowrap !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .timer-badge {
+            order: 2 !important;
+            align-self: auto !important;
+        }
+
+        body:has(#dashboard-view[style*="block"]) #dashboard-view #next-task-button,
+        body:has(#dashboard-view[style*="block"]) #dashboard-view .btn-danger {
+            order: 3 !important;
+            align-self: auto !important;
+            margin-top: 0 !important;
+            margin-left: 0 !important;
+        }
+
+        @media (max-width: 760px) {
+            body:has(#dashboard-view[style*="block"]) #dashboard-view .stats-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+
+            body:has(#dashboard-view[style*="block"]) #dashboard-view .stat-card {
+                min-height: 60px !important;
+                padding: 10px !important;
+            }
         }
     </style>
 </head>
@@ -1738,16 +2326,17 @@
                 <span>FocusPlan</span>
             </div>
             <nav class="sidebar-nav">
-                <button class="sidebar-link active" type="button" onclick="selectSidebarNav(this, 'setup-view')">Today Plan</button>
-                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">My Plans</button>
-                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">Focus Log</button>
-                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">Statistics</button>
-                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">Settings</button>
+                <button class="sidebar-link active" type="button" onclick="selectSidebarNav(this, 'setup-view')">⌂ Today</button>
+                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">▣ Sessions</button>
+                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">▥ Insights</button>
+                <span class="sidebar-divider"></span>
+                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">▧ Widget <span class="sidebar-on">ON</span></button>
+                <button class="sidebar-link" type="button" onclick="selectSidebarNav(this)">⚙ Connected <span class="green-dot"></span></button>
             </nav>
             <div class="sidebar-progress">
-                <span class="sidebar-progress-title">Today Progress</span>
-                <span class="sidebar-progress-value" id="sidebar-progress-value">0%</span>
-                <span class="sidebar-progress-note" id="sidebar-progress-note">계획을 불러오는 중</span>
+                <span class="account-mark">M</span>
+                <span class="sidebar-progress-title">mobile_planner</span>
+                <span class="sidebar-progress-note" id="sidebar-progress-note">계정</span>
             </div>
         </aside>
         <div class="launcher-card">
@@ -1770,7 +2359,7 @@
                             <div class="focus-task-box">
                                 <span class="step-order" id="current-task-order">1</span>
                                 <div class="focus-task-copy">
-                                    <strong id="current-task-title">작업 화면 열기</strong>
+                                    <strong id="setup-current-task-title">작업 화면 열기</strong>
                                     <div class="task-meta-row">
                                         <span id="current-task-category">WORK</span>
                                         <span id="current-task-minutes">5분</span>
@@ -1906,7 +2495,11 @@
     <!-- Dashboard View -->
     <div id="dashboard-view" class="container">
         <h2 class="current-task-title" id="current-task-title">현재 작업을 불러오는 중</h2>
-        <h1 class="state-title" id="state-text">수집 중</h1>
+        <div class="dashboard-status-row">
+            <h1 class="state-title" id="state-text">수집 중</h1>
+            <div class="timer-badge" id="timer-text">0:00 경과</div>
+            <button class="btn-danger" onclick="stopTracking()">작업 종료</button>
+        </div>
         <p class="current-app" id="app-text">대기 중...</p>
         
         <section class="task-progress-panel" aria-label="전체 작업 진행">
@@ -1944,10 +2537,6 @@
             </div>
             <button class="btn-primary btn-small" onclick="stopTracking(false)">마무리하고 보고서 보기</button>
         </div>
-        
-        <div class="timer-badge" id="timer-text">0:00 경과</div>
-        <br>
-        <button class="btn-danger" onclick="stopTracking()">작업 종료</button>
     </div>
 
     <!-- Report View -->
@@ -2172,6 +2761,36 @@
             });
         }
 
+        function formatPlanDate(value) {
+            if (!value) return '--';
+            const date = new Date(value);
+            if (Number.isNaN(date.getTime())) return value;
+            const yyyy = date.getFullYear();
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const dd = String(date.getDate()).padStart(2, '0');
+            const hh = String(date.getHours()).padStart(2, '0');
+            const min = String(date.getMinutes()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+        }
+
+        function renderTaskSpotlight(currentStep, nextStep) {
+            const currentMinutes = Number(currentStep.duration_minutes) || 0;
+            document.getElementById('current-task-order').innerText = currentStep.order || 1;
+            document.getElementById('setup-current-task-title').innerText = currentStep.title || '작업 화면 열기';
+            document.getElementById('current-task-category').innerText = currentStep.category || 'WORK';
+            document.getElementById('current-task-minutes').innerText = `${currentMinutes}분`;
+            document.getElementById('current-task-estimate').innerText = `예상 ${currentMinutes}분`;
+            document.getElementById('current-task-description').innerText =
+                currentStep.description || '필요한 프로그램과 자료를 모두 준비하고 작업 환경을 정리합니다.';
+
+            const nextMinutes = Number(nextStep.duration_minutes) || 0;
+            document.getElementById('next-task-order').innerText = nextStep.order || 2;
+            document.getElementById('next-task-title').innerText = nextStep.title || '다음 태스크가 없습니다';
+            document.getElementById('next-task-category').innerText = nextStep.category || 'WORK';
+            document.getElementById('next-task-minutes').innerText = nextMinutes ? `${nextMinutes}분` : '--';
+            document.getElementById('next-task-estimate').innerText = nextMinutes ? `예상 ${nextMinutes}분` : '대기';
+        }
+
         function renderCurrentPlan(plan) {
             currentPlan = plan;
             document.getElementById('plan-empty').style.display = 'none';
@@ -2185,16 +2804,25 @@
             const completed = progress.completed ?? stepsForProgress.filter(step => step.status === 'completed').length;
             const total = progress.total ?? stepsForProgress.length;
             const percent = total ? Math.round((completed / total) * 100) : 0;
-            document.getElementById('sidebar-progress-value').innerText = `${percent}%`;
-            document.getElementById('sidebar-progress-note').innerText = `총 계획 ${total}개 중 ${completed}개 완료`;
+            document.getElementById('sidebar-progress-note').innerText = '계정';
             document.getElementById('summary-total-time').innerText =
                 `${stepsForProgress.reduce((sum, step) => sum + (Number(step.duration_minutes) || 0), 0)}분`;
             document.getElementById('summary-total-steps').innerText = `${total}단계`;
-            document.getElementById('summary-created-at').innerText = plan.created_at || '--';
+            document.getElementById('summary-created-at').innerText = formatPlanDate(plan.created_at);
+            document.getElementById('session-percent').innerText = `${percent}%`;
+            document.getElementById('session-total-time').innerText = `예상 총 시간 ${stepsForProgress.reduce((sum, step) => sum + (Number(step.duration_minutes) || 0), 0)}분`;
+            document.getElementById('session-total-steps').innerText = `예상 단계 ${total}단계`;
+
+            const currentIndex = Math.max(0, stepsForProgress.findIndex(step => step.status === 'active' || step.status === 'pending'));
+            const currentStep = stepsForProgress[currentIndex] || stepsForProgress[0] || {};
+            const nextStep = stepsForProgress[currentIndex + 1] || stepsForProgress[1] || {};
+            renderTaskSpotlight(currentStep, nextStep);
+            document.getElementById('all-task-count').innerText = `(${total})`;
 
             const steps = document.getElementById('plan-steps');
             steps.innerHTML = '';
-            (plan.steps || []).forEach(step => {
+            const compactSteps = stepsForProgress.slice(Math.min(currentIndex + 2, stepsForProgress.length));
+            (compactSteps.length ? compactSteps : stepsForProgress).forEach(step => {
                 const item = document.createElement('li');
                 item.className = 'step-item';
                 item.innerHTML = `
@@ -2204,22 +2832,6 @@
                 `;
                 steps.appendChild(item);
             });
-
-            renderChipList('blocked-apps-list', plan.blocked_apps, '차단 앱 없음');
-            renderChipList('blocked-sites-list', plan.blocked_sites, '차단 사이트 없음');
-
-            const note = document.getElementById('metadata-note');
-            note.classList.toggle('allowed', Boolean(plan.metadata_permission));
-            note.innerText = plan.metadata_permission
-                ? '윈도우 activity, idle, window 데이터 수집이 사용자의 허용 상태로 저장되어 있습니다.'
-                : 'metadata_permission이 꺼져 있습니다. 다음 단계에서 activity, idle, window 데이터 수집은 비활성화될 예정입니다.';
-
-            const statusText = plan.status === 'completed'
-                ? '완료됨'
-                : (plan.status === 'active' ? '진행 중' : '대기 중');
-            document.getElementById('plan-status-label').innerText = statusText;
-            document.getElementById('plan-status-detail').innerText =
-                plan.status === 'completed' ? '모든 단계가 완료되었습니다.' : '시작 전 상태입니다.';
         }
 
         function showNoPlan(message = '아직 저장된 모바일 plan이 없습니다. 모바일 화면에서 목표를 쪼갠 뒤 이 페이지를 새로고침하세요.') {
@@ -2291,7 +2903,7 @@
                 }
             } finally {
                 btn.disabled = false;
-                btn.innerText = 'Start Plan';
+                btn.innerText = '▶ Start Plan';
             }
         }
 

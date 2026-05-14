@@ -71,11 +71,22 @@ const colors = {
   borderSoft: 'rgba(255, 255, 255, 0.65)',
 };
 
-const DEFAULT_SERVER = 'http://192.168.219.104:5000';
+const LAN_SERVER = 'http://192.168.219.104:5000';
+
+function getDefaultServer() {
+  if (Platform.OS === 'web' && typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    if (host && host !== 'localhost' && host !== '127.0.0.1') {
+      return `http://${host}:5000`;
+    }
+    return 'http://127.0.0.1:5000';
+  }
+  return LAN_SERVER;
+}
 
 function normalizeServerUrl(value: string) {
   const trimmed = value.trim();
-  if (!trimmed) return DEFAULT_SERVER;
+  if (!trimmed) return getDefaultServer();
   return /^https?:\/\//i.test(trimmed) ? trimmed.replace(/\/+$/, '') : `http://${trimmed.replace(/\/+$/, '')}`;
 }
 
@@ -180,8 +191,8 @@ function normalizePlan(plan: Partial<Plan>): Plan {
 export default function App() {
   const [screen, setScreen] = useState<Screen>('speak');
   const [goal, setGoal] = useState('');
-  const [serverInput, setServerInput] = useState(DEFAULT_SERVER);
-  const [serverUrl, setServerUrl] = useState(DEFAULT_SERVER);
+  const [serverInput, setServerInput] = useState(getDefaultServer);
+  const [serverUrl, setServerUrl] = useState(getDefaultServer);
   const [plan, setPlan] = useState<Plan | null>(null);
   const [status, setStatus] = useState<PcStatus | null>(null);
   const [toast, setToast] = useState('');

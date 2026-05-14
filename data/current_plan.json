@@ -1,56 +1,55 @@
 {
-  "plan_id": "mobile_1778709532835",
-  "goal_title": "휴대폰 요금 내야해",
-  "created_at": "2026-05-13T21:58:52.835Z",
-  "total_minutes": 35,
+  "plan_id": "mobile_1778718634448",
+  "goal_title": "공부끝내기",
+  "created_at": "2026-05-14T00:30:34.448Z",
+  "total_minutes": 45,
   "metadata_permission": true,
   "blocked_apps": [],
   "blocked_sites": [],
-  "status": "completed",
-  "current_step_index": 4,
+  "status": "active",
+  "current_step_index": 0,
   "source": "mobile",
   "steps": [
     {
       "id": "step_1",
-      "title": "작업 화면 열기",
+      "title": "공부 범위 한 줄에 적기",
       "duration_minutes": 5,
       "category": "WORK",
-      "status": "completed",
+      "status": "active",
       "order": 1
     },
     {
       "id": "step_2",
-      "title": "해야 할 일을 세 덩어리로 나누기",
-      "duration_minutes": 8,
+      "title": "가장 쉬운 개념 3개 체크하기",
+      "duration_minutes": 10,
       "category": "WORK",
-      "status": "completed",
+      "status": "pending",
       "order": 2
     },
     {
       "id": "step_3",
-      "title": "가장 쉬운 첫 조각만 끝내기",
-      "duration_minutes": 12,
+      "title": "헷갈리는 부분 2개 표시하기",
+      "duration_minutes": 10,
       "category": "WORK",
-      "status": "completed",
+      "status": "pending",
       "order": 3
     },
     {
       "id": "step_4",
-      "title": "막힌 지점 하나 적기",
-      "duration_minutes": 5,
+      "title": "지금 문제 예시 3개 풀기",
+      "duration_minutes": 15,
       "category": "WORK",
-      "status": "completed",
+      "status": "pending",
       "order": 4
     },
     {
       "id": "step_5",
-      "title": "짧게 쉬고 다음 행동 남기기",
+      "title": "스트레칭하고 다음 복습 적기",
       "duration_minutes": 5,
       "category": "ROUTINE",
-      "status": "completed",
+      "status": "pending",
       "order": 5
     }
   ],
-  "task_start_time": "2026-05-14T07:12:48+0900",
-  "task_completed_time": "2026-05-14T07:12:52+0900"
+  "task_start_time": "2026-05-14T09:30:36+0900"
 }

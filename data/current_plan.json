@@ -1,7 +1,7 @@
 {
-  "plan_id": "mobile_1778758619596",
-  "goal_title": "중간고사 공부하기",
-  "created_at": "2026-05-14T11:36:59.596Z",
+  "plan_id": "mobile_1778818519659",
+  "goal_title": "ppt 완성하기",
+  "created_at": "2026-05-15T04:15:19.659Z",
   "total_minutes": 45,
   "metadata_permission": true,
   "blocked_apps": [],
@@ -12,7 +12,7 @@
   "steps": [
     {
       "id": "step_1",
-      "title": "공부 범위 한 줄에 적기",
+      "title": "발표 주제와 요구사항 확인하기",
       "duration_minutes": 5,
       "category": "WORK",
       "status": "completed",
@@ -20,7 +20,7 @@
     },
     {
       "id": "step_2",
-      "title": "가장 쉬운 개념 3개 체크하기",
+      "title": "관련 자료 훑어보기",
       "duration_minutes": 10,
       "category": "WORK",
       "status": "completed",
@@ -28,15 +28,15 @@
     },
     {
       "id": "step_3",
-      "title": "헷갈리는 부분 2개 표시하기",
-      "duration_minutes": 10,
+      "title": "슬라이드 목차 정리하기",
+      "duration_minutes": 8,
       "category": "WORK",
       "status": "completed",
       "order": 3
     },
     {
       "id": "step_4",
-      "title": "지금 문제 예시 3개 풀기",
+      "title": "핵심 슬라이드 작성하기",
       "duration_minutes": 15,
       "category": "WORK",
       "status": "completed",
@@ -44,13 +44,20 @@
     },
     {
       "id": "step_5",
-      "title": "스트레칭하고 다음 복습 적기",
-      "duration_minutes": 5,
-      "category": "ROUTINE",
+      "title": "발표 흐름대로 1회 연습하기",
+      "duration_minutes": 7,
+      "category": "WORK",
       "status": "completed",
       "order": 5
     }
   ],
-  "task_start_time": "2026-05-14T20:46:15+0900",
-  "task_completed_time": "2026-05-14T20:46:24+0900"
+  "task_start_time": "2026-05-15T13:26:05+0900",
+  "report_totals": {
+    "focus_sec": 9,
+    "distracted_sec": 0,
+    "idle_sec": 0,
+    "elapsed_sec": 9,
+    "distractions": []
+  },
+  "task_completed_time": "2026-05-15T13:26:07+0900"
 }

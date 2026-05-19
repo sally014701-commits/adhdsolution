@@ -311,6 +311,7 @@ async function completeCurrentTask(config, initialFocus) {
     if (result.ok) {
       runCompletionAnimation(config, () => {
         refreshFocusStatus(initialFocus);
+        window.setTimeout(() => refreshFocusStatus(initialFocus), 450);
       });
       return;
     }

@@ -1122,6 +1122,11 @@
             display: none;
         }
 
+        .alert-overlay,
+        #dashboard-view .transition-panel {
+            display: none !important;
+        }
+
         #next-task-button.final-action {
             background: var(--state-focus-bg);
             color: var(--state-focus-label);
@@ -3649,8 +3654,7 @@
 
             const steps = document.getElementById('plan-steps');
             steps.innerHTML = '';
-            const compactSteps = stepsForProgress.slice(Math.min(currentIndex + 2, stepsForProgress.length));
-            (compactSteps.length ? compactSteps : stepsForProgress).forEach(step => {
+            stepsForProgress.forEach(step => {
                 const item = document.createElement('li');
                 item.className = 'step-item';
                 item.innerHTML = `
@@ -3740,12 +3744,13 @@
         let transitionAudioStarted = false;
 
         function playTransitionChime(phase) {
-            if (phase === 'work' || phase === lastTransitionPhase) return;
-            lastTransitionPhase = phase;
             if (phase === 'overrun') {
+                lastTransitionPhase = phase;
                 startTransitionAudio();
                 return;
             }
+            if (phase === 'work' || phase === lastTransitionPhase) return;
+            lastTransitionPhase = phase;
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 const ctx = new AudioContext();
@@ -3767,10 +3772,14 @@
 
         function startTransitionAudio() {
             const audio = document.getElementById('transition-audio');
-            if (!audio || transitionAudioStarted) return;
+            if (!audio) return;
+            if (transitionAudioStarted && !audio.paused) return;
             transitionAudioStarted = true;
+            audio.loop = true;
             audio.volume = 0.45;
-            audio.currentTime = 0;
+            if (audio.paused || audio.ended) {
+                audio.currentTime = 0;
+            }
             const playPromise = audio.play();
             if (playPromise) {
                 playPromise.catch(err => {
@@ -3881,6 +3890,8 @@
                 if (!response.ok || result.error) {
                     throw new Error(result.error || '다음 작업으로 넘어가지 못했습니다.');
                 }
+                stopTransitionAudio();
+                lastTransitionPhase = 'work';
                 if (result.plan_completed) {
                     await stopTracking(false);
                     return;

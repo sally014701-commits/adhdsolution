@@ -463,8 +463,44 @@ def get_plan_progress(plan):
         "percent": percent,
     }
 
+def NumberOrZero(value):
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return 0
+
 def build_task_label(plan, step):
     return f"{plan.get('goal_title', '')} - {step.get('title', '')}".strip(" -")
+
+def get_session_display_name():
+    if global_tracker.session_task_name:
+        return global_tracker.session_task_name
+    task_name = global_tracker.task_name or ""
+    if " - " in task_name:
+        return task_name.split(" - ", 1)[0]
+    return task_name
+
+def get_plan_report_totals(plan):
+    totals = plan.setdefault("report_totals", {})
+    totals["focus_sec"] = NumberOrZero(totals.get("focus_sec"))
+    totals["distracted_sec"] = NumberOrZero(totals.get("distracted_sec"))
+    totals["idle_sec"] = NumberOrZero(totals.get("idle_sec"))
+    totals["elapsed_sec"] = NumberOrZero(totals.get("elapsed_sec"))
+    totals["distractions"] = list(totals.get("distractions") or [])
+    return totals
+
+def add_current_task_report_to_plan(plan):
+    if not global_tracker:
+        return get_plan_report_totals(plan)
+    totals = get_plan_report_totals(plan)
+    distractions = set(totals.get("distractions", []))
+    distractions.update(global_tracker.distraction_log)
+    totals["focus_sec"] += NumberOrZero(global_tracker.total_focus_sec)
+    totals["distracted_sec"] += NumberOrZero(global_tracker.total_distracted_sec)
+    totals["idle_sec"] += NumberOrZero(global_tracker.total_idle_sec)
+    totals["elapsed_sec"] += NumberOrZero(global_tracker.get_elapsed_seconds())
+    totals["distractions"] = list(distractions)
+    return totals
 
 def start_tracker_for_plan_step(plan, step):
     task = build_task_label(plan, step)
@@ -472,7 +508,7 @@ def start_tracker_for_plan_step(plan, step):
     blocked_sites = ", ".join(plan.get("blocked_sites", []))
     target_minutes = step.get("duration_minutes", 25)
     metadata_permission = bool(plan.get("metadata_permission", True))
-    global_tracker.start_monitoring(task, blocked_apps, target_minutes, "", blocked_sites, metadata_permission)
+    global_tracker.start_monitoring(task, blocked_apps, target_minutes, "", blocked_sites, metadata_permission, reset_session_stats=False)
 
 def complete_active_plan_task():
     plan = load_current_plan()
@@ -485,6 +521,7 @@ def complete_active_plan_task():
 
     active_index, active_step = active
     completed_title = active_step.get("title", "")
+    add_current_task_report_to_plan(plan)
     active_step["status"] = "completed"
 
     next_pending = get_next_pending_step(plan, active_index)
@@ -548,8 +585,20 @@ def start_current_plan():
     plan["current_step_index"] = step_index
     plan["task_start_time"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
     plan["status"] = "active"
+    plan["report_totals"] = {
+        "focus_sec": 0,
+        "distracted_sec": 0,
+        "idle_sec": 0,
+        "elapsed_sec": 0,
+        "distractions": [],
+    }
     save_current_plan(plan)
 
+    global_tracker.reset_session_report(
+        plan.get("plan_id"),
+        sum(NumberOrZero(item.get("duration_minutes")) for item in plan.get("steps", [])),
+        plan.get("goal_title", ""),
+    )
     start_tracker_for_plan_step(plan, step)
 
     return jsonify({
@@ -659,19 +708,52 @@ def allowed_apps_preview():
 def stop_tracking():
     if not global_tracker:
         return jsonify({"error": "Tracker not initialized"}), 500
-    
-    global_tracker.stop()
-    
+
+    plan = None
+    try:
+        plan = load_current_plan()
+    except (OSError, json.JSONDecodeError):
+        plan = None
+
+    if plan:
+        totals = get_plan_report_totals(plan)
+        if plan.get("status") != "completed":
+            current_distractions = set(totals.get("distractions", []))
+            current_distractions.update(global_tracker.distraction_log)
+            totals = {
+                "focus_sec": totals["focus_sec"] + NumberOrZero(global_tracker.total_focus_sec),
+                "distracted_sec": totals["distracted_sec"] + NumberOrZero(global_tracker.total_distracted_sec),
+                "idle_sec": totals["idle_sec"] + NumberOrZero(global_tracker.total_idle_sec),
+                "elapsed_sec": totals["elapsed_sec"] + NumberOrZero(global_tracker.get_elapsed_seconds()),
+                "distractions": list(current_distractions),
+            }
+        target_minutes = NumberOrZero(plan.get("total_minutes")) or sum(NumberOrZero(item.get("duration_minutes")) for item in plan.get("steps", []))
+        task_name = plan.get("goal_title", "") or get_session_display_name()
+        elapsed_sec = NumberOrZero(totals.get("elapsed_sec"))
+    else:
+        totals = {
+            "focus_sec": NumberOrZero(global_tracker.session_focus_sec),
+            "distracted_sec": NumberOrZero(global_tracker.session_distracted_sec),
+            "idle_sec": NumberOrZero(global_tracker.session_idle_sec),
+            "elapsed_sec": NumberOrZero(global_tracker.get_session_elapsed_seconds()),
+            "distractions": list(global_tracker.session_distraction_log),
+        }
+        target_minutes = global_tracker.session_target_minutes or global_tracker.target_minutes
+        task_name = get_session_display_name()
+        elapsed_sec = totals["elapsed_sec"]
+
+    target_seconds = target_minutes * 60
     report = {
-        "total_focus_sec": global_tracker.total_focus_sec,
-        "total_distracted_sec": global_tracker.total_distracted_sec,
-        "total_idle_sec": global_tracker.total_idle_sec,
-        "task": global_tracker.task_name,
-        "target_minutes": global_tracker.target_minutes,
-        "elapsed_sec": global_tracker.get_elapsed_seconds(),
-        "overrun_sec": global_tracker.get_time_status()["overrun_seconds"],
-        "distractions": list(global_tracker.distraction_log)
+        "total_focus_sec": totals["focus_sec"],
+        "total_distracted_sec": totals["distracted_sec"],
+        "total_idle_sec": totals["idle_sec"],
+        "task": task_name,
+        "target_minutes": target_minutes,
+        "elapsed_sec": elapsed_sec,
+        "overrun_sec": max(0, elapsed_sec - target_seconds),
+        "distractions": list(totals.get("distractions", []))
     }
+    global_tracker.stop()
     return jsonify(report)
 
 @app.route('/status', methods=['GET'])
@@ -850,6 +932,14 @@ class FocusTracker:
         self.total_distracted_sec = 0
         self.total_idle_sec = 0
         self.distraction_log = set()
+        self.session_plan_id = None
+        self.session_task_name = ""
+        self.session_target_minutes = 0
+        self.session_start_time = None
+        self.session_focus_sec = 0
+        self.session_distracted_sec = 0
+        self.session_idle_sec = 0
+        self.session_distraction_log = set()
         
         # 윈도우 창 모니터링용
         self.last_window_handle = self.get_foreground_window()
@@ -871,7 +961,20 @@ class FocusTracker:
         global global_tracker
         global_tracker = self
         
-    def start_monitoring(self, task, blocked_input, target_minutes=60, extra_allowed_input="", blocked_sites_input="", metadata_permission=True):
+    def reset_session_report(self, plan_id=None, target_minutes=0, session_name=""):
+        self.session_plan_id = plan_id
+        self.session_task_name = session_name or self.task_name
+        self.session_target_minutes = self.parse_target_minutes(target_minutes) if target_minutes else 0
+        self.session_start_time = time.time()
+        self.session_focus_sec = 0
+        self.session_distracted_sec = 0
+        self.session_idle_sec = 0
+        self.session_distraction_log.clear()
+
+    def get_session_elapsed_seconds(self):
+        return int(time.time() - self.session_start_time) if self.session_start_time else self.get_elapsed_seconds()
+
+    def start_monitoring(self, task, blocked_input, target_minutes=60, extra_allowed_input="", blocked_sites_input="", metadata_permission=True, reset_session_stats=True):
         with self.lock:
             self.is_active = True
             
@@ -890,6 +993,10 @@ class FocusTracker:
         self.task_name = task.strip() or "작업"
         self.target_minutes = self.parse_target_minutes(target_minutes)
         self.target_seconds = self.target_minutes * 60
+        if reset_session_stats:
+            self.reset_session_report(None, self.target_minutes)
+        elif not self.session_start_time:
+            self.reset_session_report(None, self.target_minutes)
         self.transition_phase = "work"
         self.current_activity = 0
         self.activity_timestamps.clear()
@@ -1322,13 +1429,17 @@ class FocusTracker:
                 # 3) 통계 기록 (1초마다)
                 if self.current_state == "집중":
                     self.total_focus_sec += 1
+                    self.session_focus_sec += 1
                 elif self.current_state == "이탈":
                     self.total_distracted_sec += 1
+                    self.session_distracted_sec += 1
                     dist_name = self.current_chrome_url if (current_app and current_app.lower() == 'chrome.exe' and self.current_chrome_url) else current_app
                     if dist_name:
                         self.distraction_log.add(dist_name)
+                        self.session_distraction_log.add(dist_name)
                 elif self.current_state == "비활동":
                     self.total_idle_sec += 1
+                    self.session_idle_sec += 1
                 
                 # 콘솔 출력 (매 1분마다)
                 if self.seconds_elapsed % 60 == 0:

@@ -101,10 +101,63 @@ function minutesLabel(minutes: number) {
   return `${Number(minutes) || 0}분`;
 }
 
+function cleanTaskTitle(value: string) {
+  return value
+    .replace(/^[\s\-–—•·*0-9.)\]]+/, '')
+    .replace(/\s+/g, ' ')
+    .replace(/[.。!?！？,，;；]+$/, '')
+    .trim();
+}
+
+function splitGoalText(goalText: string) {
+  const normalized = goalText
+    .replace(/\r?\n/g, ',')
+    .replace(/\s*(그리고|그다음|그 다음|다음으로|이후에|한 다음|하고 나서)\s*/g, ',')
+    .replace(/\s+(하고|하고서|한 뒤|후에)\s+/g, ',');
+
+  const pieces = normalized
+    .split(/[,，;；/]+/)
+    .map(cleanTaskTitle)
+    .filter((item) => item.length >= 2);
+
+  const seen = new Set<string>();
+  return pieces
+    .filter((item) => {
+      const key = item.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 6);
+}
+
 function makeSteps(goalText: string): PlanStep[] {
   const lowerGoal = goalText.toLowerCase();
+  const goalPieces = splitGoalText(goalText);
+  if (goalPieces.length >= 2) {
+    return goalPieces.map((title, index) => ({
+      id: `step_${index + 1}`,
+      title,
+      duration_minutes: index === 0 ? 5 : 10,
+      category: index === goalPieces.length - 1 && /쉬|휴식|정리|마무리|물|스트레칭/.test(title) ? 'ROUTINE' : 'WORK',
+      status: 'pending',
+      order: index + 1,
+    }));
+  }
+
   const rawSteps =
-    lowerGoal.includes('report') ||
+    lowerGoal.includes('ppt') ||
+    lowerGoal.includes('presentation') ||
+    lowerGoal.includes('발표') ||
+    lowerGoal.includes('슬라이드')
+      ? [
+          ['발표 주제와 요구사항 확인하기', 5, 'WORK'],
+          ['관련 자료 훑어보기', 10, 'WORK'],
+          ['슬라이드 목차 정리하기', 8, 'WORK'],
+          ['핵심 슬라이드 작성하기', 15, 'WORK'],
+          ['발표 흐름대로 1회 연습하기', 7, 'WORK'],
+        ]
+      : lowerGoal.includes('report') ||
     lowerGoal.includes('essay') ||
     lowerGoal.includes('레포트') ||
     lowerGoal.includes('보고서') ||
@@ -255,11 +308,11 @@ export default function App() {
 
     const payload = normalizePlan({
       ...plan,
-      status: 'active',
+      status: 'draft',
       current_step_index: 0,
-      steps: plan.steps.map((step, index) => ({
+      steps: plan.steps.map((step) => ({
         ...step,
-        status: index === 0 ? 'active' : 'pending',
+        status: step.status === 'completed' ? 'completed' : 'pending',
       })),
     });
 
@@ -272,32 +325,13 @@ export default function App() {
       });
       if (!response.ok) throw new Error('plan failed');
       const data = await response.json();
-      let savedPlan = normalizePlan(data.plan || data || payload);
-      try {
-        const startResponse = await fetch(`${serverUrl}/api/plan/start`, { method: 'POST' });
-        if (startResponse.ok) {
-          const startData = await startResponse.json();
-          savedPlan = normalizePlan({
-            ...savedPlan,
-            current_step_index: Number(startData.current_step_index) || 0,
-            steps: savedPlan.steps.map((step) =>
-              step.id === startData.started_step?.id
-                ? { ...step, status: 'active' }
-                : step.status === 'active'
-                  ? { ...step, status: 'pending' }
-                  : step,
-            ),
-          });
-        }
-      } catch {
-        setToast('계획은 보냈지만 PC 시작 확인은 못했어요');
-      }
+      const savedPlan = normalizePlan(data.plan || data || payload);
       setPlan(savedPlan);
-      startStopTimer();
+      setToast('PC Today 화면으로 계획을 보냈어요');
       setScreen('stop');
-      void fetchPcStatus();
       if (statusRef.current) clearInterval(statusRef.current);
-      statusRef.current = setInterval(fetchPcStatus, 3000);
+      void fetchPcStatus();
+      statusRef.current = setInterval(fetchPcStatus, 2000);
     } catch {
       setToast('PC 서버에 연결하지 못했어요. 주소를 확인해주세요');
     } finally {
@@ -317,7 +351,18 @@ export default function App() {
       if (!response.ok) throw new Error('status failed');
       const nextStatus = (await response.json()) as PcStatus;
       setStatus(nextStatus);
-      if (nextStatus.plan_completed) showDashboard();
+      if (nextStatus.plan_completed) {
+        setPlan((current) =>
+          current
+            ? {
+                ...current,
+                status: 'completed',
+                steps: current.steps.map((step) => ({ ...step, status: 'completed' })),
+              }
+            : current,
+        );
+        showDashboard();
+      }
     } catch {
       setStatus(null);
     }
@@ -359,6 +404,7 @@ export default function App() {
   const showDashboard = () => {
     if (tickRef.current) clearInterval(tickRef.current);
     if (statusRef.current) clearInterval(statusRef.current);
+    statusRef.current = null;
     setScreen('dashboard');
   };
 
@@ -368,7 +414,7 @@ export default function App() {
     return active?.title || firstRunnableStep?.title || '작업을 시작하는 중입니다';
   })();
 
-  return (
+  const appContent = (
     <SafeAreaView style={styles.page}>
       <StatusBar style="dark" />
       <KeyboardAvoidingView style={styles.frame} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -503,6 +549,17 @@ export default function App() {
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
+
+  if (Platform.OS !== 'web') return appContent;
+
+  return (
+    <View style={styles.webDemoPage}>
+      <View style={styles.phoneShell}>
+        <View style={styles.phoneNotch} />
+        <View style={styles.phoneScreen}>{appContent}</View>
+      </View>
+    </View>
+  );
 }
 
 function Dashboard({ plan, status, timerSeconds }: { plan: Plan | null; status: PcStatus | null; timerSeconds: number }) {
@@ -604,6 +661,46 @@ function buildInsight(percent: number, overrunMinutes: number, distractions: num
 }
 
 const styles = StyleSheet.create({
+  webDemoPage: {
+    flex: 1,
+    minHeight: '100%',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 28,
+  },
+  phoneShell: {
+    width: 390,
+    height: 844,
+    maxWidth: '100%',
+    maxHeight: '100%',
+    padding: 12,
+    borderRadius: 58,
+    backgroundColor: '#111',
+    shadowColor: '#000',
+    shadowOpacity: 0.28,
+    shadowRadius: 36,
+    shadowOffset: { width: 0, height: 18 },
+    elevation: 16,
+  },
+  phoneNotch: {
+    position: 'absolute',
+    top: 12,
+    left: '50%',
+    width: 118,
+    height: 32,
+    marginLeft: -59,
+    borderBottomLeftRadius: 18,
+    borderBottomRightRadius: 18,
+    backgroundColor: '#111',
+    zIndex: 3,
+  },
+  phoneScreen: {
+    flex: 1,
+    borderRadius: 46,
+    overflow: 'hidden',
+    backgroundColor: colors.bgPage,
+  },
   page: {
     flex: 1,
     backgroundColor: colors.bgPage,
@@ -956,23 +1053,19 @@ const styles = StyleSheet.create({
   },
   doneText: {
     color: colors.coral,
-    fontSize: 16,
-    fontWeight: '700',
-  },
-  dashboardScreen: {
-    flex: 1,
-    paddingTop: 28,
-    paddingHorizontal: 24,
-    paddingBottom: 40,
-  },
-  chartWrap: {
-    position: 'relative',
-    width: 180,
-    height: 180,
-    marginHorizontal: 'auto',
     marginBottom: 24,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  dashboardScreen: {
+    flex: 1,
+    paddingTop: 33,
+    paddingHorizontal: 24,
+    backgroundColor: colors.bgPage,
+  },
+  chartWrap: {
+    alignItems: 'center',
+    marginBottom: 24,
   },
   circleBg: {
     width: 180,

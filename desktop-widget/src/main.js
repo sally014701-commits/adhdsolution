@@ -87,9 +87,9 @@ function createWindow() {
     resizable: false,
     alwaysOnTop: true,
     skipTaskbar: true,
-    transparent: true,
-    show: true,
-    backgroundColor: "#00000000",
+    transparent: false,
+    show: false,
+    backgroundColor: "#fff7ed",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
@@ -99,13 +99,31 @@ function createWindow() {
   });
   log("BrowserWindow created", JSON.stringify(bounds));
 
-  window.setAlwaysOnTop(true, "screen-saver");
+  const keepWidgetVisible = () => {
+    if (window.isDestroyed()) {
+      return;
+    }
+    if (window.isMinimized()) {
+      window.restore();
+    }
+    if (!window.isVisible()) {
+      window.showInactive();
+    }
+    window.setAlwaysOnTop(true, "screen-saver");
+  };
+
   window.once("ready-to-show", () => {
     log("ready-to-show");
-    window.show();
-    window.focus();
+    keepWidgetVisible();
     log("window shown");
   });
+  window.on("blur", () => {
+    window.setAlwaysOnTop(true, "screen-saver");
+  });
+  window.on("hide", keepWidgetVisible);
+  window.on("minimize", keepWidgetVisible);
+  window.on("show", () => window.setAlwaysOnTop(true, "screen-saver"));
+  setInterval(keepWidgetVisible, 3000);
   window.webContents.on("did-finish-load", () => log("renderer did-finish-load"));
   window.webContents.on("console-message", (_event, level, message, line, sourceId) => {
     log("renderer console", JSON.stringify({ level, message, line, sourceId }));

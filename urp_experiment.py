@@ -20,6 +20,7 @@ ABSTRACT_RETURN_MESSAGE = "집중 흐름이 잠시 흐트러진 것 같습니다
 CONCRETE_RETURN_MESSAGE = "읽기 과제 시작 후 약 4분 30초가 지났고, 최근 30초 동안 미니게임 화면에 머물렀습니다. 원래 읽기 과제로 돌아가시겠습니까?"
 
 SESSIONS = {}
+LATEST_SESSION_ID = ""
 
 
 CSV_FIELDS = [
@@ -66,6 +67,18 @@ def _admin_session(session):
         "elapsed_seconds": _elapsed_seconds(session.get("started_at_ms")),
         "condition_label": session.get("condition", "").title(),
     }
+
+
+def _latest_session():
+    if LATEST_SESSION_ID and LATEST_SESSION_ID in SESSIONS:
+        return SESSIONS[LATEST_SESSION_ID]
+    if not SESSIONS:
+        return None
+    return next(reversed(SESSIONS.values()))
+
+
+def _requested_or_latest_session():
+    return SESSIONS.get(request.args.get("session_id", "")) or _latest_session()
 
 
 def _safe_int(value, default=0):
@@ -207,6 +220,7 @@ def build_intervention_state(session, get_tracker, force=False):
                 "message": GAME_PROMPT_MESSAGE,
                 "type": "game_prompt",
                 "session_id": session["session_id"],
+                "display": "web_overlay",
             }
 
         return {
@@ -215,6 +229,7 @@ def build_intervention_state(session, get_tracker, force=False):
             "message": "",
             "type": "monitoring",
             "session_id": session["session_id"],
+            "display": "",
         }
 
     game_entered_at = session.get("game_entered_at_ms")
@@ -226,6 +241,7 @@ def build_intervention_state(session, get_tracker, force=False):
             "message": "",
             "type": "monitoring",
             "session_id": session["session_id"],
+            "display": "",
         }
 
     if not session.get("return_intervention_active"):
@@ -257,6 +273,8 @@ def build_intervention_state(session, get_tracker, force=False):
         "type": "monitoring",
         "session_id": session["session_id"],
         "intervention_id": session.get("intervention_id", ""),
+        "display": "desktop_widget",
+        "return_url": f"/experiment?session_id={session['session_id']}",
     }
 
 
@@ -282,6 +300,7 @@ def create_urp_experiment_blueprint(get_tracker):
 
     @blueprint.route("/experiment/api/session", methods=["POST"])
     def create_participant_session():
+        global LATEST_SESSION_ID
         session = {
             "session_id": f"urp-{uuid4().hex[:12]}",
             "participant_id": "",
@@ -291,6 +310,7 @@ def create_urp_experiment_blueprint(get_tracker):
             "intervention_active": False,
         }
         SESSIONS[session["session_id"]] = session
+        LATEST_SESSION_ID = session["session_id"]
         _append_event({
             "event_type": "participant_session_started",
             "session_id": session["session_id"],
@@ -347,14 +367,18 @@ def create_urp_experiment_blueprint(get_tracker):
 
     @blueprint.route("/experiment/api/intervention_state", methods=["GET"])
     def intervention_state():
-        session = SESSIONS.get(request.args.get("session_id", ""))
+        session = _requested_or_latest_session()
+        if session and request.args.get("client") == "desktop-widget":
+            session["desktop_widget_last_poll_at_ms"] = _now_ms()
         state = build_intervention_state(session, get_tracker, force=False)
+        if session and state.get("active") and state.get("type") == "monitoring":
+            state["web_fallback_active"] = _elapsed_seconds(session.get("desktop_widget_last_poll_at_ms")) > 4
         return jsonify(state)
 
     @blueprint.route("/experiment/api/intervention_ack", methods=["POST"])
     def intervention_ack():
         data = request.json or {}
-        session = SESSIONS.get(data.get("session_id", ""))
+        session = SESSIONS.get(data.get("session_id", "")) or _latest_session()
         if not session:
             return jsonify({"error": "session not found"}), 404
         clicked_at = _now_ms()
@@ -377,12 +401,16 @@ def create_urp_experiment_blueprint(get_tracker):
                 "return_clicked_at_ms": clicked_at,
             },
         })
-        return jsonify({"status": "ok", "return_latency_sec": return_latency_sec})
+        return jsonify({
+            "status": "ok",
+            "return_latency_sec": return_latency_sec,
+            "return_url": f"/experiment?session_id={session['session_id']}",
+        })
 
     @blueprint.route("/experiment/api/intervention_continue_game", methods=["POST"])
     def intervention_continue_game():
         data = request.json or {}
-        session = SESSIONS.get(data.get("session_id", ""))
+        session = SESSIONS.get(data.get("session_id", "")) or _latest_session()
         if not session:
             return jsonify({"error": "session not found"}), 404
         _append_event({
@@ -435,6 +463,7 @@ def create_urp_experiment_blueprint(get_tracker):
 
     @blueprint.route("/experiment/api/admin/session", methods=["POST"])
     def admin_create_session():
+        global LATEST_SESSION_ID
         data = request.json or {}
         session = {
             "session_id": data.get("session_id") or f"urp-{uuid4().hex[:12]}",
@@ -445,6 +474,7 @@ def create_urp_experiment_blueprint(get_tracker):
             "intervention_active": False,
         }
         SESSIONS[session["session_id"]] = session
+        LATEST_SESSION_ID = session["session_id"]
         _append_event({
             "event_type": "admin_session_started",
             "session_id": session["session_id"],

@@ -1,8 +1,10 @@
 {
+  "mode": "focus-widget",
   "taskSource": "mock",
   "focusSource": "status-api-with-mock-fallback",
   "integration": {
     "statusApiUrl": "http://127.0.0.1:5000/status",
+    "interventionApiUrl": "http://127.0.0.1:5000/experiment/api/intervention_state?client=desktop-widget",
     "statusJsonPath": "../integration/status.example.json"
   },
   "audio": {

@@ -280,7 +280,7 @@
         async function pollIntervention() {
             if (!sessionId || widgetShown || widgetDismissed) return;
             const state = await getJson(`/experiment/api/intervention_state?session_id=${encodeURIComponent(sessionId)}`);
-            if (state.active && state.type === "monitoring") {
+            if (state.active && state.type === "monitoring" && state.web_fallback_active !== false) {
                 widgetShown = true;
                 $("overlay-message").textContent = state.message;
                 $("ai-widget").classList.add("active");

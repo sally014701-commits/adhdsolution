@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, screen } = require("electron");
+const { app, BrowserWindow, ipcMain, screen, shell } = require("electron");
 const fs = require("fs");
 const path = require("path");
 
@@ -81,6 +81,7 @@ function getWidgetBounds() {
 function createWindow() {
   log("createWindow called");
   const bounds = getWidgetBounds();
+  let hiddenByRenderer = false;
   const window = new BrowserWindow({
     ...bounds,
     frame: false,
@@ -101,6 +102,9 @@ function createWindow() {
 
   const keepWidgetVisible = () => {
     if (window.isDestroyed()) {
+      return;
+    }
+    if (hiddenByRenderer) {
       return;
     }
     if (window.isMinimized()) {
@@ -134,6 +138,20 @@ function createWindow() {
   window.on("unresponsive", () => log("window unresponsive"));
   window.on("closed", () => log("window closed"));
   window.loadFile(path.join(__dirname, "index.html"));
+
+  ipcMain.on("widget:set-visible", (event, visible) => {
+    const target = BrowserWindow.fromWebContents(event.sender);
+    if (!target || target.isDestroyed()) {
+      return;
+    }
+    hiddenByRenderer = !visible;
+    if (visible) {
+      target.showInactive();
+      target.setAlwaysOnTop(true, "screen-saver");
+    } else {
+      target.hide();
+    }
+  });
 }
 
 ipcMain.on("widget:close", (event) => {
@@ -142,6 +160,16 @@ ipcMain.on("widget:close", (event) => {
 
 ipcMain.on("widget:log", (_event, message, detail = "") => {
   log(`renderer ${message}`, detail);
+});
+
+ipcMain.on("widget:open-url", (_event, relativeUrl = "") => {
+  try {
+    const target = new URL(relativeUrl, "http://127.0.0.1:5000").toString();
+    log("open external url", target);
+    shell.openExternal(target);
+  } catch (error) {
+    log("open external url failed", error.message);
+  }
 });
 
 app.whenReady().then(() => {

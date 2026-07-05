@@ -30,6 +30,8 @@ const state = {
   tasks: [],
   isAnimating: false,
   statusSource: "mock",
+  dismissedInterventionId: "",
+  latestIntervention: null,
 };
 
 function logWidget(message, detail = "") {
@@ -89,6 +91,10 @@ const elements = {
   statusMeta: document.querySelector("#statusMeta"),
   completeButton: document.querySelector("#completeButton"),
   closeButton: document.querySelector("#closeButton"),
+  interventionPanel: document.querySelector("#interventionPanel"),
+  interventionMessage: document.querySelector("#interventionMessage"),
+  returnToTaskButton: document.querySelector("#returnToTaskButton"),
+  continueGameButton: document.querySelector("#continueGameButton"),
 };
 
 function getPendingTasks() {
@@ -358,10 +364,76 @@ async function refreshFocusStatus(initialFocus) {
   renderFocusStatus(result.status, result.source);
 }
 
+function renderIntervention(intervention) {
+  state.latestIntervention = intervention;
+  elements.shell.dataset.mode = "experiment";
+  elements.shell.dataset.focusState = intervention.condition === "concrete" ? "distracted" : "warning";
+  elements.interventionMessage.textContent = intervention.message || "원래 읽기 과제로 돌아가시겠습니까?";
+  elements.interventionPanel.hidden = false;
+}
+
+function hideExperimentWidget() {
+  elements.interventionPanel.hidden = true;
+  window.desktopWidget?.setVisible?.(false);
+}
+
+async function refreshInterventionState() {
+  if (!window.desktopWidget?.getInterventionState) {
+    hideExperimentWidget();
+    return;
+  }
+
+  const result = await window.desktopWidget.getInterventionState();
+  const intervention = result.state || {};
+  const interventionId = intervention.intervention_id || `${intervention.session_id || ""}:${intervention.type || ""}`;
+  const shouldShow = result.ok
+    && intervention.active
+    && intervention.type === "monitoring"
+    && interventionId !== state.dismissedInterventionId;
+
+  if (!shouldShow) {
+    hideExperimentWidget();
+    return;
+  }
+
+  window.desktopWidget?.setVisible?.(true);
+  renderIntervention(intervention);
+}
+
+function initExperimentMode(initialData) {
+  elements.shell.dataset.mode = "experiment";
+  hideExperimentWidget();
+
+  elements.returnToTaskButton.addEventListener("click", async () => {
+    const intervention = state.latestIntervention || {};
+    await window.desktopWidget?.returnToTask?.(intervention.session_id || "");
+    hideExperimentWidget();
+  });
+
+  elements.continueGameButton.addEventListener("click", async () => {
+    const intervention = state.latestIntervention || {};
+    state.dismissedInterventionId = intervention.intervention_id || `${intervention.session_id || ""}:${intervention.type || ""}`;
+    await window.desktopWidget?.continueGame?.(intervention.session_id || "");
+    hideExperimentWidget();
+  });
+
+  elements.closeButton.addEventListener("click", () => {
+    window.desktopWidget?.close?.();
+  });
+
+  refreshInterventionState();
+  window.setInterval(refreshInterventionState, 1000);
+}
+
 function init() {
   const initialData = window.desktopWidget?.getInitialData
     ? window.desktopWidget.getInitialData()
     : FALLBACK_DATA;
+
+  if (initialData.config?.mode === "experiment-intervention") {
+    initExperimentMode(initialData);
+    return;
+  }
 
   state.tasks = initialData.tasks.map((task) => ({ ...task }));
   renderTasks();

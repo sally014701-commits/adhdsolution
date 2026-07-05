@@ -5,6 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
+    "start:experiment": "set FOCUSPLAN_WIDGET_MODE=experiment-intervention&& electron .",
     "check": "node --check src/main.js && node --check src/preload.js && node --check src/renderer.js"
   },
   "devDependencies": {

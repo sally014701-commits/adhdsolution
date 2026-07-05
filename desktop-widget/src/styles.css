@@ -180,6 +180,90 @@ body {
   letter-spacing: -0.02em;
 }
 
+.intervention-panel {
+  display: none;
+  flex: 1;
+  min-height: 0;
+  -webkit-app-region: no-drag;
+}
+
+.widget-shell[data-mode="experiment"] .intervention-panel:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.widget-shell[data-mode="experiment"] .widget-header,
+.widget-shell[data-mode="experiment"] .task-panel,
+.widget-shell[data-mode="experiment"] .widget-footer,
+.widget-shell[data-mode="experiment"] .status-panel {
+  display: none;
+}
+
+.widget-shell[data-mode="experiment"] .glass-card {
+  padding: 18px;
+  border-radius: 22px;
+}
+
+.intervention-title {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  color: var(--state-label);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.intervention-title::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--state-accent);
+  box-shadow: 0 0 12px var(--state-glow);
+}
+
+.intervention-message {
+  margin: 0;
+  color: var(--on-surface);
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.42;
+}
+
+.intervention-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.intervention-primary,
+.intervention-secondary {
+  min-height: 36px;
+  border: 0;
+  border-radius: 9999px;
+  padding: 0 12px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.intervention-primary {
+  background: var(--state-bg);
+  color: var(--state-label);
+  box-shadow: 0 10px 28px var(--state-glow);
+}
+
+.intervention-secondary {
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--on-surface);
+}
+
 .widget-footer {
   display: flex;
   flex-direction: column;

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusPlan Survey</title>
+    <style>
+        :root {
+            --bg: #fff8f3;
+            --panel: #fffdf8;
+            --ink: #342a26;
+            --muted: #8a7a73;
+            --line: rgba(52, 42, 38, 0.1);
+            --green: #77c773;
+            --yellow: #f5d36d;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            font-family: Inter, "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(119, 199, 115, 0.22), transparent 30rem),
+                radial-gradient(circle at top right, rgba(245, 211, 109, 0.18), transparent 32rem),
+                var(--bg);
+            color: var(--ink);
+        }
+
+        main {
+            width: min(760px, 100%);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: rgba(255, 253, 248, 0.92);
+            box-shadow: 0 18px 60px rgba(52, 42, 38, 0.08);
+            padding: 34px;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 30px;
+            letter-spacing: 0;
+        }
+
+        p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        fieldset {
+            margin: 22px 0;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 18px;
+            background: #fff;
+        }
+
+        legend {
+            padding: 0 8px;
+            font-weight: 850;
+        }
+
+        .scale {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        label.option {
+            display: grid;
+            place-items: center;
+            min-height: 42px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            margin-bottom: 4px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 12px;
+            resize: vertical;
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+            border-radius: 999px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--green), var(--yellow));
+            color: var(--ink);
+            cursor: pointer;
+            font: inherit;
+            font-weight: 900;
+        }
+
+        .done {
+            display: none;
+            margin-top: 16px;
+            color: #386c3a;
+            font-weight: 850;
+        }
+
+        .done.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>사후 설문</h1>
+        <p>방금 사용한 FocusPlan 화면에 대한 느낌을 답해주세요.</p>
+
+        <form id="survey-form">
+            <fieldset>
+                <legend>감시 인식</legend>
+                <p>시스템이 내 행동을 관찰하고 있다는 느낌이 들었다.</p>
+                <div class="scale" data-name="monitoring_awareness"></div>
+            </fieldset>
+
+            <fieldset>
+                <legend>심리적 저항</legend>
+                <p>안내 메시지가 내 자유를 제한하거나 통제한다고 느꼈다.</p>
+                <div class="scale" data-name="psychological_reactance"></div>
+            </fieldset>
+
+            <fieldset>
+                <legend>자유 응답</legend>
+                <textarea id="free-response" placeholder="느낀 점을 자유롭게 적어주세요."></textarea>
+            </fieldset>
+
+            <button type="submit">제출</button>
+            <div class="done" id="done">응답이 저장되었습니다. 감사합니다.</div>
+        </form>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const sessionId = params.get("session_id") || "";
+
+        document.querySelectorAll(".scale").forEach((scale) => {
+            const name = scale.dataset.name;
+            scale.innerHTML = Array.from({ length: 7 }, (_, index) => {
+                const value = index + 1;
+                return `
+                    <label class="option">
+                        <input type="radio" name="${name}" value="${value}" ${value === 4 ? "checked" : ""}>
+                        ${value}
+                    </label>
+                `;
+            }).join("");
+        });
+
+        function selected(name) {
+            return Number(document.querySelector(`input[name="${name}"]:checked`)?.value || 4);
+        }
+
+        document.getElementById("survey-form").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const response = await fetch("/experiment/api/survey", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    session_id: sessionId,
+                    monitoring_awareness: selected("monitoring_awareness"),
+                    psychological_reactance: selected("psychological_reactance"),
+                    free_response: document.getElementById("free-response").value.trim(),
+                }),
+            });
+            if (response.ok) {
+                document.getElementById("done").classList.add("active");
+            }
+        });
+    </script>
+</body>
+</html>

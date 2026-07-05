@@ -14,6 +14,7 @@ import logging
 import webbrowser
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from mobile_app import create_mobile_blueprint
+from urp_experiment import create_urp_experiment_blueprint
 
 # ==========================================
 # 임계값 (Thresholds) 상수 정의
@@ -70,6 +71,7 @@ for stream in (sys.stdout, sys.stderr):
 
 global_tracker = None
 app.register_blueprint(create_mobile_blueprint(lambda: global_tracker))
+app.register_blueprint(create_urp_experiment_blueprint(lambda: global_tracker))
 
 WIDGET_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "desktop-widget")
 WIDGET_SRC_DIR = os.path.join(WIDGET_DIR, "src")

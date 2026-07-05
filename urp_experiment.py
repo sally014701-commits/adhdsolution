@@ -15,6 +15,9 @@ CSV_LOG_PATH = DATA_DIR / "urp_experiment_events.csv"
 MINIGAME_AFTER_SECONDS = 180
 INTERVENTION_AFTER_SECONDS = 30
 READING_DURATION_SECONDS = 600
+GAME_PROMPT_MESSAGE = "잠깐 쉬어가는 미니게임을 해보시겠습니까? 2,000점 달성 시 소정의 보상이 제공됩니다."
+ABSTRACT_RETURN_MESSAGE = "집중 흐름이 잠시 흐트러진 것 같습니다. 원래 읽기 과제로 돌아가시겠습니까?"
+CONCRETE_RETURN_MESSAGE = "읽기 과제 시작 후 약 4분 30초가 지났고, 최근 30초 동안 미니게임 화면에 머물렀습니다. 원래 읽기 과제로 돌아가시겠습니까?"
 
 SESSIONS = {}
 
@@ -156,19 +159,12 @@ def _tracker_snapshot(tracker):
     }
 
 
-def generate_intervention_message(condition, snapshot):
+def generate_intervention_message(condition, snapshot, message_type="monitoring"):
+    if message_type == "game_prompt":
+        return GAME_PROMPT_MESSAGE
     if condition == "concrete":
-        app = snapshot.get("current_app") or "현재 창"
-        title = snapshot.get("current_title") or snapshot.get("current_url") or "다른 화면"
-        idle = _safe_int(snapshot.get("idle_time", 0))
-        switches = _safe_int(snapshot.get("window_switch", 0))
-        activity = _safe_int(snapshot.get("activity", 0))
-        return (
-            "현재 읽기 과제로 돌아갈 시간입니다. "
-            f"최근 활동 {activity}회, 입력 공백 {idle}초, 창 전환 {switches}회가 감지되었고 "
-            f"현재 화면은 {app} ({title})입니다."
-        )
-    return "현재 읽기 과제로 돌아갈 시간입니다."
+        return CONCRETE_RETURN_MESSAGE
+    return ABSTRACT_RETURN_MESSAGE
 
 
 def build_intervention_state(session, get_tracker, force=False):
@@ -181,7 +177,7 @@ def build_intervention_state(session, get_tracker, force=False):
             "session_id": "",
         }
 
-    if session.get("intervention_acknowledged_at_ms"):
+    if session.get("returned_to_task_at_ms"):
         return {
             "active": False,
             "condition": session["condition"],
@@ -190,9 +186,29 @@ def build_intervention_state(session, get_tracker, force=False):
             "session_id": session["session_id"],
         }
 
-    mini_started_at = session.get("minigame_started_at_ms")
-    eligible = bool(mini_started_at and _elapsed_seconds(mini_started_at) >= INTERVENTION_AFTER_SECONDS)
-    if not force and not session.get("intervention_active") and not eligible:
+    if not session.get("game_start_clicked_at_ms"):
+        reading_elapsed = _elapsed_seconds(session.get("started_at_ms"))
+        prompt_due = reading_elapsed >= MINIGAME_AFTER_SECONDS
+        if force or prompt_due:
+            if not session.get("distraction_prompt_shown_at_ms"):
+                session["distraction_prompt_shown_at_ms"] = _now_ms()
+                _append_event({
+                    "event_type": "distraction_prompt_shown",
+                    "session_id": session["session_id"],
+                    "participant_id": session.get("participant_id", ""),
+                    "condition": session["condition"],
+                    "message_type": "game_prompt",
+                    "message": GAME_PROMPT_MESSAGE,
+                    "payload": {"reading_elapsed_sec": reading_elapsed, "trigger": "timer" if prompt_due else "admin_force"},
+                })
+            return {
+                "active": True,
+                "condition": session["condition"],
+                "message": GAME_PROMPT_MESSAGE,
+                "type": "game_prompt",
+                "session_id": session["session_id"],
+            }
+
         return {
             "active": False,
             "condition": session["condition"],
@@ -201,12 +217,23 @@ def build_intervention_state(session, get_tracker, force=False):
             "session_id": session["session_id"],
         }
 
-    if not session.get("intervention_active"):
+    game_entered_at = session.get("game_entered_at_ms")
+    eligible = bool(game_entered_at and _elapsed_seconds(game_entered_at) >= INTERVENTION_AFTER_SECONDS)
+    if not force and not session.get("return_intervention_active") and not eligible:
+        return {
+            "active": False,
+            "condition": session["condition"],
+            "message": "",
+            "type": "monitoring",
+            "session_id": session["session_id"],
+        }
+
+    if not session.get("return_intervention_active"):
         snapshot = _tracker_snapshot(get_tracker())
         session["intervention_id"] = f"msg-{uuid4().hex[:12]}"
         session["intervention_snapshot"] = snapshot
-        session["intervention_message"] = generate_intervention_message(session["condition"], snapshot)
-        session["intervention_active"] = True
+        session["intervention_message"] = generate_intervention_message(session["condition"], snapshot, "monitoring")
+        session["return_intervention_active"] = True
         session["intervention_started_at_ms"] = _now_ms()
         _append_event({
             "event_type": "intervention_activated",
@@ -217,7 +244,10 @@ def build_intervention_state(session, get_tracker, force=False):
             "message_type": "monitoring",
             "message": session["intervention_message"],
             "snapshot": snapshot,
-            "payload": {"trigger": "minigame_30s" if not force else "admin_force"},
+            "payload": {
+                "trigger": "game_30s" if not force else "admin_force",
+                "game_elapsed_sec": _elapsed_seconds(game_entered_at),
+            },
         })
 
     return {
@@ -236,6 +266,10 @@ def create_urp_experiment_blueprint(get_tracker):
     @blueprint.route("/experiment")
     def participant_view():
         return render_template("urp_participant.html")
+
+    @blueprint.route("/experiment/game")
+    def game_view():
+        return render_template("urp_game.html")
 
     @blueprint.route("/experiment/admin")
     @blueprint.route("/experiment/urp")
@@ -265,21 +299,51 @@ def create_urp_experiment_blueprint(get_tracker):
         })
         return jsonify(_public_session(session))
 
-    @blueprint.route("/experiment/api/minigame_started", methods=["POST"])
-    def minigame_started():
+    @blueprint.route("/experiment/api/session_state", methods=["GET"])
+    def participant_session_state():
+        session = SESSIONS.get(request.args.get("session_id", ""))
+        if not session:
+            return jsonify({"error": "session not found"}), 404
+        return jsonify(_public_session(session))
+
+    @blueprint.route("/experiment/api/game_start_clicked", methods=["POST"])
+    def game_start_clicked():
         data = request.json or {}
         session = SESSIONS.get(data.get("session_id", ""))
         if not session:
             return jsonify({"error": "session not found"}), 404
-        if not session.get("minigame_started_at_ms"):
-            session["minigame_started_at_ms"] = _now_ms()
+        if not session.get("game_start_clicked_at_ms"):
+            session["game_start_clicked_at_ms"] = _now_ms()
             _append_event({
-                "event_type": "minigame_started",
+                "event_type": "game_start_clicked",
+                "session_id": session["session_id"],
+                "participant_id": session.get("participant_id", ""),
+                "condition": session["condition"],
+                "message_type": "game_prompt",
+                "message": GAME_PROMPT_MESSAGE,
+            })
+        return jsonify({"status": "ok", "session_id": session["session_id"]})
+
+    @blueprint.route("/experiment/api/game_entered", methods=["POST"])
+    def game_entered():
+        data = request.json or {}
+        session = SESSIONS.get(data.get("session_id", ""))
+        if not session:
+            return jsonify({"error": "session not found"}), 404
+        if not session.get("game_entered_at_ms"):
+            session["game_entered_at_ms"] = _now_ms()
+            _append_event({
+                "event_type": "game_entered",
                 "session_id": session["session_id"],
                 "participant_id": session.get("participant_id", ""),
                 "condition": session["condition"],
             })
         return jsonify({"status": "ok", "session_id": session["session_id"]})
+
+    @blueprint.route("/experiment/api/minigame_started", methods=["POST"])
+    def minigame_started():
+        # Backward-compatible alias for early prototypes.
+        return game_entered()
 
     @blueprint.route("/experiment/api/intervention_state", methods=["GET"])
     def intervention_state():
@@ -293,10 +357,13 @@ def create_urp_experiment_blueprint(get_tracker):
         session = SESSIONS.get(data.get("session_id", ""))
         if not session:
             return jsonify({"error": "session not found"}), 404
-        session["intervention_active"] = False
-        session["intervention_acknowledged_at_ms"] = _now_ms()
+        clicked_at = _now_ms()
+        intervention_shown_at = session.get("intervention_started_at_ms") or clicked_at
+        return_latency_sec = max(0, round((clicked_at - intervention_shown_at) / 1000, 3))
+        session["return_intervention_active"] = False
+        session["returned_to_task_at_ms"] = clicked_at
         _append_event({
-            "event_type": "intervention_acknowledged",
+            "event_type": "return_to_task",
             "session_id": session["session_id"],
             "participant_id": session.get("participant_id", ""),
             "condition": session["condition"],
@@ -304,8 +371,13 @@ def create_urp_experiment_blueprint(get_tracker):
             "message_type": "monitoring",
             "message": session.get("intervention_message", ""),
             "snapshot": session.get("intervention_snapshot", {}),
+            "payload": {
+                "return_latency_sec": return_latency_sec,
+                "intervention_shown_at_ms": intervention_shown_at,
+                "return_clicked_at_ms": clicked_at,
+            },
         })
-        return jsonify({"status": "ok"})
+        return jsonify({"status": "ok", "return_latency_sec": return_latency_sec})
 
     @blueprint.route("/experiment/api/event", methods=["POST"])
     def participant_event():

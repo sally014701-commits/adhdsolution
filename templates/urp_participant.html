@@ -7,13 +7,11 @@
     <style>
         :root {
             --bg: #fff8f3;
-            --panel: #fffdf8;
             --ink: #342a26;
             --muted: #8a7a73;
             --line: rgba(52, 42, 38, 0.1);
             --green: #77c773;
             --yellow: #f5d36d;
-            --coral: #ff8a7a;
         }
 
         * { box-sizing: border-box; }
@@ -78,26 +76,21 @@
         }
 
         .reading-card,
-        .side-card,
-        .game-card {
+        .side-card {
             border: 1px solid var(--line);
             border-radius: 18px;
             background: rgba(255, 253, 248, 0.9);
             box-shadow: 0 16px 48px rgba(52, 42, 38, 0.07);
         }
 
-        .reading-card {
-            padding: 34px;
-        }
-
-        .side-card,
-        .game-card {
-            padding: 22px;
-        }
+        .reading-card { padding: 34px; }
+        .side-card { padding: 22px; }
 
         .survey-link {
             display: none;
             margin-top: 16px;
+            color: var(--ink);
+            font-weight: 850;
             text-decoration: none;
         }
 
@@ -106,7 +99,6 @@
         }
 
         h1,
-        h2,
         h3,
         p { margin-top: 0; }
 
@@ -115,11 +107,6 @@
             font-size: 34px;
             line-height: 1.1;
             letter-spacing: 0;
-        }
-
-        h2 {
-            margin-bottom: 12px;
-            font-size: 22px;
         }
 
         h3 {
@@ -159,41 +146,6 @@
             transition: width 1s linear;
         }
 
-        .game-card {
-            display: none;
-            margin-top: 18px;
-            border-color: rgba(255, 138, 122, 0.28);
-            background: #fff6f2;
-        }
-
-        .game-card.active {
-            display: block;
-        }
-
-        .game-area {
-            position: relative;
-            height: 230px;
-            overflow: hidden;
-            border-radius: 14px;
-            background:
-                linear-gradient(135deg, rgba(159, 199, 232, 0.22), rgba(245, 211, 109, 0.26)),
-                #fff;
-            border: 1px solid var(--line);
-        }
-
-        .target {
-            position: absolute;
-            left: 45%;
-            top: 42%;
-            width: 54px;
-            height: 54px;
-            border: 0;
-            border-radius: 18px;
-            background: linear-gradient(135deg, var(--coral), var(--yellow));
-            box-shadow: 0 12px 28px rgba(255, 138, 122, 0.28);
-            cursor: pointer;
-        }
-
         button {
             border: 0;
             border-radius: 999px;
@@ -216,19 +168,14 @@
             z-index: 100;
         }
 
-        .overlay.active {
-            display: grid;
-        }
+        .overlay.active { display: grid; }
 
         .widget-modal {
-            width: min(420px, calc(100vw - 48px));
+            width: min(450px, calc(100vw - 48px));
             border: 1px solid rgba(255, 255, 255, 0.72);
             border-radius: 28px;
-            background:
-                linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(255, 248, 243, 0.94));
-            box-shadow:
-                0 22px 70px rgba(52, 42, 38, 0.22),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+            background: linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(255, 248, 243, 0.94));
+            box-shadow: 0 22px 70px rgba(52, 42, 38, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.75);
             padding: 28px;
             text-align: center;
         }
@@ -259,10 +206,7 @@
         }
 
         @media (max-width: 820px) {
-            .layout {
-                grid-template-columns: 1fr;
-            }
-
+            .layout { grid-template-columns: 1fr; }
             header {
                 align-items: flex-start;
                 flex-direction: column;
@@ -297,15 +241,6 @@
                         다음 행동이 작아질수록 시작은 쉬워지고, 시작이 쉬워질수록 다시 돌아오는 횟수도 늘어납니다.
                     </p>
                 </div>
-
-                <section class="game-card" id="game-card">
-                    <h2>잠깐 쉬어가기</h2>
-                    <p>아래 움직이는 버튼을 눌러 점수를 올려보세요.</p>
-                    <div class="game-area" id="game-area">
-                        <button class="target" id="target" aria-label="game target"></button>
-                    </div>
-                    <p style="margin-top: 12px;">점수 <strong id="score">0</strong></p>
-                </section>
             </main>
 
             <aside class="side-card">
@@ -323,21 +258,19 @@
     <div class="overlay" id="overlay">
         <div class="widget-modal">
             <div class="widget-title">FocusPlan AI</div>
-            <div class="widget-message" id="overlay-message">현재 읽기 과제로 돌아갈 시간입니다.</div>
-            <button id="return-button">돌아가기</button>
+            <div class="widget-message" id="overlay-message">잠깐 쉬어가는 미니게임을 해보시겠습니까?</div>
+            <button id="game-button">미니게임 시작</button>
         </div>
     </div>
 
     <script>
         let session = null;
-        let score = 0;
         let startedAt = Date.now();
-        let minigameShown = false;
-        let minigameStartedAt = null;
-
-        const readingDuration = 600;
-        const minigameAfter = 180;
+        let readingDuration = 600;
+        let promptVisible = false;
         const pollMs = 1500;
+        const params = new URLSearchParams(window.location.search);
+        const existingSessionId = params.get("session_id");
         const $ = (id) => document.getElementById(id);
 
         async function postJson(url, payload) {
@@ -351,6 +284,13 @@
             return data;
         }
 
+        async function getJson(url) {
+            const response = await fetch(url);
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Request failed");
+            return data;
+        }
+
         function formatTime(seconds) {
             const safe = Math.max(0, Math.floor(seconds));
             const minutes = Math.floor(safe / 60);
@@ -358,78 +298,50 @@
             return `${String(minutes).padStart(2, "0")}:${String(rest).padStart(2, "0")}`;
         }
 
-        function moveTarget() {
-            const area = $("game-area").getBoundingClientRect();
-            const target = $("target");
-            const maxX = Math.max(0, area.width - 64);
-            const maxY = Math.max(0, area.height - 64);
-            target.style.left = `${Math.round(Math.random() * maxX)}px`;
-            target.style.top = `${Math.round(Math.random() * maxY)}px`;
-        }
-
-        async function showMiniGame() {
-            if (minigameShown || !session) return;
-            minigameShown = true;
-            minigameStartedAt = Date.now();
-            $("game-card").classList.add("active");
-            moveTarget();
-            await postJson("/experiment/api/minigame_started", { session_id: session.session_id });
-        }
-
-        async function pollIntervention() {
+        function updateClock() {
             if (!session) return;
-            const response = await fetch(`/experiment/api/intervention_state?session_id=${encodeURIComponent(session.session_id)}`);
-            const state = await response.json();
-            if (state.active) {
-                $("overlay-message").textContent = state.message || "현재 읽기 과제로 돌아갈 시간입니다.";
-                $("overlay").classList.add("active");
-            }
-        }
-
-        function tick() {
             const elapsed = Math.floor((Date.now() - startedAt) / 1000);
             const remaining = Math.max(0, readingDuration - elapsed);
             $("remaining").textContent = formatTime(remaining);
             $("progress-fill").style.width = `${Math.min(100, (elapsed / readingDuration) * 100)}%`;
-            if (remaining <= 0 && session) {
-                $("survey-link").href = `/experiment/survey?session_id=${encodeURIComponent(session.session_id)}`;
-                $("survey-link").classList.add("active");
-            }
-            if (elapsed >= minigameAfter) {
-                showMiniGame().catch(() => {});
+            if (remaining <= 0) {
+                window.location.href = `/experiment/survey?session_id=${encodeURIComponent(session.session_id)}`;
             }
         }
 
-        $("target").addEventListener("click", () => {
-            score += 1;
-            $("score").textContent = String(score);
-            moveTarget();
-        });
+        async function pollIntervention() {
+            if (!session || promptVisible) return;
+            const state = await getJson(`/experiment/api/intervention_state?session_id=${encodeURIComponent(session.session_id)}`);
+            if (state.active && state.type === "game_prompt") {
+                promptVisible = true;
+                $("overlay-message").textContent = state.message;
+                $("overlay").classList.add("active");
+            }
+        }
 
-        $("return-button").addEventListener("click", async () => {
-            $("overlay").classList.remove("active");
-            $("game-card").classList.remove("active");
-            await postJson("/experiment/api/intervention_ack", { session_id: session.session_id });
-            await postJson("/experiment/api/event", {
-                session_id: session.session_id,
-                event_type: "returned_to_reading",
-                payload: {
-                    score,
-                    minigame_seconds: minigameStartedAt ? Math.floor((Date.now() - minigameStartedAt) / 1000) : 0,
-                },
-            });
+        $("game-button").addEventListener("click", async () => {
+            if (!session) return;
+            await postJson("/experiment/api/game_start_clicked", { session_id: session.session_id });
+            window.location.href = `/experiment/game?session_id=${encodeURIComponent(session.session_id)}`;
         });
 
         async function init() {
-            session = await postJson("/experiment/api/session", {});
-            startedAt = Date.now();
-            setInterval(tick, 1000);
-            setInterval(pollIntervention, pollMs);
-            tick();
-            await postJson("/experiment/api/event", {
-                session_id: session.session_id,
-                event_type: "reading_started",
-            });
+            if (existingSessionId) {
+                session = await getJson(`/experiment/api/session_state?session_id=${encodeURIComponent(existingSessionId)}`);
+            } else {
+                session = await postJson("/experiment/api/session", {});
+                const nextUrl = `/experiment?session_id=${encodeURIComponent(session.session_id)}`;
+                window.history.replaceState({}, "", nextUrl);
+                await postJson("/experiment/api/event", {
+                    session_id: session.session_id,
+                    event_type: "reading_started",
+                });
+            }
+            startedAt = Number(session.started_at_ms || Date.now());
+            readingDuration = Number(session.reading_duration_seconds || 600);
+            updateClock();
+            setInterval(updateClock, 1000);
+            setInterval(() => pollIntervention().catch(() => {}), pollMs);
         }
 
         init().catch(() => {

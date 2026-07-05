@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusPlan Mini Game</title>
+    <style>
+        :root {
+            --bg: #f5fbff;
+            --ink: #20272d;
+            --muted: #6f7a83;
+            --line: rgba(32, 39, 45, 0.1);
+            --blue: #8dc8f2;
+            --yellow: #f7d86f;
+            --coral: #ff8a7a;
+            --green: #77c773;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(141, 200, 242, 0.32), transparent 34rem),
+                radial-gradient(circle at bottom right, rgba(255, 138, 122, 0.2), transparent 30rem),
+                var(--bg);
+            color: var(--ink);
+        }
+
+        .app {
+            width: min(980px, calc(100vw - 32px));
+            margin: 0 auto;
+            padding: 28px 0 40px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .mark {
+            width: 32px;
+            height: 32px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--blue), var(--yellow));
+            box-shadow: 0 10px 24px rgba(141, 200, 242, 0.35);
+        }
+
+        .score {
+            display: inline-flex;
+            align-items: center;
+            min-height: 42px;
+            padding: 0 16px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            color: var(--ink);
+            font-weight: 900;
+        }
+
+        .game-shell {
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.86);
+            box-shadow: 0 18px 60px rgba(32, 39, 45, 0.12);
+            padding: 28px;
+        }
+
+        h1,
+        p { margin-top: 0; }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 34px;
+            letter-spacing: 0;
+        }
+
+        p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .game-area {
+            position: relative;
+            height: min(520px, calc(100vh - 250px));
+            min-height: 320px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background:
+                linear-gradient(135deg, rgba(141, 200, 242, 0.26), rgba(247, 216, 111, 0.28)),
+                #fff;
+        }
+
+        .target {
+            position: absolute;
+            left: 45%;
+            top: 42%;
+            width: 62px;
+            height: 62px;
+            border: 0;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--coral), var(--yellow));
+            box-shadow: 0 16px 30px rgba(255, 138, 122, 0.28);
+            cursor: pointer;
+        }
+
+        button {
+            border: 0;
+            border-radius: 999px;
+            padding: 12px 18px;
+            background: var(--ink);
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 850;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            place-items: center;
+            padding: 24px;
+            background: rgba(32, 39, 45, 0.32);
+            backdrop-filter: blur(14px);
+            z-index: 100;
+        }
+
+        .overlay.active { display: grid; }
+
+        .widget-modal {
+            width: min(460px, calc(100vw - 48px));
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 251, 255, 0.94));
+            box-shadow: 0 22px 70px rgba(32, 39, 45, 0.24), inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+            padding: 28px;
+            text-align: center;
+        }
+
+        .widget-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            font-weight: 900;
+        }
+
+        .widget-title::before {
+            content: "";
+            width: 14px;
+            height: 14px;
+            border-radius: 999px;
+            background: var(--green);
+            box-shadow: 0 0 18px rgba(119, 199, 115, 0.7);
+        }
+
+        .widget-message {
+            margin-bottom: 22px;
+            color: var(--ink);
+            font-size: 20px;
+            font-weight: 800;
+            line-height: 1.45;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header>
+            <div class="brand"><span class="mark"></span>FocusPlan Mini Game</div>
+            <div class="score">점수 <span id="score" style="margin-left: 8px;">0</span> / 2000</div>
+        </header>
+
+        <main class="game-shell">
+            <h1>미니게임</h1>
+            <p>움직이는 타겟을 눌러 점수를 올려보세요. 2,000점 달성 시 소정의 보상이 제공됩니다.</p>
+            <div class="game-area" id="game-area">
+                <button class="target" id="target" aria-label="game target"></button>
+            </div>
+        </main>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="widget-modal">
+            <div class="widget-title">FocusPlan AI</div>
+            <div class="widget-message" id="overlay-message">원래 읽기 과제로 돌아가시겠습니까?</div>
+            <button id="return-button">읽기 과제로 돌아가기</button>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let sessionId = new URLSearchParams(window.location.search).get("session_id") || "";
+        let overlayVisible = false;
+        const $ = (id) => document.getElementById(id);
+
+        async function postJson(url, payload) {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Request failed");
+            return data;
+        }
+
+        async function getJson(url) {
+            const response = await fetch(url);
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Request failed");
+            return data;
+        }
+
+        function moveTarget() {
+            const area = $("game-area").getBoundingClientRect();
+            const target = $("target");
+            const maxX = Math.max(0, area.width - 70);
+            const maxY = Math.max(0, area.height - 70);
+            target.style.left = `${Math.round(Math.random() * maxX)}px`;
+            target.style.top = `${Math.round(Math.random() * maxY)}px`;
+        }
+
+        async function pollIntervention() {
+            if (!sessionId || overlayVisible) return;
+            const state = await getJson(`/experiment/api/intervention_state?session_id=${encodeURIComponent(sessionId)}`);
+            if (state.active && state.type === "monitoring") {
+                overlayVisible = true;
+                $("overlay-message").textContent = state.message;
+                $("overlay").classList.add("active");
+            }
+        }
+
+        $("target").addEventListener("click", () => {
+            score += 100;
+            $("score").textContent = String(score);
+            moveTarget();
+        });
+
+        $("return-button").addEventListener("click", async () => {
+            if (!sessionId) return;
+            await postJson("/experiment/api/intervention_ack", { session_id: sessionId });
+            window.location.href = `/experiment?session_id=${encodeURIComponent(sessionId)}`;
+        });
+
+        async function init() {
+            if (!sessionId) {
+                window.location.href = "/experiment";
+                return;
+            }
+            await postJson("/experiment/api/game_entered", { session_id: sessionId });
+            moveTarget();
+            setInterval(() => pollIntervention().catch(() => {}), 1500);
+        }
+
+        init().catch(() => {
+            window.location.href = "/experiment";
+        });
+    </script>
+</body>
+</html>

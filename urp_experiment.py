@@ -379,6 +379,28 @@ def create_urp_experiment_blueprint(get_tracker):
         })
         return jsonify({"status": "ok", "return_latency_sec": return_latency_sec})
 
+    @blueprint.route("/experiment/api/intervention_continue_game", methods=["POST"])
+    def intervention_continue_game():
+        data = request.json or {}
+        session = SESSIONS.get(data.get("session_id", ""))
+        if not session:
+            return jsonify({"error": "session not found"}), 404
+        _append_event({
+            "event_type": "intervention_dismissed_continue_game",
+            "session_id": session["session_id"],
+            "participant_id": session.get("participant_id", ""),
+            "condition": session["condition"],
+            "intervention_id": session.get("intervention_id", ""),
+            "message_type": "monitoring",
+            "message": session.get("intervention_message", ""),
+            "snapshot": session.get("intervention_snapshot", {}),
+            "payload": {
+                "intervention_shown_at_ms": session.get("intervention_started_at_ms"),
+                "dismissed_at_ms": _now_ms(),
+            },
+        })
+        return jsonify({"status": "ok"})
+
     @blueprint.route("/experiment/api/event", methods=["POST"])
     def participant_event():
         data = request.json or {}

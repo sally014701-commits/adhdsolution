@@ -71,6 +71,19 @@
             font-weight: 900;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .return-link {
+            background: #fff;
+            color: var(--ink);
+            border: 1px solid var(--line);
+        }
+
         .game-shell {
             border: 1px solid var(--line);
             border-radius: 24px;
@@ -129,27 +142,24 @@
             font-weight: 850;
         }
 
-        .overlay {
+        .ai-widget {
             position: fixed;
-            inset: 0;
+            right: 22px;
+            bottom: 22px;
             display: none;
-            place-items: center;
-            padding: 24px;
-            background: rgba(32, 39, 45, 0.32);
-            backdrop-filter: blur(14px);
+            width: min(360px, calc(100vw - 44px));
             z-index: 100;
         }
 
-        .overlay.active { display: grid; }
+        .ai-widget.active { display: block; }
 
-        .widget-modal {
-            width: min(460px, calc(100vw - 48px));
+        .widget-panel {
             border: 1px solid rgba(255, 255, 255, 0.72);
-            border-radius: 28px;
+            border-radius: 22px;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 251, 255, 0.94));
-            box-shadow: 0 22px 70px rgba(32, 39, 45, 0.24), inset 0 0 0 1px rgba(255, 255, 255, 0.75);
-            padding: 28px;
-            text-align: center;
+            box-shadow: 0 18px 54px rgba(32, 39, 45, 0.20), inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+            padding: 18px;
+            text-align: left;
         }
 
         .widget-title {
@@ -170,11 +180,36 @@
         }
 
         .widget-message {
-            margin-bottom: 22px;
+            margin-bottom: 16px;
             color: var(--ink);
-            font-size: 20px;
+            font-size: 15px;
             font-weight: 800;
             line-height: 1.45;
+        }
+
+        .widget-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .widget-actions button {
+            width: 100%;
+            padding: 10px 14px;
+        }
+
+        .widget-actions .secondary {
+            background: #fff;
+            color: var(--ink);
+            border: 1px solid var(--line);
+        }
+
+        @media (max-width: 680px) {
+            .ai-widget {
+                right: 14px;
+                bottom: 14px;
+                width: calc(100vw - 28px);
+            }
         }
     </style>
 </head>
@@ -182,7 +217,10 @@
     <div class="app">
         <header>
             <div class="brand"><span class="mark"></span>FocusPlan Mini Game</div>
-            <div class="score">점수 <span id="score" style="margin-left: 8px;">0</span> / 2000</div>
+            <div class="header-actions">
+                <button class="return-link" id="manual-return-button">읽기 과제로 돌아가기</button>
+                <div class="score">점수 <span id="score" style="margin-left: 8px;">0</span> / 2000</div>
+            </div>
         </header>
 
         <main class="game-shell">
@@ -194,18 +232,22 @@
         </main>
     </div>
 
-    <div class="overlay" id="overlay">
-        <div class="widget-modal">
+    <div class="ai-widget" id="ai-widget">
+        <div class="widget-panel">
             <div class="widget-title">FocusPlan AI</div>
             <div class="widget-message" id="overlay-message">원래 읽기 과제로 돌아가시겠습니까?</div>
-            <button id="return-button">읽기 과제로 돌아가기</button>
+            <div class="widget-actions">
+                <button id="return-button">읽기 과제로 돌아가기</button>
+                <button class="secondary" id="continue-button">계속 게임하기</button>
+            </div>
         </div>
     </div>
 
     <script>
         let score = 0;
         let sessionId = new URLSearchParams(window.location.search).get("session_id") || "";
-        let overlayVisible = false;
+        let widgetShown = false;
+        let widgetDismissed = false;
         const $ = (id) => document.getElementById(id);
 
         async function postJson(url, payload) {
@@ -236,12 +278,12 @@
         }
 
         async function pollIntervention() {
-            if (!sessionId || overlayVisible) return;
+            if (!sessionId || widgetShown || widgetDismissed) return;
             const state = await getJson(`/experiment/api/intervention_state?session_id=${encodeURIComponent(sessionId)}`);
             if (state.active && state.type === "monitoring") {
-                overlayVisible = true;
+                widgetShown = true;
                 $("overlay-message").textContent = state.message;
-                $("overlay").classList.add("active");
+                $("ai-widget").classList.add("active");
             }
         }
 
@@ -255,6 +297,19 @@
             if (!sessionId) return;
             await postJson("/experiment/api/intervention_ack", { session_id: sessionId });
             window.location.href = `/experiment?session_id=${encodeURIComponent(sessionId)}`;
+        });
+
+        $("manual-return-button").addEventListener("click", async () => {
+            if (!sessionId) return;
+            await postJson("/experiment/api/intervention_ack", { session_id: sessionId });
+            window.location.href = `/experiment?session_id=${encodeURIComponent(sessionId)}`;
+        });
+
+        $("continue-button").addEventListener("click", async () => {
+            if (!sessionId) return;
+            widgetDismissed = true;
+            $("ai-widget").classList.remove("active");
+            await postJson("/experiment/api/intervention_continue_game", { session_id: sessionId });
         });
 
         async function init() {
